@@ -1,0 +1,16 @@
+.ad_content button{
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 1rem 2rem;
+    border: none;
+    background-color: #000000;
+    color: #ffffff;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+}
+
+.ad_content button:hover{
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #000000;
+}

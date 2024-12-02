@@ -1,0 +1,112 @@
+header{
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    box-shadow: 0px 9px 11px -3px rgba(0,0,0,0.1);
+    position: fixed;
+    z-index: 10;
+    background-color: #e3e3e30f;
+    backdrop-filter: blur(50px);
+}
+
+.logo {
+    font-size: 2rem;
+    height: 100%;
+    padding: 10px;
+    text-align: center;
+    transition: .4s ease-in-out;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.logo a{
+    text-decoration: none;
+}
+
+.logo_black{
+    color: #353535;
+    font-weight: bold;
+    
+}
+
+.logo_red{
+    color: #c50000;
+    font-weight: bold;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #000;
+    width: 100%;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    height: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0; 
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    transition: color 0.3s;
+    position: relative;
+}
+
+.nav-links li a::after{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    left: 0;
+    bottom: -5px;
+    transition: width .5s ease-in-out;
+    background-color: var(--secondary-color);
+    border-radius: 30px;
+}
+
+.nav-links li a:hover::after {
+    width: 100%;
+}
+
+.search-user {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;   
+}
+
+.search-bar {
+    padding: 10px 30px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    width: 70%;
+}
+
+.search-bar:focus {
+    outline: none;
+    border-color: #000000;
+}
+
+.search-user i{
+    background-color: #dddddd9a;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: var(--primary-color);
+    transition: .3s ease-in-out;
+    cursor: pointer;
+}
