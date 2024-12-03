@@ -19,7 +19,7 @@ const navigate = useNavigate();
             </Link>
         </div>
         <div className="nav-links">
-          <li><Link to="/home">Home</Link></li>
+          <li><Link to="/">Home</Link></li>
           <li><Link to="/Product">Products</Link></li>
           <li><Link to="/shop">Shop</Link></li>
           <li><Link to="/about">About</Link></li>

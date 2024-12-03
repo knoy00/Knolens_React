@@ -11,10 +11,9 @@ import './ProductPage.css'
 
 import './ProductOverview.css'
 
-function ProductOverview() {
+function ProductOverview({addToCart, removeFromCart}) {
     const location = useLocation();
     const product = location.state;
-    console.log(location)
 
   return (
     <>
@@ -65,7 +64,7 @@ function ProductOverview() {
                     <p>Insure your purchase with NIT insurance</p>
                 </div>
                 <div className="addToCart">
-                    <Link href=""><button>ADD TO CART</button></Link>
+                    <button onClick={() => addToCart(product)}>ADD TO CART</button>
                 </div>
             </div>
         </div>
