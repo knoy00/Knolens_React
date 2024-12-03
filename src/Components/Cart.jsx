@@ -14,18 +14,57 @@ function Cart({ cart }) {
             <Header />
             <div className="cart">
                 <h1>Shopping Cart</h1>
+
                 {cart.length === 0 ? (
                     <p>Your cart is empty. Add some items to continue shopping.</p>
                 ) : (
                     cart.map((item) => (
-                        <div className="cart-item" key={item.id}>
-                            <img src={item.image} alt={item.name} />
-                            <div className="cart-item-details">
-                                <h3>{item.name}</h3>
-                                <p>{item.description}</p>
-                                <p>Price: ${item.price}</p>
+                        <div className='cart-container'>
+                            <p className='delivery-time'>Estimated delivery between 10-15 business days</p>
+                            <div className='line'></div>
+
+                            <div className="cart-flex">
+                                <div className='left'>
+                                    <div className="cart-item" key={item.id}>
+                                        <div className='cart-item-img'>
+                                            <img src={item.img} alt={item.name} />
+                                        </div>
+
+                                        <div className="cart-item-details">
+                                            <h3>{item.name}</h3>
+                                            <p>{item.description}</p>
+                                            <p>Price: ${item.price}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className='right'>
+                                    {/* <h2>Summary</h2> */}
+
+                                    <div className='subtotal'>
+                                        <p>Subtotal:</p>
+                                        <p>${item.price}</p>
+                                    </div>
+
+                                    <div className='shipping'>
+                                        <p>Shipping:</p>
+                                        <p>$0</p>
+                                    </div>
+
+                                    <div className='total'>
+                                        <p>Total:</p>
+                                        <p>${item.price}</p>
+                                    </div>
+
+                                    <div className='checkout'>
+                                        <Link to="/checkout">
+                                            <button>Checkout</button>
+                                        </Link>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        
                     ))
                 )}
                 <Signinbtn />
