@@ -1,0 +1,18 @@
+.sign-in{
+    width: 100%;
+    padding-top: 2rem;
+}
+
+.sign-in button{
+    padding: .8rem 3rem;
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+
+
+

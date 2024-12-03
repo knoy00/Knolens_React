@@ -1,0 +1,53 @@
+.cart{
+    padding: 15vh 7rem 0 7rem;
+}
+
+.cart h1{
+    font-size: 2.5rem;
+    color: #373737;
+    padding-bottom: 1rem;
+    font-weight: 400;
+}
+
+.contact{
+    width: 100%;   
+    background-color: #f5f5f5;
+    padding: 3rem 7rem;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15vh;
+
+}
+
+.need-help{
+    width: 100%;
+}
+
+.call-us, .email-us, .faqs{
+    width: 60%;
+}
+
+.need-help h3{
+    font-size: 1.3rem;
+    padding-bottom: 1rem;
+}
+
+.need-help p{
+    font-size: 1rem;
+    color: #373737;
+    padding-bottom: 1rem;
+    width: 80%;
+}
+
+.title-flex{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 1rem;
+}
+
+.call-us p, .email-us p, .faqs p{
+    font-size: 1rem;
+    color: #373737;
+    padding-bottom: 1rem;
+}

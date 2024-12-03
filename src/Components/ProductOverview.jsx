@@ -2,13 +2,18 @@ import React from 'react'
 import { Link, useLocation } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
+import ProductCard from './ProductCard';
+import ProductPage from './ProductPage';
+import { useState } from 'react';
+import { S_A_Lens } from './Data/Data';
+import { allProducts } from './Data/Data';
+import './ProductPage.css'
 
 import './ProductOverview.css'
 
 function ProductOverview() {
     const location = useLocation();
     const product = location.state;
-
     console.log(location)
 
   return (
@@ -105,6 +110,21 @@ function ProductOverview() {
                 </div>
             </div>
         </div>
+        {/* <div className='product-row'>
+            <h2>Similar Lenses</h2>
+            <div className='row'>
+                {
+                    S_A_Lens.map((lens) => (
+                        <ProductCard 
+                            img = {lens.img}
+                            name={lens.name}
+                            description={lens.description}
+                            price={lens.price}
+                        />
+                    ))
+                }
+            </div>
+        </div> */}
         <Footer />
     </>
     

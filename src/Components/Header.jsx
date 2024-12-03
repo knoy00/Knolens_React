@@ -1,8 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Header.css';
 
 function Header() {
+const navigate = useNavigate();
+  const gotoCart = () => {
+    navigate("/Cart");
+  }
+
   return (
     <header>
         
@@ -24,6 +29,7 @@ function Header() {
         <div className="search-user">
           <input type="text" placeholder="Search item" className="search-bar" />
           <i className="fa fa-user" id="user"></i>
+          <i className="fa fa-shopping-cart" id="cart" onClick={gotoCart}></i>
         </div>
       </div>
     </header>
