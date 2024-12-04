@@ -1,4 +1,4 @@
-.container{
+/* .container{
     background-color: red;
     width: 100%;
     height: 100vh;
@@ -8,10 +8,10 @@
     left: 0;
     background-color: white;
     
-}
+} */
 
 .authPage{
-    width: 500px;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -19,12 +19,14 @@
     margin: auto;
     overflow-x: hidden;
     border-radius: 10px;
+    padding: 2rem 0;
     /* position: fixed;
     z-index: 100;
     top: 0;
     left: 0;
     background-color: white;
     transform: translate(140%, 20%); */
+    background-color: rgba(28, 28, 28, 0.101);
 }
 
 a{
@@ -35,8 +37,11 @@ a{
     display: flex;
     gap: 2rem;
     /* margin-left: -1063px; */
-    width: 100%; 
+    width: 500px; 
     transition: .5s ease-in-out;
+    overflow-x: hidden;
+    background-color: #fff;
+
 }
 
 .authPage-signin, .authPage-signup{
@@ -47,6 +52,7 @@ a{
     gap: 10px;
     padding: 1rem 1rem;
     flex-shrink: 0;
+    transition: .5s ease-in-out;
 }
 
 .authPage-header{

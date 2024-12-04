@@ -3,10 +3,10 @@ import React from 'react'
 
 import './Signinbtn.css'
 
-function Signinbtn() {
+function Signinbtn({handleSignin}) {
   return (
     <div className='sign-in'>
-      <button>Sign In</button>
+      <button onClick={handleSignin}>Sign In</button>
     </div>
   )
 }

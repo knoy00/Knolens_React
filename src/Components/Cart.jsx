@@ -7,7 +7,7 @@ import AuthPage from './AuthPage';
 
 import './Cart.css';
 
-function Cart({ cart }) {
+function Cart({ cart, handleSignin, handleCloseSignin }) {
     const [signIn, setSignIn] = useState(false);
 
     return (
@@ -68,7 +68,7 @@ function Cart({ cart }) {
                         
                     ))
                 )}
-                <Signinbtn />
+                <Signinbtn handleSignin={handleSignin}/>
             </div>
 
             <div className="contact">
@@ -112,6 +112,7 @@ function Cart({ cart }) {
             </div>
 
             <Footer />
+            {/* <AuthPage /> */}
             <AuthPage />
         </div>
     );
