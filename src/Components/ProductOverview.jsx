@@ -7,17 +7,19 @@ import ProductPage from './ProductPage';
 import { useState } from 'react';
 import { S_A_Lens } from './Data/Data';
 import { allProducts } from './Data/Data';
+import ScrollToTop from './ScrollToTop';
 import './ProductPage.css'
 
 import './ProductOverview.css'
 
-function ProductOverview({addToCart, removeFromCart}) {
+function ProductOverview({addToCart, removeFromCart, cart}) {
     const location = useLocation();
     const product = location.state;
 
   return (
     <>
-        <Header />
+    <ScrollToTop />
+        <Header cart={cart}/>
         <div className="product_overview">
             <div className="overview_left">
                 <div className="img_overview">
@@ -69,42 +71,42 @@ function ProductOverview({addToCart, removeFromCart}) {
             </div>
         </div>
 
-        <div class="overview_description">
-            <div class="overview_description_header">
+        <div className="overview_description">
+            <div className="overview_description_header">
                 <h2>Product Overview</h2>
             </div>
-            <div class="overview_description_text">
+            <div className="overview_description_text">
                 <p>{product.productOverview}
                 </p>
             </div>
-            <div class="divider"></div>
-            <div class="disclaimer">
+            <div className="divider"></div>
+            <div className="disclaimer">
                 <h2>Product Disclaimer</h2>
                 <p>{product.disclaimer}
                 </p>
             </div>
-            <div class="divider"></div>
+            <div className="divider"></div>
         </div>
 
             {/* PHOTOS TAKEN WITH LENS */}
-        <div class="photos">
-            <div class="photos_header">
+        <div className="photos">
+            <div className="photos_header">
                 <h2>See Some Photos Taken With This Lens</h2>
             </div>
-            <div class="photos_img">
-                <div class="photo_img_wrapper">
+            <div className="photos_img">
+                <div className="photo_img_wrapper">
                     <img src={product.RF200_shot1} alt="New York City" />
                 </div>
-                <div class="photo_img_wrapper">
+                <div className="photo_img_wrapper">
                     <img src={product.RF200_shot2} alt="" />
                 </div>
-                <div class="photo_img_wrapper">
+                <div className="photo_img_wrapper">
                     <img src={product.RF200_shot3} alt="" />
                 </div>
-                <div class="photo_img_wrapper">
+                <div className="photo_img_wrapper">
                     <img src={product.RF200_shot4} alt="" />
                 </div>
-                <div class="photo_img_wrapper">
+                <div className="photo_img_wrapper">
                     <img src={product.RF200_shot5} alt="" />
                 </div>
             </div>

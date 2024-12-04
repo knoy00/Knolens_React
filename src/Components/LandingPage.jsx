@@ -12,10 +12,11 @@ import { Routes, Route } from 'react-router-dom';
 
 import './LandingPageMediaQuery.css'
 
-function LandingPage() {
+function LandingPage({cart}) {
+  console.log(cart);
   return (
     <div>
-      <Header />
+      <Header cart={cart}/>
       <Hero />
       <Categories />
       <Collection />

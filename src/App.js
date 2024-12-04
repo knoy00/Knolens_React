@@ -7,7 +7,7 @@ import ProductOverview from './Components/ProductOverview';
 import Cart from './Components/Cart';
 import AuthPage from './Components/AuthPage';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import './App.css'
 import Signinbtn from './Components/Signinbtn';
@@ -18,7 +18,7 @@ function App() {
 
 
   const addToCart = (product) => {
-    setCart([...cart, product]);
+    setCart((prevCart) => [...prevCart, product]);
   };
 
   const handleSignin = () => {
@@ -28,14 +28,23 @@ function App() {
   const handleCloseSignin = () => {
     setShowSignin(false);
   }
+
+  // disable scrolling when Auth Page is opened
+  useEffect(() => {
+    if (showSignin) {
+      document.body.classList.add('no-scroll');
+    } else {
+      document.body.classList.remove('no-scroll');
+    }
+  }, [showSignin]);
   
   return (
     <Router>
       <div>
         <Routes>
-          <Route path='/' element={<LandingPage />} />
-          <Route path='/Product' element={<ProductPage />}/>
-          <Route path='/Product/:id' element={<ProductOverview addToCart={addToCart}/>}/>
+          <Route path='/' element={<LandingPage cart={cart} />} />
+          <Route path='/Product' element={<ProductPage cart={cart}/>}/>
+          <Route path='/Product/:id' element={<ProductOverview addToCart={addToCart} cart={cart}/>}/>
           <Route path='/Cart' element={<Cart cart={cart} handleSignin={handleSignin}/>}/>
         </Routes>
 

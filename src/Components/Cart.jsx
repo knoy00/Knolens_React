@@ -8,11 +8,12 @@ import AuthPage from './AuthPage';
 import './Cart.css';
 
 function Cart({ cart, handleSignin, handleCloseSignin }) {
+    console.log(cart)
     const [signIn, setSignIn] = useState(false);
 
     return (
         <div>
-            <Header />
+            <Header cart={cart}/>
             <div className="cart">
                 <h1>Shopping Cart</h1>
 

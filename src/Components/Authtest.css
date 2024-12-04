@@ -10,6 +10,10 @@
     
 } */
 
+body.no-scroll{
+    overflow: hidden;
+}
+
 .authPage{
     width: 100%;
     display: flex;
@@ -18,7 +22,6 @@
     box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
     margin: auto;
     overflow-x: hidden;
-    border-radius: 10px;
     padding: 2rem 0;
     position: fixed;
     z-index: 100;
@@ -148,6 +151,7 @@ input{
     border-radius: 5px;
     cursor: pointer;
     margin-bottom: 1rem;
+    font-weight: 600;
 }
 
 .google:hover, .apple:hover{

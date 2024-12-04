@@ -23,6 +23,8 @@ import RF200_shot3 from '../../assets/images/Photos/lagoon.jpg'
 import RF200_shot4 from '../../assets/images/Photos/shore.jpg'
 import RF200_shot5 from '../../assets/images/Photos/waterfall.jpg'
 
+// DJI Mini 4 pro images
+import DjiMini4_1 from '../../assets/images/Djimini4pro_3_1.png'
 
 
 
@@ -186,7 +188,8 @@ export const drones = [
         name: 'DJI Mini 4 Pro',
         description: '',
         price: 100,
-        img: MiniPro
+        img: MiniPro,
+        img_2: DjiMini4_1
     },
     {
         id: 2,

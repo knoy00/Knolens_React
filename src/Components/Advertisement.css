@@ -46,6 +46,7 @@
     color: #ffffff;
     cursor: pointer;
     transition: .3s ease-in-out;
+    border: 1px solid #000000;
 }
 
 .ad_content button:hover{

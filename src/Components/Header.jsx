@@ -2,7 +2,9 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Header.css';
 
-function Header() {
+function Header({cart = []}) {
+  console.log(cart);  // Add this inside Header to check if cart is being passed properly
+
 const navigate = useNavigate();
   const gotoCart = () => {
     navigate("/Cart");
@@ -21,15 +23,19 @@ const navigate = useNavigate();
         <div className="nav-links">
           <li><Link to="/">Home</Link></li>
           <li><Link to="/Product">Products</Link></li>
-          <li><Link to="/shop">Shop</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/contact">Contact</Link></li>
+          <li><Link to="/Shop">Shop</Link></li>
+          <li><Link to="/About">About</Link></li>
+          <li><Link to="/Contact">Contact</Link></li>
         </div>
 
         <div className="search-user">
           <input type="text" placeholder="Search item" className="search-bar" />
           <i className="fa fa-user" id="user"></i>
-          <i className="fa fa-shopping-cart" id="cart" onClick={gotoCart}></i>
+          <div className="cart-count">
+            <i className="fa fa-shopping-cart" id="cart" onClick={gotoCart}></i>
+            {cart.length > 0 && <div className='counter'>{cart.length}</div>}
+          </div>
+          
         </div>
       </div>
     </header>

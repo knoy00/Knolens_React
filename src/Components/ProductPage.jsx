@@ -10,10 +10,10 @@ import CanonRebel from '../assets/images/Canon_rebel.webp';
 
 import './ProductPage.css'
 
-function ProductPage() {
+function ProductPage({cart=[]}) {
   return (
     <div>
-      <Header />
+      <Header cart={cart}/>
       <div className="product-page">
         <div className = 'row'>
           <h2>Cameras</h2>
@@ -106,6 +106,7 @@ function ProductPage() {
                   name={drone.name}
                   price={drone.price}
                   img={drone.img}
+                  img_2={drone.img_2}
                   discount={drone.discount}
                   description={drone.description}
                   />
