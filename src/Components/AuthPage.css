@@ -1,0 +1,148 @@
+.authPage{
+    width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+    margin: auto;
+    overflow-x: hidden;
+    border-radius: 10px;
+}
+a{
+    color: #000;
+}
+
+.form-container{
+    display: flex;
+    gap: 2rem;
+    /* margin-left: -1063px; */
+    width: 100%; 
+    transition: .5s ease-in-out;
+}
+
+.authPage-signin, .authPage-signup{
+    width: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 2rem 1rem;
+    flex-shrink: 0;
+}
+
+.authPage-header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.authPage-header h3{
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+.closebtn{
+    cursor: pointer;
+    font-size: 1.5rem;
+    padding: 4px;
+}
+
+.closebtn:hover{
+    background-color: #b0b0b04b;
+    border-radius: 5px;
+}
+
+.email, .password, .name{
+    width: 100%;
+    padding: 0px;
+    outline: none;
+}
+
+.email p, .password p, .name p{
+    font-size: 0.9rem;
+    color: #666666;
+    padding-bottom: .5rem;
+}
+
+input{
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #808080;
+}
+
+.forgot-password{
+    width: 100%;
+    display: inline-block;
+    color: #000;
+    font-size: .9rem;
+    margin-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.submit-btn{
+    width: 100%;
+}
+
+.submit-btn button{
+    width: 100%;
+    padding: 15px 10px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    font-weight: 600;
+    font-size: .9rem;
+}
+
+
+.submit-btn button:hover{
+    background-color: #e5e5e5;
+    color: #000;
+}
+
+.authPage-signin h3, .authPage-signup h3{
+    font-size: 1.2rem;
+    font-weight: 400;
+    text-align: center;
+    margin-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.google, .apple{
+    display: flex;
+    align-items: center;
+    gap: 8rem;
+    border: 1px solid #808080;
+    padding: 8px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+.google:hover, .apple:hover{
+    background-color: #e3e3e379;
+    color: #000;
+}
+
+.google img, .apple img{
+    width: 30px;
+    height: 30px;
+}
+
+.register{
+    text-align: center;
+    margin-top: 1rem;
+    padding-bottom: 1rem;
+    color: #000;
+}
+
+.terms{
+    margin-top: 1rem;
+    padding-bottom: 1rem;
+    font-size: .9rem;
+}

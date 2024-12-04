@@ -3,6 +3,7 @@ import Header from './Header';
 import Signinbtn from './Signinbtn';
 import { Link } from 'react-router-dom';
 import Footer from './Footer';
+import AuthPage from './AuthPage';
 
 import './Cart.css';
 
@@ -50,17 +51,17 @@ function Cart({ cart }) {
                                         <p>Shipping:</p>
                                         <p>$0</p>
                                     </div>
-
+                                    <div className='line'></div>
                                     <div className='total'>
                                         <p>Total:</p>
                                         <p>${item.price}</p>
                                     </div>
 
-                                    <div className='checkout'>
+                                    {/* <div className='checkout'>
                                         <Link to="/checkout">
                                             <button>Checkout</button>
                                         </Link>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </div>
@@ -111,6 +112,7 @@ function Cart({ cart }) {
             </div>
 
             <Footer />
+            <AuthPage />
         </div>
     );
 }

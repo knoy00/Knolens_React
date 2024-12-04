@@ -86,7 +86,7 @@
 }
 
 .cart-item-img img{
-    width: 50%;
+    width: 30%;
     height: 100%;
     object-fit: cover;
 }
@@ -107,7 +107,24 @@
 }
 
 .right{
-    width: 100%;
-    text-align: right;
+    width: 30%;
 }
 
+.subtotal, .shipping, .total{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.subtotal p, .shipping p, .total p{
+    font-size: 1rem;
+    color: #373737;
+}
+
+.subtotal, .shipping{
+    padding-bottom: 1rem;
+}
+
+.total{
+    padding-top: 1rem;
+}
