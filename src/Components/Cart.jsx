@@ -112,8 +112,6 @@ function Cart({ cart, handleSignin, handleCloseSignin }) {
             </div>
 
             <Footer />
-            {/* <AuthPage /> */}
-            <AuthPage />
         </div>
     );
 }

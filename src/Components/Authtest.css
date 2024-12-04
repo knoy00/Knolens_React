@@ -20,13 +20,13 @@
     overflow-x: hidden;
     border-radius: 10px;
     padding: 2rem 0;
-    /* position: fixed;
+    position: fixed;
     z-index: 100;
     top: 0;
     left: 0;
     background-color: white;
-    transform: translate(140%, 20%); */
-    background-color: rgba(28, 28, 28, 0.101);
+    background-color: rgba(9, 9, 9, 0.449);
+    height: 100vh;
 }
 
 a{
@@ -41,6 +41,7 @@ a{
     transition: .5s ease-in-out;
     overflow-x: hidden;
     background-color: #fff;
+    border-radius: 10px;
 
 }
 
