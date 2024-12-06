@@ -12,7 +12,7 @@ import './ProductPage.css'; // CSS file for product page styles
 import './ProductOverview.css'; // CSS file specifically for this component's styles
 
 // Main ProductOverview component
-function ProductOverview({ addToCart, removeFromCart, cart }) {
+function ProductOverview({ addToCart, removeFromCart, cart, handleSignin }) {
   // `useLocation` hook to access the state passed via the `Link` component
   const location = useLocation();
   const product = location.state; // The product details passed via state
@@ -38,7 +38,7 @@ function ProductOverview({ addToCart, removeFromCart, cart }) {
       <ScrollToTop />
 
       {/* Render the Header, passing the cart as a prop */}
-      <Header cart={cart} />
+      <Header cart={cart} handleSignin={handleSignin} />
 
       {/* Main product overview section */}
       <div className="product_overview">

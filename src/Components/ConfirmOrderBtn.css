@@ -1,0 +1,21 @@
+.confirm-order{
+    width: 100%;
+    padding-top: 2rem;
+}
+
+.confirm-order button{
+    padding: .8rem 3rem;
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color.3s ease-in-out, color.3s ease-in-out;
+}
+
+.confirm-order button:hover{
+    background-color: #e5e5e5;
+    color: #000000;
+}
+

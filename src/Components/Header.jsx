@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Header.css';
 
-function Header({cart = []}) {
+function Header({cart = [],handleSignin}) {
   console.log(cart);  // Add this inside Header to check if cart is being passed properly
 
 const navigate = useNavigate();
@@ -12,7 +12,6 @@ const navigate = useNavigate();
 
   return (
     <header>
-        
       <div className="navbar">
         <div className="logo">
             <Link to="/">
@@ -30,7 +29,7 @@ const navigate = useNavigate();
 
         <div className="search-user">
           <input type="text" placeholder="Search item" className="search-bar" />
-          <i className="fa fa-user" id="user"></i>
+          {<i onClick={handleSignin} className="fa fa-user" id="user"></i>}
           <div className="cart-count" onClick={gotoCart}>
             <i className="fa fa-shopping-cart" id="cart" ></i>
             {cart.length > 0 && <div className='counter'>{cart.length}</div>}

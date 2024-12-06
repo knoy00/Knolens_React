@@ -1,11 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 // Importing Link for navigation between routes
+
 import './Authtest.css';
 // Importing styles for the component
+
 import google from '../assets/images/google-small.png';
 import apple from '../assets/images/apple-logo.png';
 // Importing images for Google and Apple login options
+
 import { useState } from 'react';
 // Importing useState for managing component state
 

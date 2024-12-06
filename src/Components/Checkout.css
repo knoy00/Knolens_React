@@ -1,6 +1,5 @@
 .checkout{
     width: 100%;
-    padding: 2rem 6rem;
 }
 
 .checkout-header{
@@ -11,6 +10,7 @@
     align-items: center;
     display: flex;
     align-items: center;
+    padding: 2rem 6rem;
 }
 
 .checkout-header .secure,.checkout-header .checkout-logo, .checkout-header .help{
@@ -79,16 +79,39 @@
     padding: 2rem 20rem;
 }
 
+
+
 input{
     width: 100%;
     height: 2.5rem;
     border: 1px solid #b4b4b4;
     border-radius: 5px;
-    padding: 0 1rem;
+    padding: 1.3rem 1rem;
     outline: none;
-    font-size: 1.2rem;
+    font-size: .9rem;
     font-weight: 500;
     margin-top: .5rem;
+    background-color: #ffffff;
+}
+
+input:focus{
+    border: 2px solid #000000
+}
+
+
+.first-name, .last-name{
+    width: 100%;
+}
+
+.first-name, .last-name, .address, .city, .zip, .state, .phone{
+    position: relative;
+}
+
+.check{
+    right: 10px;
+    top: 2.5rem;
+    cursor: pointer;
+    position: absolute;
 }
 
 label{
@@ -99,7 +122,15 @@ label{
 }
 
 .checkout-left{
-    width: 90%;
+    width: 80%;
+    position: relative;
+}
+
+.cancel{
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
 }
 
 .checkout-left h2{
@@ -170,7 +201,7 @@ label{
 
 .city{
     padding-bottom: 1rem;
-    width: 100%;
+    width: 50%;
 }
 
 .state-wrapper{
@@ -182,6 +213,7 @@ label{
 .phone{
     padding-bottom: 1rem;
     margin-top: 1rem;
+    width: 50%;
 }
 
 
@@ -213,6 +245,9 @@ label{
 
 .checkout-right{
     width: 50%;
+    border: 1px solid #e4e4e4;
+    border-radius: 5px;
+    padding: 1rem;
 }
 
 .checkout-right-header{
@@ -311,4 +346,40 @@ label{
     color: #000000;
     font-weight: 500;
     padding-bottom: 1rem;
+}
+
+.delivery-fee{
+    display: flex;
+    justify-content: space-between;
+}
+.delivery-fee p{
+    font-size: .8rem;
+    color: #000000;
+    font-weight: 500;
+    padding-bottom: 1rem;
+}
+
+.promo{
+    margin-top: 1.5rem;
+}
+
+.promo button{
+    width: 30%;
+    height: 3rem;
+    background-color: #000000;
+    border: none;
+    border-radius: 5px;
+    color: #b6b6b6;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 1rem;
+    cursor: pointer;
+}
+
+.promo button:hover{
+    background-color: #353535;
+}
+
+.line{
+    margin-bottom: 1rem;
 }

@@ -10,10 +10,10 @@ import CanonRebel from '../assets/images/Canon_rebel.webp';
 
 import './ProductPage.css'
 
-function ProductPage({cart=[]}) {
+function ProductPage({cart=[], handleSignin}) {
   return (
     <div>
-      <Header cart={cart}/>
+      <Header cart={cart} handleSignin={handleSignin}/>
       <div className="product-page">
         <div className = 'row'>
           <h2>Cameras</h2>

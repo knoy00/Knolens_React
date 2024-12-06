@@ -76,11 +76,11 @@ function App() {
       <div>
         <Routes>
           {/* Define application routes */}
-          <Route path='/' element={<LandingPage cart={cart} />} />
+          <Route path='/' element={<LandingPage cart={cart} handleSignin={handleSignin}/>} />
           {/* Landing page route */}
-          <Route path='/Product' element={<ProductPage cart={cart} />} />
+          <Route path='/Product' element={<ProductPage cart={cart} handleSignin={handleSignin}/>} />
           {/* Product listing page route */}
-          <Route path='/Product/:id' element={<ProductOverview addToCart={addToCart} cart={cart} />} />
+          <Route path='/Product/:id' element={<ProductOverview addToCart={addToCart} cart={cart} handleSignin={handleSignin}/>} />
           {/* Product details page route with dynamic product ID */}
           <Route path='/Cart' element={<Cart removeFromCart={removeFromCart} cart={cart} handleSignin={handleSignin} showSigninBtn={showSigninBtn} hideSigninBtn={hideSigninBtn}/>} />
           {/* Cart page route */}

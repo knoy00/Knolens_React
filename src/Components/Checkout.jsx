@@ -1,9 +1,24 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import Footer from './Footer'
+
+import { useState } from 'react'
 
 import './Checkout.css'
 
 function Checkout() {
+
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [address, setAddress] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
+    const [zip, setZip] = useState('');
+    const [country, setCountry] = useState('');
+
+
   return (
     <div className='checkout'>
 
@@ -36,16 +51,19 @@ function Checkout() {
                 <p>Add your delivery address</p>
 
                 <span>*Required fields</span>
+                <span className="cancel">Cancel</span>
 
                 <div className="names">
                     <div className="first-name">
                         <label htmlFor="first-name">First name<span>*</span></label>
-                        <input type="text" placeholder='' name='first-name' required/>
+                        <input type="text" placeholder='' name='first-name' required value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
+                        {firstName.length > 0 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
                     </div>
 
                     <div className="last-name">
                         <label htmlFor="first-name">Last name<span>*</span></label>
-                        <input type="text" placeholder='' name='last-name' required/>               
+                        <input type="text" placeholder='' name='last-name' required value={lastName} onChange={(e) => setLastName(e.target.value)}/> 
+                        {lastName.length > 0 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}              
                     </div>
                 </div>
 
@@ -61,29 +79,34 @@ function Checkout() {
 
                 <div className="address">
                     <label htmlFor="Address">Address<span>*</span></label>
-                    <input type="text" name="Address" required/>
+                    <input type="text" name="Address" required value={address} onChange={(e) => setAddress(e.target.value)}/>
+                    {address.length > 0 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
                 </div>
 
                 <div className="city">
                     <label htmlFor="city">City<span>*</span></label>
-                    <input type="text" name="city" required/>
+                    <input type="text" name="city" required value={city} onChange={(e) => setCity(e.target.value)}/>
+                    {city.length > 0 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
                 </div>
 
                 <div className='state-wrapper'>
                     <div className="state">
                         <label htmlFor="state">State/Province</label>
-                        <input type="text" name="state"/>
+                        <input type="text" name="state" value={state} onChange={(e) => setState(e.target.value)}/>
+                        {state.length > 0 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
                     </div>
 
                     <div className="zip">
                         <label htmlFor="zip">Postal/Zip Code <span>*</span></label>
-                        <input type="text" />
+                        <input type="text" required name="zip" value={zip} onChange={(e) => setZip(e.target.value)}/>
+                        {zip.length >= 5 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
                     </div>
                 </div>
 
                 <div className="phone">
                     <label htmlFor="phone">Phone<span>*</span></label>
-                    <input type="text" name="phone" required/>
+                    <input type="text" name="phone" required value={phone} onChange={(e) => setPhone(e.target.value)}/>
+                    {phone.length >= 10 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
                     <span style={{fontSize: "0.8rem"}}>We will not share your phone number</span>
                 </div>
 
@@ -134,14 +157,15 @@ function Checkout() {
                 </div>
 
                 <div className="promo">
-                    <p>Have a Promo Code?</p>
-                    <input type="text" placeholder='Promo Code' />
+                    <label htmlFor="promo-code">Promo Code</label>
+                    <input type="text" placeholder='' name="promo-code"/>
                     <button>Apply</button>
                 </div>
 
 
             </div>
         </div>  
+        {/* <Footer /> */}
     </div>
   )
 }

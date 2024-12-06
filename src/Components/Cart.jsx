@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'; // React Router's Link for navigation
 import Footer from './Footer'; // Footer component to display at the bottom of the page
 import AuthPage from './AuthPage'; // Authentication page (optional)
 import Checkout from './Checkout';
+import ConfirmOrderBtn from './ConfirmOrderBtn';
 
 import './Cart.css'; // CSS file for styling the cart page
 
@@ -16,7 +17,7 @@ function Cart({ cart, handleSignin, handleCloseSignin, signin, removeFromCart}) 
     return (
         <div>
             {/* Header component receives the cart as a prop */}
-            <Header cart={cart} />
+            <Header cart={cart} handleSignin={handleSignin}/>
 
             {/* Main cart section */}
             <div className="cart">
@@ -94,7 +95,14 @@ function Cart({ cart, handleSignin, handleCloseSignin, signin, removeFromCart}) 
                 </div>}
 
                 {/* Display sign-in button if the user is not signed in */}
-                {!signin && <Signinbtn handleSignin={handleSignin} />}
+                {!signin ? (
+                    cart.length > 0 ? (
+                        <ConfirmOrderBtn handleSignin={handleSignin}/>
+                    ) : (
+                        <Signinbtn handleSignin={handleSignin} />
+                    )
+                ) : null}
+
             </div>
 
             {/* Contact section for customer support */}
