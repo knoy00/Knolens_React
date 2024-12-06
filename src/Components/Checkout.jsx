@@ -108,14 +108,14 @@ function Checkout() {
 
                 <div className="line"></div>
 
-                <h2>Summary</h2>
+                <h2 className="summary-title">Summary</h2>
 
-                <div className="item">
-                    <div className="item-image">
-                        <img src="https://via.placeholder.com/150x150" alt="" />
+                <div className="checkout-item">
+                    <div className="checkout-item-image">
+                        <img src="https://via.placeholder.com/70x70" alt="" />
                     </div>
 
-                    <div className="item-info">
+                    <div className="checkout-item-info">
                         <p>Product Name</p>
                         <p>USD $1,000</p>
                     </div>
