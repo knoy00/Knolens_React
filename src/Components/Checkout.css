@@ -84,7 +84,7 @@
 input{
     width: 100%;
     height: 2.5rem;
-    border: 1px solid #b4b4b4;
+    border: 2px solid #d5d5d5;
     border-radius: 5px;
     padding: 1.3rem 1rem;
     outline: none;
@@ -359,8 +359,10 @@ label{
     padding-bottom: 1rem;
 }
 
+/* PROMO SECTION */
+
 .promo{
-    margin-top: 1.5rem;
+    margin-top: 2rem;
 }
 
 .promo button{
