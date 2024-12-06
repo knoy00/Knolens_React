@@ -1,34 +1,43 @@
 import React, { useState } from 'react';
-import Header from './Header';
-import Signinbtn from './Signinbtn';
-import { Link } from 'react-router-dom';
-import Footer from './Footer';
-import AuthPage from './AuthPage';
+import Header from './Header'; // Header component to display at the top of the page
+import Signinbtn from './Signinbtn'; // Sign-in button component
+import { Link } from 'react-router-dom'; // React Router's Link for navigation
+import Footer from './Footer'; // Footer component to display at the bottom of the page
+import AuthPage from './AuthPage'; // Authentication page (optional)
 
-import './Cart.css';
+import './Cart.css'; // CSS file for styling the cart page
 
-function Cart({ cart, handleSignin, handleCloseSignin }) {
-    console.log(cart)
-    const [signIn, setSignIn] = useState(false);
+// Cart Component
+function Cart({ cart, handleSignin, handleCloseSignin, signin }) {
+    console.log(cart); // Logs the cart content for debugging
+
 
     return (
         <div>
-            <Header cart={cart}/>
+            {/* Header component receives the cart as a prop */}
+            <Header cart={cart} />
+
+            {/* Main cart section */}
             <div className="cart">
                 <h1>Shopping Cart</h1>
 
+                {/* Display a message if the cart is empty */}
                 {cart.length === 0 ? (
                     <p>Your cart is empty. Add some items to continue shopping.</p>
                 ) : (
+                    // Map through the cart items and display each one
                     cart.map((item) => (
-                        <div className='cart-container'>
-                            <p className='delivery-time'>Estimated delivery between 10-15 business days</p>
-                            <div className='line'></div>
+                        <div className="cart-container" key={item.id}>
+                            {/* Estimated delivery time */}
+                            <p className="delivery-time">Estimated delivery between 10-15 business days</p>
+                            <div className="line"></div> {/* Divider line */}
 
+                            {/* Cart item details */}
                             <div className="cart-flex">
-                                <div className='left'>
-                                    <div className="cart-item" key={item.id}>
-                                        <div className='cart-item-img'>
+                                {/* Left section: item image and details */}
+                                <div className="left">
+                                    <div className="cart-item">
+                                        <div className="cart-item-img">
                                             <img src={item.img} alt={item.name} />
                                         </div>
 
@@ -40,24 +49,27 @@ function Cart({ cart, handleSignin, handleCloseSignin }) {
                                     </div>
                                 </div>
 
-                                <div className='right'>
-                                    {/* <h2>Summary</h2> */}
-
-                                    <div className='subtotal'>
+                                {/* Right section: order summary */}
+                                <div className="right">
+                                    <div className="subtotal">
                                         <p>Subtotal:</p>
                                         <p>${item.price}</p>
                                     </div>
 
-                                    <div className='shipping'>
+                                    <div className="shipping">
                                         <p>Shipping:</p>
                                         <p>$0</p>
                                     </div>
-                                    <div className='line'></div>
-                                    <div className='total'>
+
+                                    <div className="line"></div> {/* Divider line */}
+                                    
+                                    {/* Total amount */}
+                                    <div className="total">
                                         <p>Total:</p>
                                         <p>${item.price}</p>
                                     </div>
 
+                                    {/* Checkout button (currently commented out) */}
                                     {/* <div className='checkout'>
                                         <Link to="/checkout">
                                             <button>Checkout</button>
@@ -66,12 +78,14 @@ function Cart({ cart, handleSignin, handleCloseSignin }) {
                                 </div>
                             </div>
                         </div>
-                        
                     ))
                 )}
-                <Signinbtn handleSignin={handleSignin}/>
+
+                {/* Display sign-in button if the user is not signed in */}
+                {!signin && <Signinbtn handleSignin={handleSignin} />}
             </div>
 
+            {/* Contact section for customer support */}
             <div className="contact">
                 <div className="need-help">
                     <h3>Need help?</h3>
@@ -82,6 +96,7 @@ function Cart({ cart, handleSignin, handleCloseSignin }) {
                     </p>
                 </div>
 
+                {/* Call us section */}
                 <div className="call-us">
                     <div className="title-flex">
                         <i className="fa-solid fa-phone"></i>
@@ -93,6 +108,7 @@ function Cart({ cart, handleSignin, handleCloseSignin }) {
                     </span>
                 </div>
 
+                {/* Email us section */}
                 <div className="email-us">
                     <div className="title-flex">
                         <i className="fa-solid fa-envelope"></i>
@@ -101,6 +117,7 @@ function Cart({ cart, handleSignin, handleCloseSignin }) {
                     <p>Customer Service</p>
                 </div>
 
+                {/* FAQs section */}
                 <div className="faqs">
                     <div className="title-flex">
                         <i className="fa-solid fa-question"></i>
@@ -112,6 +129,7 @@ function Cart({ cart, handleSignin, handleCloseSignin }) {
                 </div>
             </div>
 
+            {/* Footer component */}
             <Footer />
         </div>
     );

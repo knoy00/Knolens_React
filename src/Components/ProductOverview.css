@@ -136,7 +136,7 @@
 .addToCart button{
     width: 50%;
     padding: 1rem 0;
-    border: none;
+    border: 1px solid #000000;
     background-color: #000000;
     color: #ffffff;
     font-size: 1.2rem;
