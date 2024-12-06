@@ -39,19 +39,19 @@ function Checkout() {
 
                 <div className="names">
                     <div className="first-name">
-                        <label htmlFor="first-name">First name*</label>
-                        <input type="text" placeholder='First Name' name='first-name'/>
+                        <label htmlFor="first-name">First name<span>*</span></label>
+                        <input type="text" placeholder='' name='first-name' required/>
                     </div>
 
                     <div className="last-name">
-                        <label htmlFor="first-name">Last name*</label>
-                        <input type="text" placeholder='Last Name' name='last-name'/>               
+                        <label htmlFor="first-name">Last name<span>*</span></label>
+                        <input type="text" placeholder='' name='last-name' required/>               
                     </div>
                 </div>
 
                 <div className="region">
-                    <p>Country/region*</p>
-                    <select>
+                    <label htmlFor="region">Country/region<span>*</span></label>
+                    <select name='region' id='region' required>
                         <option value="">Select Country/Region</option>
                         <option value="USA">USA</option>
                         <option value="UK">UK</option>
@@ -60,31 +60,31 @@ function Checkout() {
                 </div>
 
                 <div className="address">
-                    <p>Address*</p>
-                    <input type="text" />
+                    <label htmlFor="Address">Address<span>*</span></label>
+                    <input type="text" name="Address" required/>
                 </div>
 
                 <div className="city">
-                    <p>City*</p>
-                    <input type="text" />
+                    <label htmlFor="city">City<span>*</span></label>
+                    <input type="text" name="city" required/>
                 </div>
 
                 <div className='state-wrapper'>
                     <div className="state">
-                        <p>State/Province*</p>
-                        <input type="text" />
+                        <label htmlFor="state">State/Province</label>
+                        <input type="text" name="state"/>
                     </div>
 
                     <div className="zip">
-                        <p>Zip/Postal Code*</p>
+                        <label htmlFor="zip">Postal/Zip Code <span>*</span></label>
                         <input type="text" />
                     </div>
                 </div>
 
                 <div className="phone">
-                    <p>Phone*</p>
-                    <input type="text" />
-                    <span>We will not share your phone number</span>
+                    <label htmlFor="phone">Phone<span>*</span></label>
+                    <input type="text" name="phone" required/>
+                    <span style={{fontSize: "0.8rem"}}>We will not share your phone number</span>
                 </div>
 
                 <div className="billing-address-check">
