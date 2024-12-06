@@ -1,0 +1,110 @@
+.checkout{
+    width: 100%;
+    padding: 2rem 6rem;
+}
+
+.checkout-header{
+    width: 100%;
+    padding: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    align-items: center;
+}
+
+.checkout-header .secure,.checkout-header .checkout-logo, .checkout-header .help{
+    width: 100%
+}
+
+.secure{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: flex-start;
+}
+
+.checkout-logo{
+    text-align: center;
+}
+
+.checkout-logo {
+    font-size: 2rem;
+    height: 100%;
+    text-align: center;
+}
+
+.checkout-logo a{
+    text-decoration: none;
+}
+
+.logo_black{
+    color: #353535;
+    font-weight: 500;
+    
+}
+
+.logo_red{
+    color: #c50000;
+    font-weight: 500;
+}
+
+
+.help{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-align: right;
+    margin-right: auto;
+    justify-content: flex-end;
+}
+
+.help .phone{
+    display: flex;
+    align-items: center;
+    text-align: right;
+    
+}
+
+.phone p{
+    text-align: right;
+}
+
+
+/* Checkout Flex Section */
+.checkout-flex{
+    display: flex;
+    width: 100%;
+}
+
+.checkout-left{
+    width: 100%;
+}
+
+.checkout-left h2{
+    font-weight: 400;
+    font-size: 1.8rem;
+    padding-bottom: 1rem;
+}
+
+.checkout-left p{
+    font-size: 1.1rem;
+    padding-bottom: 1rem;
+}
+
+.checkout-left span{
+    font-size: 1rem;
+    padding-bottom: 1rem;
+    color: #ff0000;
+}
+
+.names{
+    padding-top: 1.5rem;
+    display: flex;
+}
+
+
+
+.checkout-right{
+    width: 70%;
+}

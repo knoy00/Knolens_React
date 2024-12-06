@@ -9,6 +9,7 @@ import ProductPage from './Components/ProductPage';
 import ProductOverview from './Components/ProductOverview';
 import Cart from './Components/Cart';
 import AuthPage from './Components/AuthPage';
+import Checkout from './Components/Checkout';
 // Importing page components
 
 import { useState, useEffect } from 'react';

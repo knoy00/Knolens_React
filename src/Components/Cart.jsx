@@ -4,6 +4,7 @@ import Signinbtn from './Signinbtn'; // Sign-in button component
 import { Link } from 'react-router-dom'; // React Router's Link for navigation
 import Footer from './Footer'; // Footer component to display at the bottom of the page
 import AuthPage from './AuthPage'; // Authentication page (optional)
+import Checkout from './Checkout';
 
 import './Cart.css'; // CSS file for styling the cart page
 
@@ -142,6 +143,7 @@ function Cart({ cart, handleSignin, handleCloseSignin, signin, removeFromCart}) 
 
             {/* Footer component */}
             <Footer />
+            <Checkout />
         </div>
     );
 }
