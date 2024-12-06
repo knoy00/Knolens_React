@@ -17,6 +17,21 @@ function ProductOverview({ addToCart, removeFromCart, cart }) {
   const location = useLocation();
   const product = location.state; // The product details passed via state
 
+  console.log(product.type); // Check if product is defined and contains 'type'
+
+  const type = () => {
+    if(product.type === 'cameras'){
+      return 'Cameras';
+    }
+    if(product.type === 'lenses'){
+      return 'Lenses';
+    }
+    if(product.type === 'drones'){
+      return 'Drones';
+    }
+    return 'Product';
+  }
+
   return (
     <>
       {/* Ensure the page scrolls to the top when this component is rendered */}
@@ -29,13 +44,34 @@ function ProductOverview({ addToCart, removeFromCart, cart }) {
       <div className="product_overview">
         {/* Left section: displays product images */}
         <div className="overview_left">
-          {/* Render all product images if they exist */}
-          <div className="img_overview"><img src={product.img} alt="" /></div>
-          <div className='img_overview'><img src={product.img_2} alt="" /></div>
-          <div className='img_overview'><img src={product.img_3} alt="" /></div>
-          <div className='img_overview'><img src={product.img_4} alt="" /></div>
-          <div className='img_overview'><img src={product.img_5} alt="" /></div>
-        </div>
+
+  {/* Render all product images only if they exist */}
+  {product.img && (
+    <div className="img_overview">
+      <img src={product.img} alt="Product Image 1" />
+    </div>
+  )}
+  {product.img_2 && (
+    <div className="img_overview">
+      <img src={product.img_2} alt="Product Image 2" />
+    </div>
+  )}
+  {product.img_3 && (
+    <div className="img_overview">
+      <img src={product.img_3} alt="Product Image 3" />
+    </div>
+  )}
+  {product.img_4 && (
+    <div className="img_overview">
+      <img src={product.img_4} alt="Product Image 4" />
+    </div>
+  )}
+  {product.img_5 && (
+    <div className="img_overview">
+      <img src={product.img_5} alt="Product Image 5" />
+    </div>
+  )}
+</div>
 
         {/* Right section: displays product details */}
         <div className="overview_right">
@@ -98,7 +134,7 @@ function ProductOverview({ addToCart, removeFromCart, cart }) {
       {/* Section showcasing photos taken with the product (e.g., a lens) */}
       <div className="photos">
         <div className="photos_header">
-          <h2>See Some Photos Taken With This Lens</h2>
+          <h2>See Some Photos Taken With This {type()}</h2>
         </div>
         <div className="photos_img">
           {/* Display all photos if available */}

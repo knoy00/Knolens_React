@@ -4,16 +4,18 @@ import './ProductCard.css'; // Import the CSS file for styling
 
 // Define the ProductCard component and destructure props
 function ProductCard({ 
-  name, description, price, discount, img, img_2, img_3, img_4, img_5, id, 
+  name, type, description, price, discount, img, img_2, img_3, img_4, img_5, id, 
   attribute_1, attribute_2, attribute_3, code, productOverview, disclaimer, 
   RF200_shot1, RF200_shot2, RF200_shot3, RF200_shot4, RF200_shot5 
-}) {
+})
+
+{
   return (
-    // Link component navigates to the product details page with a dynamic URL and passes data via state
+    // Link component navigates to the product overview page with a dynamic URL and passes data via state
     <Link 
       to={`/Product/${id}`} // Dynamic URL based on the product's unique ID
       state={{
-        name, img, img_2, img_3, img_4, img_5, description, price, discount, id, 
+        name, type, img, img_2, img_3, img_4, img_5, description, price, discount, id, 
         attribute_1, attribute_2, attribute_3, code, productOverview, disclaimer, 
         RF200_shot1, RF200_shot2, RF200_shot3, RF200_shot4, RF200_shot5, // Pass all product details as state
       }}

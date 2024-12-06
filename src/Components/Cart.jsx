@@ -8,7 +8,7 @@ import AuthPage from './AuthPage'; // Authentication page (optional)
 import './Cart.css'; // CSS file for styling the cart page
 
 // Cart Component
-function Cart({ cart, handleSignin, handleCloseSignin, signin }) {
+function Cart({ cart, handleSignin, handleCloseSignin, signin, removeFromCart}) {
     console.log(cart); // Logs the cart content for debugging
 
 
@@ -23,17 +23,23 @@ function Cart({ cart, handleSignin, handleCloseSignin, signin }) {
 
                 {/* Display a message if the cart is empty */}
                 {cart.length === 0 ? (
-                    <p>Your cart is empty. Add some items to continue shopping.</p>
+                    <p style={{ paddingBottom: '2rem' }}>Your cart is empty. Add some items to continue shopping.</p>
                 ) : (
                     // Map through the cart items and display each one
                     cart.map((item) => (
                         <div className="cart-container" key={item.id}>
+                           
                             {/* Estimated delivery time */}
                             <p className="delivery-time">Estimated delivery between 10-15 business days</p>
                             <div className="line"></div> {/* Divider line */}
 
                             {/* Cart item details */}
                             <div className="cart-flex">
+                                {/* Remove item from cart button */}
+                                <div className='removeItem' onClick={() => removeFromCart(item)}>
+                                    <i className='fa fa-times'></i>
+                                </div>
+
                                 {/* Left section: item image and details */}
                                 <div className="left">
                                     <div className="cart-item">
@@ -61,13 +67,13 @@ function Cart({ cart, handleSignin, handleCloseSignin, signin }) {
                                         <p>$0</p>
                                     </div>
 
-                                    <div className="line"></div> {/* Divider line */}
+                                    
                                     
                                     {/* Total amount */}
-                                    <div className="total">
+                                    {/* <div className="total">
                                         <p>Total:</p>
                                         <p>${item.price}</p>
-                                    </div>
+                                    </div> */}
 
                                     {/* Checkout button (currently commented out) */}
                                     {/* <div className='checkout'>
@@ -77,9 +83,14 @@ function Cart({ cart, handleSignin, handleCloseSignin, signin }) {
                                     </div> */}
                                 </div>
                             </div>
+                            
                         </div>
                     ))
                 )}
+                <div className="line"></div> {/* Divider line */}
+                {cart.length > 0 && <div className='totalAmount'>
+                    <p>Total: $33</p>
+                </div>}
 
                 {/* Display sign-in button if the user is not signed in */}
                 {!signin && <Signinbtn handleSignin={handleSignin} />}

@@ -45,6 +45,11 @@ function App() {
     setCart((prevCart) => [...prevCart, product]);
   };
 
+  const removeFromCart = (product) => {
+    // Function to remove a product from the cart
+    setCart((prevCart) => prevCart.filter((item) => item.id !== product.id));
+  };
+
   const handleSignin = () => {
     // Function to show the sign-in page
     setShowSignin(true);
@@ -76,7 +81,7 @@ function App() {
           {/* Product listing page route */}
           <Route path='/Product/:id' element={<ProductOverview addToCart={addToCart} cart={cart} />} />
           {/* Product details page route with dynamic product ID */}
-          <Route path='/Cart' element={<Cart cart={cart} handleSignin={handleSignin} showSigninBtn={showSigninBtn} hideSigninBtn={hideSigninBtn}/>} />
+          <Route path='/Cart' element={<Cart removeFromCart={removeFromCart} cart={cart} handleSignin={handleSignin} showSigninBtn={showSigninBtn} hideSigninBtn={hideSigninBtn}/>} />
           {/* Cart page route */}
         </Routes>
 

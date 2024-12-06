@@ -31,8 +31,8 @@ const navigate = useNavigate();
         <div className="search-user">
           <input type="text" placeholder="Search item" className="search-bar" />
           <i className="fa fa-user" id="user"></i>
-          <div className="cart-count">
-            <i className="fa fa-shopping-cart" id="cart" onClick={gotoCart}></i>
+          <div className="cart-count" onClick={gotoCart}>
+            <i className="fa fa-shopping-cart" id="cart" ></i>
             {cart.length > 0 && <div className='counter'>{cart.length}</div>}
           </div>
           

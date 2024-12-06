@@ -65,10 +65,11 @@ export const accessories = [
 export const lenses = [
     {
         id: 1,
+        type: 'lenses',
         name: 'Canon Lens',
         description: 'This is a camera 1',
         code: 'CNR7-T',
-        price: 100,
+        price: 900,
         attribute_1: 'Comfortable handheld shooting and amazing mobility',
         attribute_2: 'Superior image quality',
         attribute_3: 'Durable and waterproof',
@@ -117,6 +118,7 @@ export const lenses = [
 export const cameras = [
     {
         id: 1,
+        type: 'cameras',
         name: 'Canon EOS',
         description: 'CNR7-T',
         code: 'CNR7-T',
@@ -185,6 +187,7 @@ export const cameras = [
 export const drones = [
     {
         id: 1,
+        type: 'drones',
         name: 'DJI Mini 4 Pro',
         description: '',
         price: 100,

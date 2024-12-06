@@ -58,12 +58,14 @@
 
 .cart-container{
     width: 100%;
+    position: relative;
 }
 
 .cart-flex{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
 }
 
 .left{
@@ -125,6 +127,28 @@
     padding-bottom: 1rem;
 }
 
-.total{
-    padding-top: 1rem;
+.totalAmount{
+   padding-top: 2rem;
+    text-align: right;
+    display: inline-block;
+    width: 100%;
+}
+
+.totalAmount p{
+    font-weight: 600;
+}
+
+.removeItem{
+    position: absolute;
+    right: 0;
+    top: 2px;
+    padding: .5rem;
+    cursor: pointer;
+    transition: .3s ease-in-out;  
+}
+
+.removeItem:hover{
+    background-color: #e0e0e0;
+    background-color: #e0e0e092;
+    border-radius: 5px;
 }
