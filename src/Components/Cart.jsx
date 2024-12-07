@@ -6,6 +6,7 @@ import Footer from './Footer'; // Footer component to display at the bottom of t
 import AuthPage from './AuthPage'; // Authentication page (optional)
 import Checkout from './Checkout';
 import ConfirmOrderBtn from './ConfirmOrderBtn';
+import ScrollToTop from './ScrollToTop';
 
 import './Cart.css'; // CSS file for styling the cart page
 
@@ -16,6 +17,7 @@ function Cart({ cart, handleSignin, handleCloseSignin, signin, removeFromCart}) 
 
     return (
         <div>
+            <ScrollToTop />
             {/* Header component receives the cart as a prop */}
             <Header cart={cart} handleSignin={handleSignin}/>
 

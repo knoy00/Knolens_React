@@ -26,8 +26,27 @@ import RF200_shot5 from '../../assets/images/Photos/waterfall.jpg'
 // DJI Mini 4 pro images
 import DjiMini4_1 from '../../assets/images/Djimini4pro_3_1.png'
 
+// EF11-24 lenses images
+import EF11_24_1 from '../../assets/images/EF11-24/EF11-24_1.webp'
+import EF11_24_2 from '../../assets/images/EF11-24/EF11-24_2.webp'
+
+//EF8-15 lenses images
+import EF8_15_1 from '../../assets/images/EF8-15/EF8-15_1.webp'
+import EF8_15_2 from '../../assets/images/EF8-15/EF8-15_2.webp'
+
+// RF-1200 Lens
+import RF1200_1 from '../../assets/images/RF-1200/RF-1200_1.webp'
+import RF1200_2 from '../../assets/images/RF-1200/RF-1200_2.webp'
+import RF1200_3 from '../../assets/images/RF-1200/RF-1200_3.webp'
+import RF1200_4 from '../../assets/images/RF-1200/RF-1200_4.webp'
+import RF1200_5 from '../../assets/images/RF-1200/RF-1200_5.webp'
 
 
+// Drone images
+import Drone1 from '../../assets/images/97e1b5ab20211e739898969647666de1.png'
+import Drone2 from '../../assets/images/a2d5733d4fe4b62050a3a1ea1109612d.png'
+import Drone3 from '../../assets/images/77738ff32f7a228fc58b4f401261e481.png'
+import Drone4 from '../../assets/images/5698cb42a9a1fdce69e22f30550d9767.png'
 export const accessories = [
     {
         id: 1,
@@ -93,24 +112,59 @@ export const lenses = [
     },
     {
         id: 2,
-        name: 'Camera 2',
+        type: 'lenses',
+        name: 'Canon Lens',
         description: 'This is a camera 1',
-        price: 100,
-        discount: 0,
+        code: 'EF11-23',
+        price: 2200,
+        attribute_1: 'Comfortable handheld shooting and amazing mobility',
+        attribute_2: 'Superior image quality',
+        attribute_3: 'Durable and waterproof',
+        attribute_4: 'Easy-to-use interface',
+        attribute_5: '24-hour battery life',
+        insurance: true,
+        img: EF11_24_1,
+        img_2: EF11_24_2,
+        attribute_6: '18-megapixel sensor',
+        attribute_7: 'Full HD video recording',
+        disclaimer:  `* Based on CIPA (Camera & Imaging Products Association) standards. Testing performed at a focal length of 200mm using the EOS-1D X Mark II digital SLR camera.`,
     },
     {
         id: 3,
-        name: 'Camera 1',
-        description: 'This is a camera 1',
+        name: 'Canon Lens',
+        description: 'Canon ',
         price: 100,
-        discount: 0,
+        img: EF8_15_1,
+        attribute_1: 'Comfortable handheld shooting and amazing mobility',
+        attribute_2: 'Superior image quality',
+        attribute_3: 'Durable and waterproof',
+        attribute_4: 'Easy-to-use interface',
+        attribute_5: '24-hour battery life',
+        attribute_6: '18-megapixel sensor',
+        img_2: EF8_15_2,
+        code: 'EF8-15',
+        attribute_7: 'Full HD video recording',
+        insurance: true
     },
     {
         id: 4,
-        name: 'Camera 1',
+        name: 'Canon Lens',
         description: 'This is a camera 1',
-        price: 100,
-        discount: 0,
+        price: 2240,
+        img: RF1200_1,
+        attribute_1: 'Comfortable handheld shooting and amazing mobility',
+        attribute_2: 'Superior image quality',
+        attribute_3: 'Durable and waterproof',
+        attribute_4: 'Easy-to-use interface',
+        attribute_5: '24-hour battery life',
+        attribute_6: '18-megapixel sensor',
+        attribute_7: 'Full HD video recording',
+        code: 'RF-1200',
+        img_2: RF1200_2,
+        img_3: RF1200_3,
+        img_4: RF1200_4,
+        img_5: RF1200_5,
+        insurance: true
     },
 
 ]
@@ -190,30 +244,64 @@ export const drones = [
         type: 'drones',
         name: 'DJI Mini 4 Pro',
         description: '',
-        price: 100,
+        price: 2500,
         img: MiniPro,
-        img_2: DjiMini4_1
+        img_2: DjiMini4_1,
+        attribute_1: 'Comfortable and easy to pilot',
+        attribute_2: 'High-resolution video recording',
+        attribute_3: 'Compact and lightweight',
+        attribute_4: 'Easy-to-use interface',
+        attribute_5: 'Long battery life',
+        attribute_6: '24-megapixel sensor',
+        insurance: true,
+        code: 'DJI-T2XR',
+        disclaimer: '*Based on the DJI Mini 4 Pro specs and features'
     },
     {
         id: 2,
         name: 'drones 2',
         description: 'This is a camera 1',
         price: 100,
-        discount: 0,
+        img: Drone1,
+        attribute_1: 'Comfortable and easy to pilot',
+        attribute_2: 'High-resolution video recording',
+        attribute_3: 'Compact and lightweight',
+        attribute_4: 'Easy-to-use interface',
+        attribute_5: 'Long battery life',
+        attribute_6: '24-megapixel sensor',
+        insurance: true,
+        code: 'DJI-T200'
+        
     },
     {
         id: 3,
         name: 'drones 1',
         description: 'This is a camera 1',
         price: 100,
-        discount: 0,
+        img: Drone2,
+        attribute_1: 'Comfortable and easy to pilot',
+        attribute_2: 'High-resolution video recording',
+        attribute_3: 'Compact and lightweight',
+        attribute_4: 'Easy-to-use interface',
+        attribute_5: 'Long battery life',
+        attribute_6: '24-megapixel sensor',
+        insurance: true,
+        code: 'DJI-M30'
     },    
     {
         id: 4,
         name: 'drones 1',
         description: 'This is a camera 1',
         price: 100,
-        discount: 0,    
+        img: Drone3,
+        attribute_1: 'Comfortable and easy to pilot',
+        attribute_2: 'High-resolution video recording',
+        attribute_3: 'Compact and lightweight',
+        attribute_4: 'Easy-to-use interface',
+        attribute_5: 'Long battery life',
+        attribute_6: '24-megapixel sensor',
+        insurance: true,
+        code: 'DJI-Mavic-TS3'
     }
 
 ]

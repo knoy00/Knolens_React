@@ -11,6 +11,10 @@ import CanonRebel from '../assets/images/Canon_rebel.webp';
 import './ProductPage.css'
 
 function ProductPage({cart=[], handleSignin}) {
+
+  const cameraSlice = cameras.slice(0, 4);
+  const lensSlice = lenses.slice(0, 4);
+  const droneSlice = drones.slice(0, 4);
   return (
     <div>
       <Header cart={cart} handleSignin={handleSignin}/>
@@ -18,7 +22,7 @@ function ProductPage({cart=[], handleSignin}) {
         <div className = 'row'>
           <h2>Cameras</h2>
           <div className='product-row'>
-              {cameras.map((camera) => (
+              {cameraSlice.map((camera) => (
                   <ProductCard
                   key={camera.id}
                   name={camera.name}
@@ -52,7 +56,7 @@ function ProductPage({cart=[], handleSignin}) {
         <div className = 'row'>
           <h2>Lenses</h2>
           <div className='product-row'>
-              {lenses.map((lens) => (
+              {lensSlice.map((lens) => (
                   <ProductCard
                   key={lens.id}
                   name={lens.name}
@@ -100,7 +104,7 @@ function ProductPage({cart=[], handleSignin}) {
         <div className = 'row'>
           <h2>Drones</h2>
           <div className='product-row'>
-              {drones.map((drone) => (
+              {droneSlice.map((drone) => (
                   <ProductCard
                   key={drone.id}
                   name={drone.name}
@@ -109,6 +113,11 @@ function ProductPage({cart=[], handleSignin}) {
                   img_2={drone.img_2}
                   discount={drone.discount}
                   description={drone.description}
+                  code={drone.code}
+                  attribute_1={drone.attribute_1}
+                  attribute_2={drone.attribute_2}
+                  attribute_3={drone.attribute_3}
+                  disclaimer={drone.disclaimer}
                   />
               ))}
           </div>

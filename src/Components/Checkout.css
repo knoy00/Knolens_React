@@ -8,24 +8,23 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    display: flex;
-    align-items: center;
-    padding: 2rem 6rem;
+    padding: 2rem 2rem;
 }
 
 .checkout-header .secure,.checkout-header .checkout-logo, .checkout-header .help{
-    width: 100%
+    flex-shrink: 0;
+    padding: 1rem;
 }
 
 .secure{
     display: flex;
     align-items: center;
     gap: 1rem;
-    justify-content: flex-start;
 }
 
 .checkout-logo{
     text-align: center;
+
 }
 
 .checkout-logo {
@@ -49,26 +48,57 @@
     font-weight: 500;
 }
 
-
 .help{
     display: flex;
     align-items: center;
-    gap: 1rem;
     text-align: right;
-    margin-right: auto;
     justify-content: flex-end;
+    gap: .6rem;
+    padding: 2rem 0;
+}
+
+.help p{
+    width: 200px;
+}
+
+.phone{
+    display: flex;
+    align-items: center;
+}
+
+.phone p{
+    width: 130px;
+}
+
+/* .help{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: rgb(225, 0, 255);
+    justify-content: flex-end;
+    
+}
+
+.help p{
+    text-align: right;
+    background-color: rgb(74, 74, 235);
+    width: 30%;
 }
 
 .help .phone{
     display: flex;
-    align-items: center;
     text-align: right;
+    background-color: green;
+    gap: 1rem;
+    padding: 0;
+    justify-content: flex-end;
     
 }
 
 .phone p{
     text-align: right;
-}
+    background-color: rgb(255, 0, 64);
+} */
 
 
 /* Checkout Flex Section */
@@ -207,13 +237,25 @@ label{
 .state-wrapper{
     display: flex;
     width: 100%;
+    
     gap: 1rem;
 }
 
-.phone{
+.state{
+    width: 100%;
+    /* max-width: 400px; */
+}
+
+.zip{
+    width: 100%;
+    /* max-width: 400px; */
+}
+
+.mobile{
     padding-bottom: 1rem;
     margin-top: 1rem;
-    width: 50%;
+    width: 100%;
+    max-width: 400PX;
 }
 
 

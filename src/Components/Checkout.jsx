@@ -103,7 +103,7 @@ function Checkout() {
                     </div>
                 </div>
 
-                <div className="phone">
+                <div className="mobile">
                     <label htmlFor="phone">Phone<span>*</span></label>
                     <input type="text" name="phone" required value={phone} onChange={(e) => setPhone(e.target.value)}/>
                     {phone.length >= 10 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
