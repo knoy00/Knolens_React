@@ -10,6 +10,7 @@ import ProductOverview from './Components/ProductOverview';
 import Cart from './Components/Cart';
 import AuthPage from './Components/AuthPage';
 import Checkout from './Components/Checkout';
+import ContactUs from './Components/ContactUs';
 // Importing page components
 
 import { useState, useEffect } from 'react';
@@ -78,12 +79,18 @@ function App() {
           {/* Define application routes */}
           <Route path='/' element={<LandingPage cart={cart} handleSignin={handleSignin}/>} />
           {/* Landing page route */}
+
           <Route path='/Product' element={<ProductPage cart={cart} handleSignin={handleSignin}/>} />
           {/* Product listing page route */}
+
           <Route path='/Product/:id' element={<ProductOverview addToCart={addToCart} cart={cart} handleSignin={handleSignin}/>} />
           {/* Product details page route with dynamic product ID */}
+
           <Route path='/Cart' element={<Cart removeFromCart={removeFromCart} cart={cart} handleSignin={handleSignin} showSigninBtn={showSigninBtn} hideSigninBtn={hideSigninBtn}/>} />
           {/* Cart page route */}
+
+          <Route path='/Contact' element={<ContactUs />} handeleSignin={handleSignin} />
+          {/* Contact page route */}
         </Routes>
 
         {/* Render the authentication page if `showSignin` is true */}

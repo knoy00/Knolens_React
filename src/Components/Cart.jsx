@@ -7,6 +7,7 @@ import AuthPage from './AuthPage'; // Authentication page (optional)
 import Checkout from './Checkout';
 import ConfirmOrderBtn from './ConfirmOrderBtn';
 import ScrollToTop from './ScrollToTop';
+import ContactUs from './ContactUs';
 
 import './Cart.css'; // CSS file for styling the cart page
 
