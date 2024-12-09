@@ -11,6 +11,7 @@ import Cart from './Components/Cart';
 import AuthPage from './Components/AuthPage';
 import Checkout from './Components/Checkout';
 import ContactUs from './Components/ContactUs';
+import Shop from './Components/Shop';
 // Importing page components
 
 import { useState, useEffect } from 'react';
@@ -89,8 +90,11 @@ function App() {
           <Route path='/Cart' element={<Cart removeFromCart={removeFromCart} cart={cart} handleSignin={handleSignin} showSigninBtn={showSigninBtn} hideSigninBtn={hideSigninBtn}/>} />
           {/* Cart page route */}
 
-          <Route path='/Contact' element={<ContactUs />} handeleSignin={handleSignin} />
+          <Route path='/Contact' element={<ContactUs handeleSignin={handleSignin} />}  />
           {/* Contact page route */}
+
+          <Route path='/Shop' element={<Shop handeleSignin={handleSignin} />}  />
+          {/* Shop page route */}
         </Routes>
 
         {/* Render the authentication page if `showSignin` is true */}

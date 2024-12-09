@@ -12,9 +12,9 @@ import './ProductPage.css'
 
 function ProductPage({cart=[], handleSignin}) {
 
-  const cameraSlice = cameras.slice(0, 4);
-  const lensSlice = lenses.slice(0, 4);
-  const droneSlice = drones.slice(0, 4);
+  const cameraSlice = cameras.slice(0, 5);
+  const lensSlice = lenses.slice(0, 5);
+  const droneSlice = drones.slice(0, 5);
   return (
     <div>
       <Header cart={cart} handleSignin={handleSignin}/>

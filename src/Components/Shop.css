@@ -1,0 +1,50 @@
+.shop-page{
+    padding-top: 8vh;
+    width: 100%;
+}
+
+.shop_top{
+    padding: 7rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000000;
+}
+
+.shop_top h1{
+    color: #f5f5f5;
+    font-size: 5rem;
+    font-weight: 400;
+}
+
+/* SHOP CAMERA SECTION */
+.shop_cameras{
+    width: 100%;
+}
+
+.shop_cameras h2, .shop_lenses h2{
+    font-size: 2.5rem;
+    font-weight: 400;
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.shop-row{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: calc(250px * 5 + 20px * 15);
+    margin: 0 auto;
+    width: 100%;
+    padding: 1rem 0rem;
+
+}
+
+
+/* SHOP lENSES SECTION */
+
+.shop_lenses{
+    width: 100%;
+    padding: 5rem 0;
+}

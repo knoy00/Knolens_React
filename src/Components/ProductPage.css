@@ -4,11 +4,16 @@
 }
 
 .product-row{
-    display: flex;
+    /* display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    gap: 1.5rem; */
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.5rem;
+
 }
 
 .row h2{
