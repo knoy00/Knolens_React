@@ -18,7 +18,7 @@ function Shop({handleSignin, cart=[]}) {
                 </div>
 
                 <div className="shop_cameras">
-                    <h2>Cameras</h2>
+                    <h2 className='sticky-header'>Cameras</h2>
                     <div className="shop-row">
                         {cameras.map((item) => {
                             return (
@@ -37,25 +37,23 @@ function Shop({handleSignin, cart=[]}) {
             {/* <Footer /> */}
 
                 <div className="shop_lenses">
-                        <h2>Lenses</h2>
-                        <div className="shop-row">
-                            {lenses.map((item) => {
-                                return (
-                                <ProductCard 
-                                    key={item.id}
-                                    name={item.name}
-                                    price={item.price}
-                                    img={item.img}
-                                    discount={item.discount}
-                                    description={item.description}
-                                    code={item.code}
-                                />
-                            )})}
-                        </div>
+                    <h2 className='sticky-header'>Lenses</h2>
+                    <div className="shop-row">
+                        {lenses.map((item) => {
+                            return (
+                            <ProductCard 
+                                key={item.id}
+                                name={item.name}
+                                price={item.price}
+                                img={item.img}
+                                discount={item.discount}
+                                description={item.description}
+                                code={item.code}
+                            />
+                        )})}
                     </div>
                 </div>
-
-            
+            </div>
         </div>
     )
 }

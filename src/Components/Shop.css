@@ -23,6 +23,17 @@
     width: 100%;
 }
 
+.sticky-header{
+    position: sticky;
+    top: 75px;
+    z-index: 1;
+    background-color: #222222;
+    padding: 1rem 0rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: white;
+
+}
+
 .shop_cameras h2, .shop_lenses h2{
     font-size: 2.5rem;
     font-weight: 400;
@@ -37,7 +48,7 @@
     max-width: calc(250px * 5 + 20px * 15);
     margin: 0 auto;
     width: 100%;
-    padding: 1rem 0rem;
+    padding: 4rem 0rem;
 
 }
 
