@@ -13,11 +13,20 @@ function Shop({handleSignin, cart=[]}) {
         <div>
             <Header handleSignin={handleSignin}/>
             <div className="shop-page">
+                <div className="arrow-top">
+                    <i className="fa-solid fa-arrow-up"></i>
+                </div>
                 <div className="shop_top">
-                    <h1>Shop</h1>
+                        <h1>Shop</h1>
+                        {/* <div className="shop_links stick">
+                            <Link to="lnk-cam">Camera</Link>
+                            <Link>Lens</Link>
+                            <Link>Drones</Link>
+                            <Link>Accessories</Link>
+                        </div> */}
                 </div>
 
-                <div className="shop_cameras">
+                <div className="shop_cameras" id="lnk-cam">
                     <h2 className='sticky-header'>Cameras</h2>
                     <div className="shop-row">
                         {cameras.map((item) => {
@@ -51,6 +60,25 @@ function Shop({handleSignin, cart=[]}) {
                                 code={item.code}
                             />
                         )})}
+                    </div>
+                </div>
+
+                <div className="shop_drones">
+                    <h2 className="sticky-header">Drones</h2>
+                    <div className="shop-row">
+                        {drones.map((item) => {
+                            return (
+                                <ProductCard 
+                                  key={item.id}
+                                  name={item.name}
+                                  price={item.price}
+                                  img={item.img}
+                                  discount={item.discount}
+                                  description={item.description}
+                                  code={item.code}
+                                />
+                            )
+                        })}
                     </div>
                 </div>
             </div>

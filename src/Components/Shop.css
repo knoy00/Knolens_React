@@ -1,7 +1,36 @@
 .shop-page{
     padding-top: 8vh;
     width: 100%;
+    position: relative;
 }
+
+.arrow-top{
+    position: fixed;
+    background-color: #ffffff51;
+    right: 20px;
+    top: 80vh;
+    z-index: 100;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #8f8f8f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:  0.5s ease-in-out;   
+    
+}
+
+.arrow-top i{
+    color: #000000;
+    font-size: 1.5rem;
+    
+}
+
+.arrow-top:hover{
+    cursor: pointer;
+    transform: scale(1.5);}
+
 
 .shop_top{
     padding: 7rem;
@@ -16,6 +45,24 @@
     color: #f5f5f5;
     font-size: 5rem;
     font-weight: 400;
+}
+
+
+.shop_links{
+    background-color: blue;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.shop_links a{
+    font-size: 1.3rem;
+    text-decoration: none;
+    padding: 1rem;
+    cursor: pointer;
+    color: #f5f5f5
 }
 
 /* SHOP CAMERA SECTION */
@@ -34,7 +81,13 @@
 
 }
 
-.shop_cameras h2, .shop_lenses h2{
+.stick{
+    position: sticky;
+    top: 0px;
+    z-index: 1
+}
+
+.shop_cameras h2, .shop_lenses h2, .shop_drones h2{
     font-size: 2.5rem;
     font-weight: 400;
     text-align: center;
