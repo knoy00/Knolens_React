@@ -5,10 +5,10 @@ import Footer from './Footer'
 
 import './ContactUs.css'
 
-function ContactUs() {
+function ContactUs({handleSignin}) {
   return (
     <div>
-      <Header />
+      <Header handleSignin={handleSignin}/>
       <div className="contact-us">
         <div className="contact-text">
             <h1>Contact Us</h1>

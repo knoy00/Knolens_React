@@ -15,8 +15,8 @@ const navigate = useNavigate();
       <div className="navbar">
         <div className="logo">
             <Link to="/">
-                <span className="logo_black">KNO</span>
-                <span className="logo_red">LENS</span>
+              <span className="logo_black">KNO</span>
+              <span className="logo_red">LENS</span>
             </Link>
         </div>
         <div className="nav-links">

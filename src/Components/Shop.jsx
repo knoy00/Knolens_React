@@ -4,6 +4,7 @@ import Footer from './Footer'
 import {Link} from 'react-router-dom'
 import { cameras, lenses, drones, salesOff, AdOne } from "./Data/Data.js";
 import ProductCard from './ProductCard.jsx';
+import ChatBot from './ChatBot.jsx';
 
 
 import './Shop.css'
@@ -82,6 +83,7 @@ function Shop({handleSignin, cart=[]}) {
                     </div>
                 </div>
             </div>
+            <ChatBot />
         </div>
     )
 }

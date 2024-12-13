@@ -5,6 +5,7 @@ import Header from './Header'
 import ProductCard from './ProductCard'
 import Advertisement from './Advertisement.jsx';
 import Footer from './Footer.jsx';
+import ScrollToTop from './ScrollToTop.jsx';
 import { cameras, lenses, drones, salesOff, AdOne } from "./Data/Data.js";
 import CanonRebel from '../assets/images/Canon_rebel.webp';
 
@@ -17,6 +18,7 @@ function ProductPage({cart=[], handleSignin}) {
   const droneSlice = drones.slice(0, 5);
   return (
     <div>
+      <ScrollToTop />
       <Header cart={cart} handleSignin={handleSignin}/>
       <div className="product-page">
         <div className = 'row'>

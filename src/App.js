@@ -90,10 +90,10 @@ function App() {
           <Route path='/Cart' element={<Cart removeFromCart={removeFromCart} cart={cart} handleSignin={handleSignin} showSigninBtn={showSigninBtn} hideSigninBtn={hideSigninBtn}/>} />
           {/* Cart page route */}
 
-          <Route path='/Contact' element={<ContactUs handeleSignin={handleSignin} />}  />
+          <Route path='/Contact' element={<ContactUs handleSignin={handleSignin} />}  />
           {/* Contact page route */}
 
-          <Route path='/Shop' element={<Shop handeleSignin={handleSignin} />}  />
+          <Route path='/Shop' element={<Shop handleSignin={handleSignin} />}  />
           {/* Shop page route */}
         </Routes>
 
