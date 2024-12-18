@@ -4,6 +4,7 @@ import Footer from './Footer'
 import Paypal from '../assets/images/paypal.png'
 import Card from '../assets/images/card.png'
 import Bitcoin from '../assets/images/bitcoin.png'
+import ScrollToTop from './ScrollToTop'
 
 import { useState } from 'react'
 
@@ -20,10 +21,19 @@ function Checkout({cart}) {
     const [state, setState] = useState('');
     const [zip, setZip] = useState('');
     const [country, setCountry] = useState('');
+    const [name, setName] = useState('');
+    const [number, setNumber] = useState('');
+    const [code, setCode] = useState('');
 
     const total = (cart.reduce((total, item) => total + item.price, 0)).toFixed(2);
 
     const [activeTab, setActiveTab] = useState(null);
+
+    const [displayContent, setDisplayContent] = useState(null);
+
+    const handleTabClick = (content) => {
+        setDisplayContent(content);
+    }
 
     const handleActiveTab = (tab) => {
         setActiveTab(tab);
@@ -32,6 +42,7 @@ function Checkout({cart}) {
 
   return (
     <div className='checkout'>
+        <ScrollToTop />
 
         <div className="checkout-header">
             <div className="secure">
@@ -97,7 +108,7 @@ function Checkout({cart}) {
                 <div className="city">
                     <label htmlFor="city">City<span>*</span></label>
                     <input type="text" name="city" required value={city} onChange={(e) => setCity(e.target.value)}/>
-                    {city.length > 0 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
+                    {city.length > 1 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
                 </div>
 
                 <div className='state-wrapper'>
@@ -151,13 +162,47 @@ function Checkout({cart}) {
                         </div>
                     </div>
 
-                    <div className="paypal-content">
+                    <div className={`paypal-content ${activeTab === 'paypal' ? 'display-content' : ''}`} onClick={() => handleTabClick('paypal')}>
                         <div className="paypal-check">
                             <input type="checkbox" id="paypal" name="paypal" />
                             <label for="paypal">Activate one-click pay</label>
                         </div>
                         <p>Next time you can pay with PayPal without having to log in</p>
                         <p className='confirm-method-txt'>Please confirm your payment method below</p>
+                    </div>
+
+                    <div className={`card-content ${activeTab === 'card' ? 'display-content' : ''}`} onClick={() => handleTabClick('card')}>
+                        <div>
+                            <p>CARD DETAILS</p>
+                            <span>*Required fields</span>
+
+                            <div className="card-name">
+                                <label htmlFor="card-name">Card Name<span>*</span></label>
+                                <input type="text" name="card-name" required value={name} onChange={(e) => setName(e.target.value)}/>
+                                {name.length > 2 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
+
+                            </div>
+
+                            <div className="card-number-wrapper">
+                                <div className="card-number">
+                                    <label htmlFor="card-number">Card Number<span>*</span></label>
+                                    <input type="text" name="card-number" required value={number} onChange={(e) => setNumber(e.target.value)}/>
+                                    {number.length >= 16 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
+                                </div>
+
+                                <div className="card-expiration">
+                                    <label htmlFor="card-expiration">Expiry Date<span>*</span></label>
+                                    <input type="text" name="card-expiration" placeholder='MM/YY' required />
+                                </div>
+                            </div>
+
+                            <div className="card-cvv">
+                                <label htmlFor="card-cvv">CVV<span>*</span></label>
+                                <input type="text" name="card-cvv" required value={code} onChange={(e) => setCode(e.target.value)}/>
+                                {code.length >= 3 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
+                            </div>
+                            
+                        </div>
                     </div>
 
                 </div>

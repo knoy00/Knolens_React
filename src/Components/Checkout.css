@@ -133,7 +133,7 @@ input:focus{
     width: 100%;
 }
 
-.first-name, .last-name, .address, .city, .zip, .state, .phone{
+.first-name, .last-name, .address, .city, .zip, .state, .mobile, .card-name, .card-number, .card-expiration, .card-cvv{
     position: relative;
 }
 
@@ -255,7 +255,7 @@ label{
     padding-bottom: 1rem;
     margin-top: 1rem;
     width: 100%;
-    max-width: 400PX;
+    max-width: 400px;
 }
 
 
@@ -486,9 +486,15 @@ label{
     outline: 1px solid #000000;
 }
 
+.display-content{
+    display: block !important;
+}
+
 .paypal-content{
     display: flex;
     flex-direction: column;
+    padding-top: 2rem;
+    display: none;
 }
 
 .paypal-content p{
@@ -498,4 +504,32 @@ label{
 .paypal-content .confirm-method-txt{
     font-size: .9rem;
     font-weight: 600;
+}
+
+
+.card-content{
+    width: 100%;
+    padding-top: 2rem;
+    display: none;
+}
+
+.card-number-wrapper{
+    padding-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.card-cvv{
+    margin-top: 1rem;
+    width: 100%;
+    max-width: 100px;
+}
+
+.card-cvv label{
+    display: block;
+}
+
+.card-cvv input{
+    width: 100%;
 }
