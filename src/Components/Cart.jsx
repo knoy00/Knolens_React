@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './Header'; // Header component to display at the top of the page
 import Signinbtn from './Signinbtn'; // Sign-in button component
-import { Link } from 'react-router-dom'; // React Router's Link for navigation
+import { Link, useNavigate } from 'react-router-dom'; // React Router's Link for navigation
 import Footer from './Footer'; // Footer component to display at the bottom of the page
 import AuthPage from './AuthPage'; // Authentication page (optional)
 import Checkout from './Checkout';
 import ConfirmOrderBtn from './ConfirmOrderBtn';
 import ScrollToTop from './ScrollToTop';
 import ContactUs from './ContactUs';
+import {auth, checkUser} from '../firebase/Auth';
+
 
 import './Cart.css'; // CSS file for styling the cart page
 
@@ -15,6 +17,22 @@ import './Cart.css'; // CSS file for styling the cart page
 function Cart({ cart, handleSignin, handleCloseSignin, signin, removeFromCart}) {
     console.log(cart); // Logs the cart content for debugging
 
+    const [user, setUser] = useState(null);
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+            setUser(currentUser);
+        })
+    }, []); 
+
+    const navigate = useNavigate();
+
+    const checkout = (user) => {
+        if (user) {
+            navigate("/Checkout");
+        } else {
+            navigate("/AuthPage");
+        }
+    }
 
     return (
         <div>
@@ -98,13 +116,18 @@ function Cart({ cart, handleSignin, handleCloseSignin, signin, removeFromCart}) 
                 </div>}
 
                 {/* Display sign-in button if the user is not signed in */}
-                {!signin ? (
+                {!user ? (
                     cart.length > 0 ? (
                         <ConfirmOrderBtn handleSignin={handleSignin}/>
                     ) : (
                         <Signinbtn handleSignin={handleSignin} />
                     )
-                ) : null}
+                ) : cart.length > 0 ? (
+                    <Link to="/Checkout"><ConfirmOrderBtn /></Link>
+                ) : (
+                    null
+                )
+                }
 
             </div>
 
@@ -154,7 +177,7 @@ function Cart({ cart, handleSignin, handleCloseSignin, signin, removeFromCart}) 
 
             {/* Footer component */}
             <Footer />
-            <Checkout />
+            {/*   */}
         </div>
     );
 }

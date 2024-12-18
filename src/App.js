@@ -12,6 +12,9 @@ import AuthPage from './Components/AuthPage';
 import Checkout from './Components/Checkout';
 import ContactUs from './Components/ContactUs';
 import Shop from './Components/Shop';
+
+import { registerUser, loginUser, logoutUser, checkUser, auth } from './firebase/Auth';
+
 // Importing page components
 
 import { useState, useEffect } from 'react';
@@ -78,6 +81,7 @@ function App() {
       <div>
         <Routes>
           {/* Define application routes */}
+
           <Route path='/' element={<LandingPage cart={cart} handleSignin={handleSignin}/>} />
           {/* Landing page route */}
 
@@ -95,10 +99,14 @@ function App() {
 
           <Route path='/Shop' element={<Shop handleSignin={handleSignin} />}  />
           {/* Shop page route */}
+
+          <Route path='/Checkout'  element={<Checkout cart={cart}/>}/>
         </Routes>
 
         {/* Render the authentication page if `showSignin` is true */}
         {showSignin && <AuthPage onClose={handleCloseSignin} />}
+
+        
       </div>
     </Router>
   );

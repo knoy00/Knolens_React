@@ -259,7 +259,7 @@ label{
 }
 
 
-.billing-address-check{
+.billing-address-check, .paypal-check{
     width: 100%;
     display: flex;
     gap: .5rem;
@@ -267,14 +267,14 @@ label{
     align-items: center;
 }
 
-.billing-address-check input{
+.billing-address-check input, .paypal-check input{
     width: 1.2rem;
     height: 1.2rem;
     vertical-align: middle;
 }
 
-.billing-address-check label{
-    font-size: 1.3rem;
+.billing-address-check label, .paypal-check label{
+    font-size: 1.1rem;
     font-weight: 500;
     color: #353535;
     margin-right: 0.5rem;
@@ -300,14 +300,15 @@ label{
 }
 
 .checkout-right-header h2{
-    font-weight: 400;
+    font-weight: 600;
     font-size: 1.2rem;
     font-weight: 600;
 }
 
-.checkout-right-header p{
-    font-size: 1.1rem;
+.checkout-right-header .total{
+    font-size: 1rem;
     font-weight: 600;
+    color: #000;
 }
 
 .place-order{
@@ -426,4 +427,75 @@ label{
 
 .line{
     margin-bottom: 1rem;
+}
+
+
+/* PAYMENT */
+.payment{
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.payment-methods{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding-top: 20px;
+   
+
+    
+}
+
+.payment-option{
+    width: 250px;
+    border: 1px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    border-radius: 5px;
+    gap: 10px;
+    cursor: pointer;   
+}
+
+.payment-option:hover{
+    outline: 1px solid #000000;
+}
+
+.pay-logo{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.pay-logo img{
+    width: 70%;
+    object-fit: contain;
+}
+
+.card img{
+    width: 30%;
+}
+
+.coin img{
+    width: 20%;
+}
+
+.active{
+    outline: 1px solid #000000;
+}
+
+.paypal-content{
+    display: flex;
+    flex-direction: column;
+}
+
+.paypal-content p{
+    margin-top: 1rem;
+}
+
+.paypal-content .confirm-method-txt{
+    font-size: .9rem;
+    font-weight: 600;
 }

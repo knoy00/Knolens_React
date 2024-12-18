@@ -134,3 +134,51 @@ header{
     align-items: center;
     padding: 0px;
 }
+
+.user{
+    background-color: #808080;
+    padding: 5px;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+
+}
+
+.user-info{
+    position: relative;
+
+}
+
+.account-setting{
+    position: absolute;
+    height: auto;
+    top: 30px;
+    left: 0;
+    background-color: #202020;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.account-flex{
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.account-flex span{
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+a{
+    text-decoration: none;
+}
+
+.account-flex:hover{
+    background-color: #656565;
+    border-radius: 10px;
+}

@@ -1,12 +1,15 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import Footer from './Footer'
+import Paypal from '../assets/images/paypal.png'
+import Card from '../assets/images/card.png'
+import Bitcoin from '../assets/images/bitcoin.png'
 
 import { useState } from 'react'
 
 import './Checkout.css'
 
-function Checkout() {
+function Checkout({cart}) {
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -17,6 +20,14 @@ function Checkout() {
     const [state, setState] = useState('');
     const [zip, setZip] = useState('');
     const [country, setCountry] = useState('');
+
+    const total = (cart.reduce((total, item) => total + item.price, 0)).toFixed(2);
+
+    const [activeTab, setActiveTab] = useState(null);
+
+    const handleActiveTab = (tab) => {
+        setActiveTab(tab);
+    }
 
 
   return (
@@ -115,12 +126,48 @@ function Checkout() {
                     <label for="billing-address">Use as billing address</label>
                 </div>
 
+                <div className="payment">  
+                    <div className="line"></div>
+                    <h2>Payment Method</h2>
+                    <p>Pay securely through your preferred payment method</p>
+
+                    <div className="payment-methods">
+                        <div className={`payment-option ${activeTab === 'paypal' ? 'active' : ''}`} onClick={() => handleActiveTab('paypal')}>
+                            <div className='pay-logo paypal'>
+                                <img src={Paypal} alt="" />
+                            </div>
+                        </div>
+
+                        <div className={`payment-option ${activeTab === 'card' ? 'active' : ''}`} onClick={() => handleActiveTab('card')}>
+                            <div className='pay-logo card'>
+                                <img src={Card} alt="" />
+                            </div>
+                        </div>
+
+                        <div className={`payment-option ${activeTab === 'bitcoin' ? 'active' : ''}`} onClick={() => handleActiveTab('bitcoin')}>
+                            <div className='pay-logo coin'>
+                                <img src={Bitcoin} alt="" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="paypal-content">
+                        <div className="paypal-check">
+                            <input type="checkbox" id="paypal" name="paypal" />
+                            <label for="paypal">Activate one-click pay</label>
+                        </div>
+                        <p>Next time you can pay with PayPal without having to log in</p>
+                        <p className='confirm-method-txt'>Please confirm your payment method below</p>
+                    </div>
+
+                </div>
+
             </div>
 
             <div className="checkout-right">
                 <div className="checkout-right-header">
                     <h2>Total</h2>
-                    <p>USD $1,000</p>
+                    <p className='total'>USD ${total}</p>
                 </div>
 
                 <div className="place-order">
@@ -133,27 +180,34 @@ function Checkout() {
 
                 <h2 className="summary-title">Summary</h2>
 
-                <div className="checkout-item">
-                    <div className="checkout-item-image">
-                        <img src="https://via.placeholder.com/70x70" alt="" />
+                {cart.map((item) => (
+                    <>
+                    <div className="checkout-item">
+                        <div className="checkout-item-image">
+                            <img src={item.img} alt="Canon" />
+                        </div>
+
+                        <div className="checkout-item-info">
+                            <p>{item.name}</p>
+                            <p>USD$ {item.price}</p>
+                        </div>
                     </div>
 
-                    <div className="checkout-item-info">
-                        <p>Product Name</p>
-                        <p>USD $1,000</p>
-                    </div>
-                </div>
+                    <div className="line"></div>
+                    </>
+                ))}
+                
 
                 <div className="delivery-fee">
                     <p>Delivery Fee</p>
-                    <p>USD $50</p>
+                    <p>FREE</p>
                 </div>
 
                 <div className="line"></div>
 
                 <div className="checkout-right-header">
                     <h2>Total</h2>
-                    <p>USD $1,000</p>
+                    <p className='total'>USD ${total}</p>
                 </div>
 
                 <div className="promo">
@@ -161,7 +215,6 @@ function Checkout() {
                     <input type="text" placeholder='' name="promo-code"/>
                     <button>Apply</button>
                 </div>
-
 
             </div>
         </div>  
