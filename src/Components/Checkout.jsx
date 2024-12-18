@@ -5,6 +5,7 @@ import Paypal from '../assets/images/paypal.png'
 import Card from '../assets/images/card.png'
 import Bitcoin from '../assets/images/bitcoin.png'
 import ScrollToTop from './ScrollToTop'
+import PaymentMethodBtn from './PaymentMethodBtn'
 
 import { useState } from 'react'
 
@@ -169,6 +170,8 @@ function Checkout({cart}) {
                         </div>
                         <p>Next time you can pay with PayPal without having to log in</p>
                         <p className='confirm-method-txt'>Please confirm your payment method below</p>
+
+                        <PaymentMethodBtn />
                     </div>
 
                     <div className={`card-content ${activeTab === 'card' ? 'display-content' : ''}`} onClick={() => handleTabClick('card')}>
@@ -201,7 +204,20 @@ function Checkout({cart}) {
                                 <input type="text" name="card-cvv" required value={code} onChange={(e) => setCode(e.target.value)}/>
                                 {code.length >= 3 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
                             </div>
-                            
+
+                            <PaymentMethodBtn />
+                        </div>
+                    </div>
+
+                    <div className={`crypto-content ${activeTab === 'crypto' ? 'display-content' : ''}`} onClick={() => handleTabClick('crypto')}>
+                        <div>
+                            <p>
+                                You can pay with Bitcoin (BTC), Bitcoin Lightning (LN BTC), Ethereum (ETH), Tether (USDT), USD Coin (USDC) and other cryptocurrencies.
+                            </p>
+
+                            <p>When you place your order, you’ll be redirected to TripleA to complete your purchase. <br />Your payment to TripleA will pay for your FARFETCH purchase in full. <br />Keep the page open until your payment is successful.</p>
+
+                            <PaymentMethodBtn />
                         </div>
                     </div>
 
@@ -227,18 +243,18 @@ function Checkout({cart}) {
 
                 {cart.map((item) => (
                     <>
-                    <div className="checkout-item">
-                        <div className="checkout-item-image">
-                            <img src={item.img} alt="Canon" />
+                        <div className="checkout-item">
+                            <div className="checkout-item-image">
+                                <img src={item.img} alt="Canon" />
+                            </div>
+
+                            <div className="checkout-item-info">
+                                <p>{item.name}</p>
+                                <p>USD$ {item.price}</p>
+                            </div>
                         </div>
 
-                        <div className="checkout-item-info">
-                            <p>{item.name}</p>
-                            <p>USD$ {item.price}</p>
-                        </div>
-                    </div>
-
-                    <div className="line"></div>
+                        <div className="line"></div>
                     </>
                 ))}
                 
@@ -263,7 +279,6 @@ function Checkout({cart}) {
 
             </div>
         </div>  
-        {/* <Footer /> */}
     </div>
   )
 }

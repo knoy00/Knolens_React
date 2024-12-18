@@ -490,6 +490,8 @@ label{
     display: block !important;
 }
 
+
+/* PAYPAL PAYMENT CONTENT */
 .paypal-content{
     display: flex;
     flex-direction: column;
@@ -506,6 +508,7 @@ label{
     font-weight: 600;
 }
 
+/**************************** USER CARD DETAILS */
 
 .card-content{
     width: 100%;
@@ -532,4 +535,18 @@ label{
 
 .card-cvv input{
     width: 100%;
+}
+
+/*********************************************** CRYPTO CURRENCY */
+
+.crypto-content{
+    width: 100%;
+    padding-top: 2rem;
+    display: none;
+}
+
+.crypto-content p{
+    font-size: 15px;
+    letter-spacing: .03rem;
+    line-height: 1.4rem;
 }
