@@ -142,6 +142,25 @@ input:focus{
     position: relative;
 }
 
+.card-name{
+    width: 425px;
+    margin-top: 1rem;
+}
+
+.card-number{
+    width: 250px;
+}
+
+.card-expiration{
+    width: 150px;
+}
+
+.card-number input, .card-expiration input, .card-name input, .card-cvv input{
+    font-size: 17px;
+}
+
+
+
 .check{
     right: 10px;
     top: 2.5rem;
@@ -297,9 +316,9 @@ label{
 }
 
 .checkout-right-header-wrapper{
-    border: 1px solid #000000;
+    border: 1px solid #cacaca;
     padding: 1rem;
-    border-radius: 10px;
+    border-radius: 5px;
     background-color: #fff;
 }
 
@@ -467,7 +486,7 @@ label{
 
 .payment-option{
     width: 250px;
-    border: 1px solid;
+    border: 1px solid #d5d5d5;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -595,3 +614,49 @@ label{
 .edit span{
     color: #000;
 }
+
+
+/******************************************* PAYPAL CONFIRM */
+
+.payment-confirm{
+    width: 100%;
+    padding-top: 1rem;
+    background-color: #ffffff;
+    cursor: pointer;
+    transition: .8s ease-in-out;
+}
+
+.crypto-confirm, .paypal-confirm, .card-confirm{
+    position: relative;
+    width: 100%;
+}
+
+.paypal-confirm img{
+    width: 15%;
+    margin-left: -8px;
+}
+
+.card-confirm img, .crypto-confirm img{
+    width: 5%;
+    margin-left: 0;
+    
+}
+
+.paypal-confirm p, .card-confirm p, .crypto-confirm p{
+    font-size: 15px;
+    letter-spacing: .03rem;
+    line-height: 1.4rem;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield; /* For Firefox */
+    -webkit-appearance: none; /* For Chrome, Safari, Edge */
+    appearance: none;
+  }
+  
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0; /* Removes any margin */
+  }
+  

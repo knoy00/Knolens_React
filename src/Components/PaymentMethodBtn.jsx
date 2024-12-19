@@ -2,10 +2,10 @@ import React from 'react'
 
 import './PaymentMethodBtn.css'
 
-function PaymentMethodBtn() {
+function PaymentMethodBtn({onClick}) {
   return (
     <div className='payment_method'>
-        <button className='payment_method_btn'> Confirm Payment Method</button>
+        <button className='payment_method_btn' onClick={onClick}> Confirm Payment Method</button>
     </div>
   )
 }
