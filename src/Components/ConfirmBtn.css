@@ -1,0 +1,22 @@
+.payment_method{
+    width: 100%;
+    padding-top: 20px;
+}
+
+.payment_method_btn{
+    width: 50%;
+    height: 3rem;
+    background-color: #131313;
+    border: 1px solid #000;
+    border-radius: 5px;
+    color: #b6b6b6;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+
+}
+
+.payment_method_btn:hover{
+    background-color: #fcfcfc;
+    color: #131313;
+}

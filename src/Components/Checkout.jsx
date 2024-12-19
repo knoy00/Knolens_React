@@ -6,6 +6,7 @@ import Card from '../assets/images/card.png'
 import Bitcoin from '../assets/images/bitcoin.png'
 import ScrollToTop from './ScrollToTop'
 import PaymentMethodBtn from './PaymentMethodBtn'
+import ConfirmBtn from './ConfirmBtn'
 
 import { useState } from 'react'
 
@@ -26,16 +27,24 @@ function Checkout({cart}) {
     const [number, setNumber] = useState('');
     const [code, setCode] = useState('');
 
+    const[allFields, setAllFields] = useState(false);
+
+    const validateForm = () => {
+        if (firstName && lastName && phone && address && city && zip) {
+            setAllFields(true);
+        }
+        else{
+            setAllFields(false);
+        }
+    }
+
+    function handleBlur(event) {
+        validateForm();
+    }
+
     const total = (cart.reduce((total, item) => total + item.price, 0)).toFixed(2);
 
     const [activeTab, setActiveTab] = useState(null);
-
-    const [displayContent, setDisplayContent] = useState(null);
-
-    const handleTabClick = (content) => {
-        setDisplayContent(content);
-    }
-
     const handleActiveTab = (tab) => {
         setActiveTab(tab);
     }
@@ -79,13 +88,29 @@ function Checkout({cart}) {
                 <div className="names">
                     <div className="first-name">
                         <label htmlFor="first-name">First name<span>*</span></label>
-                        <input type="text" placeholder='' name='first-name' required value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
+                        <input 
+                        type="text" 
+                        placeholder='' 
+                        name='first-name' 
+                        required 
+                        value={firstName} 
+                        onChange={(e) => {
+                            validateForm();
+                            setFirstName(e.target.value)}} />
                         {firstName.length > 0 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
                     </div>
 
                     <div className="last-name">
                         <label htmlFor="first-name">Last name<span>*</span></label>
-                        <input type="text" placeholder='' name='last-name' required value={lastName} onChange={(e) => setLastName(e.target.value)}/> 
+                        <input 
+                        type="text" 
+                        placeholder='' 
+                        name='last-name' 
+                        required 
+                        value={lastName} 
+                        onChange={(e) => {
+                            setLastName(e.target.value)
+                            validateForm()}}/> 
                         {lastName.length > 0 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}              
                     </div>
                 </div>
@@ -102,13 +127,27 @@ function Checkout({cart}) {
 
                 <div className="address">
                     <label htmlFor="Address">Address<span>*</span></label>
-                    <input type="text" name="Address" required value={address} onChange={(e) => setAddress(e.target.value)}/>
+                    <input 
+                    type="text" 
+                    name="Address" 
+                    required 
+                    value={address} 
+                    onChange={(e) => {
+                        setAddress(e.target.value)
+                        validateForm()}}/>
                     {address.length > 0 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
                 </div>
 
                 <div className="city">
                     <label htmlFor="city">City<span>*</span></label>
-                    <input type="text" name="city" required value={city} onChange={(e) => setCity(e.target.value)}/>
+                    <input 
+                    type="text" 
+                    name="city" 
+                    required 
+                    value={city} 
+                    onChange={(e) => {
+                        setCity(e.target.value)
+                        validateForm()}}/>
                     {city.length > 1 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
                 </div>
 
@@ -121,14 +160,30 @@ function Checkout({cart}) {
 
                     <div className="zip">
                         <label htmlFor="zip">Postal/Zip Code <span>*</span></label>
-                        <input type="text" required name="zip" value={zip} onChange={(e) => setZip(e.target.value)}/>
+                        <input 
+                        type="text" 
+                        required 
+                        name="zip" 
+                        value={zip} 
+                        onChange={(e) => {
+                            setZip(e.target.value)
+                            validateForm();
+                            }}/>
                         {zip.length >= 5 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
                     </div>
                 </div>
 
                 <div className="mobile">
                     <label htmlFor="phone">Phone<span>*</span></label>
-                    <input type="text" name="phone" required value={phone} onChange={(e) => setPhone(e.target.value)}/>
+                    <input 
+                    type="text" 
+                    name="phone" 
+                    required 
+                    value={phone} 
+                    onChange={(e) => {
+                        setPhone(e.target.value)
+                        validateForm();
+                        }}/>
                     {phone.length >= 10 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
                     <span style={{fontSize: "0.8rem"}}>We will not share your phone number</span>
                 </div>
@@ -136,6 +191,17 @@ function Checkout({cart}) {
                 <div className="billing-address-check">
                     <input type="checkbox" id="billing-address" name="billing-address" />
                     <label for="billing-address">Use as billing address</label>
+                </div>
+
+
+                {allFields && <ConfirmBtn />}
+
+                <div>
+                    <h2>Delivery Address</h2>
+                    <p>{firstName} {lastName}</p>
+                    <p>{city}</p>
+                    <p>{zip}</p>
+                    <div className="line"></div>
                 </div>
 
                 <div className="payment">  
@@ -163,7 +229,7 @@ function Checkout({cart}) {
                         </div>
                     </div>
 
-                    <div className={`paypal-content ${activeTab === 'paypal' ? 'display-content' : ''}`} onClick={() => handleTabClick('paypal')}>
+                    <div className={`paypal-content ${activeTab === 'paypal' ? 'display-content' : ''}`} onClick={() => handleActiveTab('paypal')}>
                         <div className="paypal-check">
                             <input type="checkbox" id="paypal" name="paypal" />
                             <label for="paypal">Activate one-click pay</label>
@@ -174,7 +240,7 @@ function Checkout({cart}) {
                         <PaymentMethodBtn />
                     </div>
 
-                    <div className={`card-content ${activeTab === 'card' ? 'display-content' : ''}`} onClick={() => handleTabClick('card')}>
+                    <div className={`card-content ${activeTab === 'card' ? 'display-content' : ''}`} onClick={() => handleActiveTab('card')}>
                         <div>
                             <p>CARD DETAILS</p>
                             <span>*Required fields</span>
@@ -209,7 +275,8 @@ function Checkout({cart}) {
                         </div>
                     </div>
 
-                    <div className={`crypto-content ${activeTab === 'crypto' ? 'display-content' : ''}`} onClick={() => handleTabClick('crypto')}>
+
+                    <div className={`crypto-content ${activeTab === 'bitcoin' ? 'display-content' : ''}`} onClick={() => handleActiveTab('bitcoin')}>
                         <div>
                             <p>
                                 You can pay with Bitcoin (BTC), Bitcoin Lightning (LN BTC), Ethereum (ETH), Tether (USDT), USD Coin (USDC) and other cryptocurrencies.
