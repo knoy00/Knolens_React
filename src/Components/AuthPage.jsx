@@ -14,7 +14,7 @@ import { useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 // Importing useState for managing component state
 
-function AuthPage({ onClose }) {
+function AuthPage({ onClose, showSignin }) {
 
   const load = document.getElementById("load");
   const [isSignin, setSignin] = useState(true);
@@ -100,15 +100,25 @@ function AuthPage({ onClose }) {
       showMessage("Enter email address");
     } else if (!password) {
       showMessage("Enter password");
-    } else if (password.length < 8) {
-      showMessage("Password should be at least 8 characters long");
+    } else if (!password) {
+      showMessage("Password is incorrect");
     } else {
       try {
         if (loadRef.current) {
           loadRef.current.style.width = "40%";
         }
         await loginUser(email, password);
-        showMessage("Login successful!");
+        loadRef.current.style.width = "100%";
+        
+        // showMessage("Login successful!");
+        setTimeout(() => {
+          loadRef.current.style.display = "none";
+        }, 1000);
+
+        setTimeout(() => {
+          showSignin && onClose();
+        }, 1000)
+
         setEmail("");
         setPassword("");
       } catch (e) {

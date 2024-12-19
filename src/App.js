@@ -104,7 +104,7 @@ function App() {
         </Routes>
 
         {/* Render the authentication page if `showSignin` is true */}
-        {showSignin && <AuthPage onClose={handleCloseSignin} />}
+        {showSignin && <AuthPage showSignin={showSignin} onClose={handleCloseSignin} />}
 
         
       </div>
