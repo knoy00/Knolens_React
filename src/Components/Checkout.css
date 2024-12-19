@@ -165,7 +165,7 @@ label{
 
 .checkout-left h2{
     font-weight: 400;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     padding-bottom: 1rem;
 }
 
@@ -549,4 +549,31 @@ label{
     font-size: 15px;
     letter-spacing: .03rem;
     line-height: 1.4rem;
+}
+
+/******************************************************* ADDRESS TAB */
+
+.address-tab{
+    width: 100%;
+    position: relative;
+}
+
+.address-tab p{
+    padding-bottom: 5px;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.edit{
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    color: #000;
+    display: flex;
+    gap: .5rem;
+}
+
+.edit span{
+    color: #000;
 }

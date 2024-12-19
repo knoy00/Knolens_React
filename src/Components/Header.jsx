@@ -5,6 +5,14 @@ import { auth, logoutUser } from "../firebase/Auth";
 import "./Header.css";
 
 function Header({ cart = [], handleSignin }) {
+
+  // Handle Navigation to Cart page
+  const navigate = useNavigate();
+  const gotoCart = () => {
+    navigate("/Cart");
+  };
+
+  // Check if the user is logged in
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -15,11 +23,7 @@ function Header({ cart = [], handleSignin }) {
     return () => unsubscribe();
   }, []);
 
-  // Handle Navigation to Cart page
-  const navigate = useNavigate();
-  const gotoCart = () => {
-    navigate("/Cart");
-  };
+  
 
   // Handling the state of the menu
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -104,7 +108,7 @@ function Header({ cart = [], handleSignin }) {
                       className="account-flex"
                       onClick={handleOptionClick}
                     >
-                      <i className="fa fa-cog"></i>
+                      <i className="fa fa-file-invoice"></i>
                       <span>Orders</span>
                     </Link>
                   </div>

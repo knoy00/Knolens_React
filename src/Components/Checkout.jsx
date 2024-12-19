@@ -49,6 +49,17 @@ function Checkout({cart}) {
         setActiveTab(tab);
     }
 
+    const[mainAddressSection, setMainAddressSection] = useState(true);
+    const[addressTab, setAddressTab] = useState(false);
+
+    const confirmAddress = (allFields) => {
+        console.log("Confirm button clicked, allFields:", allFields); // Debug
+        if(allFields){
+            setAddressTab(true)
+            setMainAddressSection(false)
+        }
+    }
+
 
   return (
     <div className='checkout'>
@@ -78,131 +89,145 @@ function Checkout({cart}) {
 
         <div className="checkout-flex">
             <div className="checkout-left">
-                <h2>Delivery Address</h2>
+                {mainAddressSection && <div>
+                    <h2>Delivery Address</h2>
 
-                <p>Add your delivery address</p>
+                    <p>Add your delivery address</p>
 
-                <span>*Required fields</span>
-                <span className="cancel">Cancel</span>
+                    <span>*Required fields</span>
+                    <span className="cancel">Cancel</span>
 
-                <div className="names">
-                    <div className="first-name">
-                        <label htmlFor="first-name">First name<span>*</span></label>
-                        <input 
-                        type="text" 
-                        placeholder='' 
-                        name='first-name' 
-                        required 
-                        value={firstName} 
-                        onChange={(e) => {
-                            validateForm();
-                            setFirstName(e.target.value)}} />
-                        {firstName.length > 0 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
+                    <div className="names">
+                        <div className="first-name">
+                            <label htmlFor="first-name">First name<span>*</span></label>
+                            <input 
+                            type="text" 
+                            placeholder='' 
+                            name='first-name' 
+                            required 
+                            value={firstName} 
+                            onChange={(e) => {
+                                validateForm();
+                                setFirstName(e.target.value)}} />
+                            {firstName.length > 0 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
+                        </div>
+
+                        <div className="last-name">
+                            <label htmlFor="first-name">Last name<span>*</span></label>
+                            <input 
+                            type="text" 
+                            placeholder='' 
+                            name='last-name' 
+                            required 
+                            value={lastName} 
+                            onChange={(e) => {
+                                setLastName(e.target.value)
+                                validateForm()}}/> 
+                            {lastName.length > 0 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}              
+                        </div>
                     </div>
 
-                    <div className="last-name">
-                        <label htmlFor="first-name">Last name<span>*</span></label>
-                        <input 
-                        type="text" 
-                        placeholder='' 
-                        name='last-name' 
-                        required 
-                        value={lastName} 
-                        onChange={(e) => {
-                            setLastName(e.target.value)
-                            validateForm()}}/> 
-                        {lastName.length > 0 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}              
-                    </div>
-                </div>
-
-                <div className="region">
-                    <label htmlFor="region">Country/region<span>*</span></label>
-                    <select name='region' id='region' required>
-                        <option value="">Select Country/Region</option>
-                        <option value="USA">USA</option>
-                        <option value="UK">UK</option>
-                        <option value="Canada">Canada</option>
-                    </select>
-                </div>
-
-                <div className="address">
-                    <label htmlFor="Address">Address<span>*</span></label>
-                    <input 
-                    type="text" 
-                    name="Address" 
-                    required 
-                    value={address} 
-                    onChange={(e) => {
-                        setAddress(e.target.value)
-                        validateForm()}}/>
-                    {address.length > 0 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
-                </div>
-
-                <div className="city">
-                    <label htmlFor="city">City<span>*</span></label>
-                    <input 
-                    type="text" 
-                    name="city" 
-                    required 
-                    value={city} 
-                    onChange={(e) => {
-                        setCity(e.target.value)
-                        validateForm()}}/>
-                    {city.length > 1 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
-                </div>
-
-                <div className='state-wrapper'>
-                    <div className="state">
-                        <label htmlFor="state">State/Province</label>
-                        <input type="text" name="state" value={state} onChange={(e) => setState(e.target.value)}/>
-                        {state.length > 0 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
+                    <div className="region">
+                        <label htmlFor="region">Country/region<span>*</span></label>
+                        <select name='region' id='region' required>
+                            <option value="">Select Country/Region</option>
+                            <option value="USA">USA</option>
+                            <option value="UK">UK</option>
+                            <option value="Canada">Canada</option>
+                        </select>
                     </div>
 
-                    <div className="zip">
-                        <label htmlFor="zip">Postal/Zip Code <span>*</span></label>
+                    <div className="address">
+                        <label htmlFor="Address">Address<span>*</span></label>
                         <input 
                         type="text" 
+                        name="Address" 
                         required 
-                        name="zip" 
-                        value={zip} 
+                        value={address} 
                         onChange={(e) => {
-                            setZip(e.target.value)
+                            setAddress(e.target.value)
+                            validateForm()}}/>
+                        {address.length > 0 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
+                    </div>
+
+                    <div className="city">
+                        <label htmlFor="city">City<span>*</span></label>
+                        <input 
+                        type="text" 
+                        name="city" 
+                        required 
+                        value={city} 
+                        onChange={(e) => {
+                            setCity(e.target.value)
+                            validateForm()}}/>
+                        {city.length > 1 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
+                    </div>
+
+                    <div className='state-wrapper'>
+                        <div className="state">
+                            <label htmlFor="state">State/Province</label>
+                            <input type="text" name="state" value={state} onChange={(e) => setState(e.target.value)}/>
+                            {state.length > 0 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
+                        </div>
+
+                        <div className="zip">
+                            <label htmlFor="zip">Postal/Zip Code <span>*</span></label>
+                            <input 
+                            type="text" 
+                            required 
+                            name="zip" 
+                            value={zip} 
+                            onChange={(e) => {
+                                setZip(e.target.value)
+                                validateForm();
+                                }}/>
+                            {zip.length >= 5 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
+                        </div>
+                    </div>
+
+                    <div className="mobile">
+                        <label htmlFor="phone">Phone<span>*</span></label>
+                        <input 
+                        type="text" 
+                        name="phone" 
+                        required 
+                        value={phone} 
+                        onChange={(e) => {
+                            setPhone(e.target.value)
                             validateForm();
                             }}/>
-                        {zip.length >= 5 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
+                        {phone.length >= 10 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
+                        <span style={{fontSize: "0.8rem"}}>We will not share your phone number</span>
                     </div>
-                </div>
 
-                <div className="mobile">
-                    <label htmlFor="phone">Phone<span>*</span></label>
-                    <input 
-                    type="text" 
-                    name="phone" 
-                    required 
-                    value={phone} 
-                    onChange={(e) => {
-                        setPhone(e.target.value)
-                        validateForm();
-                        }}/>
-                    {phone.length >= 10 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
-                    <span style={{fontSize: "0.8rem"}}>We will not share your phone number</span>
-                </div>
+                    <div className="billing-address-check">
+                        <input type="checkbox" id="billing-address" name="billing-address" />
+                        <label for="billing-address">Use as billing address</label>
+                    </div>
 
-                <div className="billing-address-check">
-                    <input type="checkbox" id="billing-address" name="billing-address" />
-                    <label for="billing-address">Use as billing address</label>
-                </div>
+                    {allFields && <ConfirmBtn onClick={() => confirmAddress(allFields)}/>}
+
+                </div>}
 
 
-                {allFields && <ConfirmBtn />}
 
-                <div>
-                    <h2>Delivery Address</h2>
+               {addressTab && <div className="address-tab">
+                    <div style={{display: 'flex', justifyContent: '', alignItems: 'center', gap: 30, position: 'relative'}}>
+                        
+                        {/* <i className='fa-solid fa-pen-to-square'></i> */}
+                        <div><i className='fa-regular fa-circle-check check' style={{color: 'green', top: 6, left: 0, fontSize: 20}}></i></div>
+                        <h2>Delivery Address</h2>
+                    </div>
+
+                    
                     <p>{firstName} {lastName}</p>
                     <p>{city}</p>
                     <p>{zip}</p>
-                    <div className="line"></div>
-                </div>
+                    <div className="edit">
+                        <span>Edit</span>
+                        <i className='fa-solid fa-pen-to-square'></i>
+                    </div>
+                </div>}
 
                 <div className="payment">  
                     <div className="line"></div>
@@ -238,6 +263,8 @@ function Checkout({cart}) {
                         <p className='confirm-method-txt'>Please confirm your payment method below</p>
 
                         <PaymentMethodBtn />
+                        <div className="line"></div>
+
                     </div>
 
                     <div className={`card-content ${activeTab === 'card' ? 'display-content' : ''}`} onClick={() => handleActiveTab('card')}>
@@ -272,6 +299,7 @@ function Checkout({cart}) {
                             </div>
 
                             <PaymentMethodBtn />
+                            <div className="line"></div>
                         </div>
                     </div>
 
@@ -285,6 +313,8 @@ function Checkout({cart}) {
                             <p>When you place your order, you’ll be redirected to TripleA to complete your purchase. <br />Your payment to TripleA will pay for your FARFETCH purchase in full. <br />Keep the page open until your payment is successful.</p>
 
                             <PaymentMethodBtn />
+                            <div className="line"></div>
+
                         </div>
                     </div>
 
