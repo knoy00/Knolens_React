@@ -9,6 +9,9 @@
     justify-content: space-between;
     align-items: center;
     padding: 2rem 2rem;
+    position: fixed;
+    background-color: #fff;
+    z-index: 50;
 }
 
 .checkout-header .secure,.checkout-header .checkout-logo, .checkout-header .help{
@@ -107,6 +110,8 @@
     width: 100%;
     gap: 2rem;
     padding: 2rem 20rem;
+    padding-top: 20vh;
+    background-color: #ffffff;
 }
 
 
@@ -283,13 +288,19 @@ label{
 }
 
 
-/* CHECKOUT RIGHT SECTION */
+/*********************************** CHECKOUT RIGHT SECTION */
 
 .checkout-right{
     width: 50%;
-    border: 1px solid #e4e4e4;
     border-radius: 5px;
     padding: 1rem;
+}
+
+.checkout-right-header-wrapper{
+    border: 1px solid #000000;
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: #fff;
 }
 
 .checkout-right-header{
@@ -365,6 +376,13 @@ label{
     display: flex;
     justify-content: space-between;
     padding-bottom: 1rem;
+    
+}
+
+.sticky{
+    position: sticky;
+    top: 13.9vh;
+    z-index: 100;
 }
 
 .checkout-item-image{

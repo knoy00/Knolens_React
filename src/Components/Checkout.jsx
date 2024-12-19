@@ -322,38 +322,45 @@ function Checkout({cart}) {
 
             </div>
 
-            <div className="checkout-right">
-                <div className="checkout-right-header">
-                    <h2>Total</h2>
-                    <p className='total'>USD ${total}</p>
-                </div>
+            <div className="checkout-right ">
 
-                <div className="place-order">
-                    <button>Place Order</button>
-                </div>
+                <div className='checkout-right-header-wrapper sticky'>
+                    <div className="checkout-right-header">
+                        <h2>Total</h2>
+                        <p className='total'>USD ${total}</p>
+                    </div>
 
-                <p>By clicking "Place Order", you agree to our <span>Terms and Conditions</span></p>
+                    <div className="place-order">
+                        <button>Place Order</button>
+                    </div>
+                </div>
+                
+
+                <p style={{paddingTop: 30}}>By clicking "Place Order", you agree to our <span>Terms and Conditions</span></p>
 
                 <div className="line"></div>
 
                 <h2 className="summary-title">Summary</h2>
 
-                {cart.map((item) => (
-                    <>
-                        <div className="checkout-item">
-                            <div className="checkout-item-image">
-                                <img src={item.img} alt="Canon" />
+                <div>
+                    {cart.map((item) => (
+                        <div>
+                            <div className="checkout-item">
+                                <div className="checkout-item-image">
+                                    <img src={item.img} alt="Canon" />
+                                </div>
+
+                                <div className="checkout-item-info">
+                                    <p>{item.name}</p>
+                                    <p>USD$ {item.price}</p>
+                                </div>
                             </div>
 
-                            <div className="checkout-item-info">
-                                <p>{item.name}</p>
-                                <p>USD$ {item.price}</p>
-                            </div>
+                            <div className="line"></div>
                         </div>
-
-                        <div className="line"></div>
-                    </>
-                ))}
+                    ))}
+                </div>
+                
                 
 
                 <div className="delivery-fee">
