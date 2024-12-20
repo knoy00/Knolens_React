@@ -8,7 +8,7 @@ import ScrollToTop from './ScrollToTop'
 import PaymentMethodBtn from './PaymentMethodBtn'
 import ConfirmBtn from './ConfirmBtn'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import './Checkout.css'
@@ -16,6 +16,7 @@ import './Checkout.css'
 function Checkout({cart}) {
 
     const navigate = useNavigate();
+    const loadRef = useRef(null);
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -62,6 +63,7 @@ function Checkout({cart}) {
         }
     }
 
+    // Switching between active and inactive tabs
     const [paypalTab, setPaypalTab] = useState(false);
     const [cardTab, setCardTab] = useState(false);
     const [bitcoinTab, setBitcoinTab] = useState(false);
@@ -88,15 +90,42 @@ function Checkout({cart}) {
         }
     }
 
-    const palceOrder = () => {
-        navigate('/Checkout/orderhistory')
-    }
+    // Loader function and navigation
+    const handlePlaceOrder = () => {
+        if(addressTab && (paypalTab || bitcoinTab || cardTab) && total > 0){
+            if (loadRef.current) {
+                loadRef.current.style.width = "40%";
+            
+                setTimeout(() => {
+                  if (loadRef.current) {
+                    loadRef.current.style.width = "70%";
+                  }
+                }, 2000);
+            
+                setTimeout(() => {
+                  if (loadRef.current) {
+                        loadRef.current.style.width = "100%";
+            
+                        setTimeout(() => {
+                            if (loadRef.current) {
+                              loadRef.current.style.display = "none";
+                              navigate('/OrderAndReturn');
+                            }
+                        }, 500);
+                    }
+                }, 2500);
+            }
+        }  
+    };
+      
 
   return (
     <div className='checkout'>
         <ScrollToTop />
+        
 
         <div className="checkout-header">
+            <div className="load-animate" ref={loadRef}></div>
             <div className="secure">
                 <i className='fa-solid fa-lock'></i>
                 <p>Secure Checkout</p>
@@ -386,6 +415,11 @@ function Checkout({cart}) {
                                 <img src={Paypal} alt="" />
                                 <p>When you place your order, you’ll be redirected to PayPal to complete your purchase.</p>
                                 <div className="line"></div>
+
+                                <div className="edit">
+                                    <span>Edit</span>
+                                    <i className='fa-solid fa-pen-to-square'></i>
+                                </div>
                             </div>
                         }
 
@@ -398,6 +432,11 @@ function Checkout({cart}) {
                                 <img src={Card} alt="" />
                                 <p>When you place your order, you’ll be redirected to TripleA to complete your purchase.</p>
                                 <div className="line"></div>
+
+                                <div className="edit">
+                                    <span>Edit</span>
+                                    <i className='fa-solid fa-pen-to-square'></i>
+                                </div>
                             </div>
                         }
 
@@ -435,8 +474,8 @@ function Checkout({cart}) {
                         <p className='total'>USD ${total}</p>
                     </div>
 
-                    <div className="place-order">
-                        <button onClick={palceOrder}>Place Order</button>
+                    <div className={`place-order ${addressTab && (paypalTab || bitcoinTab || cardTab)  && total > 0 ? 'place-order-active' : ''}`}>
+                        <button onClick={handlePlaceOrder}>Place Order</button>
                     </div>
                 </div>
                 

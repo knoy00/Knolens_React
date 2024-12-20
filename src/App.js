@@ -12,6 +12,7 @@ import AuthPage from './Components/AuthPage';
 import Checkout from './Components/Checkout';
 import ContactUs from './Components/ContactUs';
 import Shop from './Components/Shop';
+import OrderAndReturn from './Components/OrderAndReturn';
 
 import { registerUser, loginUser, logoutUser, checkUser, auth } from './firebase/Auth';
 
@@ -28,41 +29,43 @@ import Signinbtn from './Components/Signinbtn';
 
 function App() {
   const [cart, setCart] = useState([]);
-  // State to keep track of items in the cart
-
-  const [showSignin, setShowSignin] = useState(false);
+  const [orders, setOrders] = useState([]);
+  
   // State to manage the visibility of the authentication (sign-in) page
-
-  const [signin, setSignin] = useState(false);
+  const [showSignin, setShowSignin] = useState(false);
+  
   // State to manage the visibility of the sign-in button
-
+  const [signin, setSignin] = useState(false);
+  
+  // Function to show the sign-in button
   const showSigninBtn = () => {
     setShowSignin(true);
   }
-  // Function to show the sign-in button
-
+  
+  // Function to hide the sign-in button
   const hideSigninBtn = () => {
     setShowSignin(false);
   }
-  // Function to hide the sign-in button
-
+  
+  // Function to add a product to the cart
   const addToCart = (product) => {
-    // Function to add a product to the cart
     setCart((prevCart) => [...prevCart, product]);
   };
 
+  // Function to remove a product from the cart
   const removeFromCart = (product) => {
-    // Function to remove a product from the cart
     setCart((prevCart) => prevCart.filter((item) => item.id !== product.id));
   };
 
+
+
+  // Function to show the sign-in page
   const handleSignin = () => {
-    // Function to show the sign-in page
     setShowSignin(true);
   };
 
+  // Function to close the sign-in page
   const handleCloseSignin = () => {
-    // Function to close the sign-in page
     setShowSignin(false);
   };
 
@@ -101,6 +104,8 @@ function App() {
           {/* Shop page route */}
 
           <Route path='/Checkout'  element={<Checkout cart={cart}/>}/>
+
+          <Route path='/OrderAndReturn'  element={<OrderAndReturn handleSignin={handleSignin} orders={orders} />}/>
         </Routes>
 
         {/* Render the authentication page if `showSignin` is true */}

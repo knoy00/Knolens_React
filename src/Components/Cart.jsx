@@ -44,7 +44,7 @@ function Cart({ cart, handleSignin, handleCloseSignin, signin, removeFromCart}) 
             <div className="cart">
                 <h1>Shopping Cart</h1>
 
-                {/* Display a message if the cart is empty */}
+               
                 {cart.length === 0 ? (
                     <p style={{ paddingBottom: '2rem' }}>Your cart is empty. Add some items to continue shopping.</p>
                 ) : (
