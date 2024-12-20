@@ -28,8 +28,24 @@ import Signinbtn from './Components/Signinbtn';
 // Importing the Sign-in button component
 
 function App() {
-  const [cart, setCart] = useState([]);
-  const [orders, setOrders] = useState([]);
+  const [cart, setCart] = useState(() => {
+    const cartItems = JSON.parse(localStorage.getItem('cartItems'));
+    return cartItems? cartItems : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem('cartItems', JSON.stringify(cart));
+  }, [cart]);
+
+
+  const [orders, setOrders] = useState(() => {
+    const ordersData = JSON.parse(localStorage.getItem('orders'));
+    return ordersData? ordersData : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem('orders', JSON.stringify(orders));
+  }, [orders]);
   
   // State to manage the visibility of the authentication (sign-in) page
   const [showSignin, setShowSignin] = useState(false);
@@ -51,6 +67,12 @@ function App() {
   const addToCart = (product) => {
     setCart((prevCart) => [...prevCart, product]);
   };
+
+
+  const addToOrders = (cart) => {
+    setOrders((prevOrders) => [...prevOrders, cart]);
+    setCart([]);
+  }
 
   // Function to remove a product from the cart
   const removeFromCart = (product) => {
@@ -103,9 +125,9 @@ function App() {
           <Route path='/Shop' element={<Shop handleSignin={handleSignin} />}  />
           {/* Shop page route */}
 
-          <Route path='/Checkout'  element={<Checkout cart={cart}/>}/>
+          <Route path='/Checkout'  element={<Checkout cart={cart} addToOrders={addToOrders}/>}/>
 
-          <Route path='/OrderAndReturn'  element={<OrderAndReturn handleSignin={handleSignin} orders={orders} />}/>
+          <Route path='/OrderAndReturn'  element={<OrderAndReturn handleSignin={handleSignin} orders={orders} addToOrders={addToOrders}/>}/>
         </Routes>
 
         {/* Render the authentication page if `showSignin` is true */}

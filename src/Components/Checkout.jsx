@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom'
 
 import './Checkout.css'
 
-function Checkout({cart}) {
+function Checkout({cart ,addToOrders}) {
 
     const navigate = useNavigate();
     const loadRef = useRef(null);
@@ -109,6 +109,7 @@ function Checkout({cart}) {
                         setTimeout(() => {
                             if (loadRef.current) {
                               loadRef.current.style.display = "none";
+                              addToOrders(cart);
                               navigate('/OrderAndReturn');
                             }
                         }, 500);

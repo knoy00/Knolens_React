@@ -1,6 +1,8 @@
 .or-wrapper{
     padding: 15vh 23rem 0 23rem;
     transition: .8s ease-in-out;
+    width: 100%;
+    max-width: 2000px;
 }
 
 .or-header{
@@ -75,10 +77,70 @@
     cursor: pointer;
     transition: .3s ease-in-out;
     margin-top: 2rem;
+    border-radius: 10px;
 }
 
 .shop-now button:hover, .view-orders-btn button:hover{
     background-color: #ffffff !important;
     color: #000000;
     border: 1px solid #000000;
+}
+
+
+/* ORDER-TICKET */
+.order-ticket{
+    width: 100%;
+    border: 1px solid #bdbdbd;
+    border-radius: 10px;
+    margin-top: 2rem;
+    padding: 1rem 2rem;
+}
+
+.ticket-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ticket-date{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.ticket-details{
+    display: flex;
+    gap: 0.5rem;
+    padding-top: 2rem;
+    width: 100%;
+}
+
+.ticket-item-details{
+    display: flex;
+    align-items: center;
+    gap: 4.5rem;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 1rem;
+}
+
+.ticket-item-info{
+    display: flex;
+    gap: 0.5rem;
+    justify-content: space-between;
+    width: 50%;
+    padding: 1.3rem 0 1.3rem 3rem;
+}
+
+.ticket-img{
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    border-radius: 5px;
+    background-color: #e7e7e78a;
+    padding-top: .5rem;
+}
+
+.ticket-img img{
+    width: 100%;
 }
