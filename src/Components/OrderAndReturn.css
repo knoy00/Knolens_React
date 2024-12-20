@@ -1,5 +1,6 @@
 .or-wrapper{
-    padding: 15vh 17rem 0 17rem;
+    padding: 15vh 23rem 0 23rem;
+    transition: .8s ease-in-out;
 }
 
 .or-header{
@@ -30,7 +31,54 @@
     color: #969696;
 }
 
-.active h2{
+.activee h2{
     color: #000000;
     border-bottom: 3px solid #000000;
+}
+
+.no-orders-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 4rem;
+}
+
+.no-orders{
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.no-orders i{
+    font-size: 4rem;
+    padding-bottom: 1rem;;
+}
+
+.no-orders h2{
+    font-size: 20px;
+    line-height: 2.5rem;
+}
+
+.no-orders p{
+    font-size: 16px;
+    line-height: 2rem;
+}
+
+/* SHOP NOW BUTTON */
+.shop-now button, .view-orders-btn button{
+    font-size: 1rem !important;
+    font-weight: 600;
+    padding: 1rem 2rem !important;
+    border: none;
+    background-color: #000000 !important;
+    color: #ffffff;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+    margin-top: 2rem;
+}
+
+.shop-now button:hover, .view-orders-btn button:hover{
+    background-color: #ffffff !important;
+    color: #000000;
+    border: 1px solid #000000;
 }
