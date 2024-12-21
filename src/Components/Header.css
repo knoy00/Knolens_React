@@ -136,42 +136,39 @@ header{
 }
 
 .user{
-    background-color: #808080;
+    background-color: #909090f4;
     padding: 5px;
     border-radius: 5px;
     color: #fff;
     font-weight: 600;
     cursor: pointer;
+    width: 180px;
 
 }
 
-.user-info{
-    position: relative;
-
-}
 
 .account-setting{
     position: absolute;
     height: auto;
-    top: 30px;
-    left: 0;
+    top: 80px;
+    right: 50px;
     background-color: #202020;
-    width: 100%;
+    width: 250px;
     border-radius: 10px;
 }
 
 .account-flex{
     display: flex;
     align-items: center;
-    gap: 35px;
-    padding: 10px;
+    gap: 65px;
+    padding: 20px;
     cursor: pointer;
 }
 
 .account-flex span{
     color: #ffffff;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 a{
@@ -182,3 +179,28 @@ a{
     background-color: #656565;
     border-radius: 10px;
 }
+
+.user-icon{
+    position: relative;
+}
+
+  /* HTML: <div class="loader"></div> */
+.loader {
+    position: absolute;
+    width: 20px;
+    padding: 8px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: #000000;
+    --_m: 
+      conic-gradient(#0000 10%,#000),
+      linear-gradient(#000 0 0) content-box;
+    -webkit-mask: var(--_m);
+            mask: var(--_m);
+    -webkit-mask-composite: source-out;
+            mask-composite: subtract;
+    animation: l3 1s infinite linear;
+    top: 5px;
+    right: 5px;
+  }
+  @keyframes l3 {to{transform: rotate(1turn)}}
