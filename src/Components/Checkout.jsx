@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom'
 import './Checkout.css'
 
 function Checkout({cart ,addToOrders}) {
+    
 
     const navigate = useNavigate();
     const loadRef = useRef(null);

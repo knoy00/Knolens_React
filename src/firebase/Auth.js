@@ -19,8 +19,22 @@ const logoutUser = () => {
 }
 
 //check if user is logged in
-const checkUser = (callback) => {
-    return onAuthStateChanged(auth, callback);
-}
+const checkUser = () => {
+    const auth = getAuth();
+    const currentUser = auth.currentUser;
+  
+    if (!currentUser) {
+      console.log("No user logged in.");
+      return false; // User is not logged in
+    }
+  
+    console.log("User is logged in:", currentUser.uid);
+    return true; // User is logged in
+  };
+  
+  export default checkUser;
+  
+
+
 
 export {registerUser, loginUser, logoutUser, checkUser, auth};

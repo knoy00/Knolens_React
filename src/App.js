@@ -15,6 +15,10 @@ import Shop from './Components/Shop';
 import OrderAndReturn from './Components/OrderAndReturn';
 
 import { registerUser, loginUser, logoutUser, checkUser, auth } from './firebase/Auth';
+import {db} from './firebase/firebase'
+
+import { collection, addDoc, onSnapshot, query, where, setDoc, doc, arrayUnion } from 'firebase/firestore';
+
 
 // Importing page components
 
@@ -25,18 +29,44 @@ import './App.css';
 // Importing global styles
 
 import Signinbtn from './Components/Signinbtn';
+import { onAuthStateChanged } from 'firebase/auth';
 // Importing the Sign-in button component
 
 function App() {
-  const [cart, setCart] = useState(() => {
-    const cartItems = JSON.parse(localStorage.getItem('cartItems'));
-    return cartItems? cartItems : [];
-  });
+  const [cart, setCart] = useState([]);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     localStorage.setItem('cartItems', JSON.stringify(cart));
   }, [cart]);
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    })
+
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    if(user) {
+      const cartQuery = query(
+        collection(db, 'carts'),
+        where('userId', '==', user.uid)
+      );
+
+      const unsubscribe = onSnapshot(cartQuery, (snapshot) => {
+        const cartItems = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data()
+        }))
+
+        setCart(cartItems);
+      })
+
+      return () => unsubscribe();
+    }
+  }, [user]);
 
   const [orders, setOrders] = useState(() => {
     const ordersData = JSON.parse(localStorage.getItem('orders'));
@@ -63,10 +93,52 @@ function App() {
     setShowSignin(false);
   }
   
+
   // Function to add a product to the cart
-  const addToCart = (product) => {
-    setCart((prevCart) => [...prevCart, product]);
+  const addToCart = async (product) => {
+    console.log("Adding to cart");
+  
+    if (!user) {
+      alert('You need to log in to add items to your cart.');
+      return;
+    }
+  
+    try {
+      // Create a reference to the user's cart document
+      const cartDocRef = doc(db, 'carts', user.uid); // User's cart document
+  
+      // Add the new product to the user's cart document
+      await setDoc(
+        cartDocRef,
+        {
+          userId: user.uid,
+          products: arrayUnion({ // Use arrayUnion to avoid overwriting the cart items
+            name: product.name,
+            price: product.price,
+            code: product.code,
+            description: product.description,
+            addedAt: new Date() // Optionally include a timestamp
+          })
+        },
+        { merge: true } // Merge the new item with existing cart data
+      );
+  
+      // Optionally, update local state to reflect the new item added
+      setCart((prevCart) => [
+        ...prevCart,
+        {
+          name: product.name,
+          price: product.price,
+          code: product.code,
+          description: product.description
+        }
+      ]);
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+    }
   };
+  
+  
 
 
   const addToOrders = (cart) => {

@@ -13,7 +13,7 @@ function ProductCard({
   return (
     // Link component navigates to the product overview page with a dynamic URL and passes data via state
     <Link 
-      to={`/Product/${code}`} // Dynamic URL based on the product's unique ID
+      to={`/Product/${code}`} // Dynamic URL based on the product's code
       state={{
         name, type, img, img_2, img_3, img_4, img_5, description, price, discount, id, 
         attribute_1, attribute_2, attribute_3, code, productOverview, disclaimer, 
