@@ -137,6 +137,26 @@ function App() {
       console.error('Error adding to cart:', error);
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      // Directly reference the user's cart document
+      const cartDocRef = doc(db, 'carts', user.uid);
+  
+      const unsubscribe = onSnapshot(cartDocRef, (doc) => {
+        if (doc.exists()) {
+          const cartData = doc.data();
+          // Ensure that the products array exists in the document and update the state
+          setCart(cartData?.products || []);
+        } else {
+          setCart([]); // If there's no cart for the user yet, initialize with an empty array
+        }
+      });
+  
+      return () => unsubscribe(); // Cleanup on unmount or user change
+    }
+  }, [user]);
+  
   
   
 
