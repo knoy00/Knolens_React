@@ -53,7 +53,6 @@ function OrderAndReturn({ orders }) {
                   </div>
                 </div>
               )}
-
               {tabActive === 'returns' && (
                 <div>
                   <p>Track your return status, adjust collection schedules, and print your return documents.</p>
