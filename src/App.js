@@ -60,6 +60,7 @@ function App() {
     }
   }, [user]);
 
+  // Fetching data
   useEffect(() => {
     if (user) {
       const cartDocRef = doc(db, 'carts', user.uid);
@@ -97,29 +98,23 @@ function App() {
     setShowSignin(false);
   };
 
-  const uploadImage = async (imageFile) => {
-    const storage = getStorage();
-    const storageRef = ref(storage, `cart-images/${imageFile.name}`)
+  // const uploadImage = async (imageFile) => {
+  //   const storage = getStorage();
+  //   const storageRef = ref(storage, `cart-images/${imageFile.name}`)
 
-    const snapshot = await uploadBytes(storageRef, imageFile)
+  //   const snapshot = await uploadBytes(storageRef, imageFile)
     
-    const downloadURL = await getDownloadURL(snapshot.ref);
-    return downloadURL;
-  }
+  //   const downloadURL = await getDownloadURL(snapshot.ref);
+  //   return downloadURL;
+  // }
 
-  const addToCart = async (product, imageFile) => {
+  const addToCart = async (product) => {
     if (!user) {
       alert('You need to log in to add items to your cart.');
       return;
     }
 
     try {
-
-      let imageURL = null;
-
-      if(imageFile){
-        imageURL = await uploadImage(imageFile)
-      }
       const cartDocRef = doc(db, 'carts', user.uid);
 
       await setDoc(
@@ -127,11 +122,12 @@ function App() {
         {
           userId: user.uid,
           products: arrayUnion({
+            id: product.id,
             name: product.name,
             price: product.price,
+            img:product.img,
             code: product.code,
             description: product.description,
-            image: imageURL,
             addedAt: new Date()
           })
         },
@@ -145,7 +141,6 @@ function App() {
           price: product.price,
           code: product.code,
           description: product.description,
-          image: imageURL
         }
       ]);
     } catch (error) {
