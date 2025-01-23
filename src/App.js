@@ -11,7 +11,7 @@ import Shop from './Components/Shop';
 import OrderAndReturn from './Components/OrderAndReturn';
 import { registerUser, loginUser, logoutUser, checkUser, auth } from './firebase/Auth';
 import { db } from './firebase/firebase';
-import { collection, addDoc, onSnapshot, query, where, setDoc, doc, arrayUnion } from 'firebase/firestore';
+import { collection, addDoc, onSnapshot, query, where, setDoc, doc, arrayUnion, updateDoc, arrayRemove, getDoc } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 import './App.css';
 import Signinbtn from './Components/Signinbtn';
@@ -109,6 +109,8 @@ function App() {
   // }
 
   const addToCart = async (product) => {
+    console.log(product)
+
     if (!user) {
       alert('You need to log in to add items to your cart.');
       return;
@@ -122,11 +124,10 @@ function App() {
         {
           userId: user.uid,
           products: arrayUnion({
-            id: product.id,
             name: product.name,
             price: product.price,
-            img:product.img,
             code: product.code,
+            img: product.img,
             description: product.description,
             addedAt: new Date()
           })
@@ -141,6 +142,7 @@ function App() {
           price: product.price,
           code: product.code,
           description: product.description,
+          img: product.img,
         }
       ]);
     } catch (error) {
@@ -150,14 +152,51 @@ function App() {
 
  
 
+// Inside your removeFromCart function
+const removeFromCart = async (product) => {
+  try {
+    // Remove from Firestore
+    const cartDocRef = doc(db, 'carts', user.uid);
+    console.log("Updating Firestore")
+    await updateDoc(cartDocRef, 
+      {
+        userId: user.uid,
+        products: arrayRemove({
+          name: product.name,
+          price: product.price,
+          code: product.code,
+          description: product.description,
+          img: product.img  // If you added the image to the cart data
+        })
+      }
+    );
+
+    // Remove from UI state
+    setCart((prevCart) => prevCart.filter((item) => item.code !== product.code));
+
+    console.log("removed product from cart");
+
+const cartDocSnapshot = await getDoc(cartDocRef);
+const cartData = cartDocSnapshot.data();
+console.log("Current cart data: ", cartData);
+
+  } catch (error) {
+    console.error("Error removing from cart:", error);
+  }
+};
+
+  
+
+ 
+
   const addToOrders = (cart) => {
     setOrders((prevOrders) => [...prevOrders, cart]);
     setCart([]);
   };
 
-  const removeFromCart = (product) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== product.id));
-  };
+  // const removeFromCart = (product) => {
+  //   setCart((prevCart) => prevCart.filter((item) => item.code !== product.code));
+  // };
 
   const handleSignin = () => {
     setShowSignin(true);
