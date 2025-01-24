@@ -98,16 +98,7 @@ function App() {
     setShowSignin(false);
   };
 
-  // const uploadImage = async (imageFile) => {
-  //   const storage = getStorage();
-  //   const storageRef = ref(storage, `cart-images/${imageFile.name}`)
-
-  //   const snapshot = await uploadBytes(storageRef, imageFile)
-    
-  //   const downloadURL = await getDownloadURL(snapshot.ref);
-  //   return downloadURL;
-  // }
-
+ 
   const addToCart = async (product) => {
     console.log(product)
 
@@ -115,7 +106,6 @@ function App() {
       alert('You need to log in to add items to your cart.');
       return;
     }
-
     try {
       const cartDocRef = doc(db, 'carts', user.uid);
 
@@ -150,53 +140,44 @@ function App() {
     }
   };
 
- 
+  const removeFromCart = async (product) => {
 
-// Inside your removeFromCart function
-const removeFromCart = async (product) => {
-  try {
-    // Remove from Firestore
-    const cartDocRef = doc(db, 'carts', user.uid);
-    console.log("Updating Firestore")
-    await updateDoc(cartDocRef, 
-      {
-        userId: user.uid,
-        products: arrayRemove({
-          name: product.name,
-          price: product.price,
-          code: product.code,
-          description: product.description,
-          img: product.img  // If you added the image to the cart data
-        })
+    if (!user) {
+      alert('You need to log in to add items to your cart.');
+      return;
+    }
+
+    try {
+      // Fetch the current cart data to get the exact object
+      const cartDocRef = doc(db, 'carts', user.uid);
+      const cartDocSnapshot = await getDoc(cartDocRef);
+      const cartData = cartDocSnapshot.data();
+
+
+      console.log("Updating Firestore")
+
+      const productToRemove = cartData.products.find((item) => item.code === product.code);
+
+      if(productToRemove) {
+        await updateDoc(cartDocRef, {
+          products: arrayRemove(productToRemove)
+        });
       }
-    );
 
-    // Remove from UI state
-    setCart((prevCart) => prevCart.filter((item) => item.code !== product.code));
+      // Remove from UI state
+      setCart((prevCart) => prevCart.filter((item) => item.code !== product.code));
 
-    console.log("removed product from cart");
-
-const cartDocSnapshot = await getDoc(cartDocRef);
-const cartData = cartDocSnapshot.data();
-console.log("Current cart data: ", cartData);
-
-  } catch (error) {
-    console.error("Error removing from cart:", error);
-  }
-};
-
-  
-
- 
+      console.log("removed product from cart");
+    } catch (error) {
+      console.error("Error removing from cart:", error);
+    }
+  };
 
   const addToOrders = (cart) => {
     setOrders((prevOrders) => [...prevOrders, cart]);
     setCart([]);
   };
 
-  // const removeFromCart = (product) => {
-  //   setCart((prevCart) => prevCart.filter((item) => item.code !== product.code));
-  // };
 
   const handleSignin = () => {
     setShowSignin(true);

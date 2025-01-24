@@ -31,7 +31,7 @@ function Header({ cart = [], handleSignin }) {
       await logoutUser();
       setTimeout(() => {
         setLoading(false);
-      }, 3000);
+      }, 4000);
     } catch (error) {
       setLoading(false);
       alert("Error logging out: " + error.message);
