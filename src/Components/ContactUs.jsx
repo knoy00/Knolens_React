@@ -5,13 +5,13 @@ import Footer from './Footer'
 
 import './ContactUs.css'
 
-function ContactUs({handleSignin}) {
+function ContactUs({handleSignin, cart}) {
   return (
     <div>
-      <Header handleSignin={handleSignin}/>
+      <Header handleSignin={handleSignin} cart={cart}/>
       <div className="contact-us">
         <div className="contact-text">
-            <h1>Contact Us</h1>
+          <h1>Contact Us</h1>
         </div>
 
         <div className="contact-flex">

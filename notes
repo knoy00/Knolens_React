@@ -1,399 +1,665 @@
-// //ADDING ITEMS TO CART AND STORING THEM USING LOCAL STORAGE
+// // // //ADDING ITEMS TO CART AND STORING THEM USING LOCAL STORAGE
 
-// // const [cart, setCart] = useState(() => {
-// //     const cartItems = JSON.parse(localStorage.getItem('cartItems'));
-// //     return cartItems? cartItems : [];
-// //   });
+// // import { arrayUnion } from "firebase/firestore";
 
-// //   useEffect(() => {
-// //     localStorage.setItem('cartItems', JSON.stringify(cart));
-// //   }, [cart]);
+// // // // const [cart, setCart] = useState(() => {
+// // // //     const cartItems = JSON.parse(localStorage.getItem('cartItems'));
+// // // //     return cartItems? cartItems : [];
+// // // //   });
 
-// //    // Function to add a product to the cart
-// //    const addToCart = (product) => {
-// //     setCart((prevCart) => [...prevCart, product]);
-// //   };
+// // // //   useEffect(() => {
+// // // //     localStorage.setItem('cartItems', JSON.stringify(cart));
+// // // //   }, [cart]);
 
-
-
-// // useEffect(() => {
-// //     const fetchCart = async () => {
-// //       const user = await checkUser();
-// //       if (user) {
-// //         const cartRef = doc(db, "users", user.uid, "cart");
-// //         const cartSnapshot = await getDoc(cartRef);
-// //         if (cartSnapshot.exists()) {
-// //           setCart(cartSnapshot.data().items);
-// //         }
-// //       }
-// //     }
+// // // //    // Function to add a product to the cart
+// // // //    const addToCart = (product) => {
+// // // //     setCart((prevCart) => [...prevCart, product]);
+// // // //   };
 
 
-// // APP.JS CODE HERE
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// // Importing routing components from react-router-dom for navigation
 
-// import '@fortawesome/fontawesome-free/css/all.css';
-// // Importing FontAwesome CSS for icons
-
-// import LandingPage from "./Components/LandingPage";
-// import ProductPage from './Components/ProductPage';
-// import ProductOverview from './Components/ProductOverview';
-// import Cart from './Components/Cart';
-// import AuthPage from './Components/AuthPage';
-// import Checkout from './Components/Checkout';
-// import ContactUs from './Components/ContactUs';
-// import Shop from './Components/Shop';
-// import OrderAndReturn from './Components/OrderAndReturn';
-
-// import { registerUser, loginUser, logoutUser, checkUser, auth, db } from './firebase/Auth';
-
-// import { collection, addDoc, onSnapshot, query, where, setDoc, doc } from 'firebase/firestore';
+// // // // useEffect(() => {
+// // // //     const fetchCart = async () => {
+// // // //       const user = await checkUser();
+// // // //       if (user) {
+// // // //         const cartRef = doc(db, "users", user.uid, "cart");
+// // // //         const cartSnapshot = await getDoc(cartRef);
+// // // //         if (cartSnapshot.exists()) {
+// // // //           setCart(cartSnapshot.data().items);
+// // // //         }
+// // // //       }
+// // // //     }
 
 
-// // Importing page components
+// // // // APP.JS CODE HERE
+// // // import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// // // // Importing routing components from react-router-dom for navigation
 
-// import { useState, useEffect } from 'react';
-// // Importing React hooks for state management and side effects
+// // // import '@fortawesome/fontawesome-free/css/all.css';
+// // // // Importing FontAwesome CSS for icons
 
-// import './App.css';
-// // Importing global styles
+// // // import LandingPage from "./Components/LandingPage";
+// // // import ProductPage from './Components/ProductPage';
+// // // import ProductOverview from './Components/ProductOverview';
+// // // import Cart from './Components/Cart';
+// // // import AuthPage from './Components/AuthPage';
+// // // import Checkout from './Components/Checkout';
+// // // import ContactUs from './Components/ContactUs';
+// // // import Shop from './Components/Shop';
+// // // import OrderAndReturn from './Components/OrderAndReturn';
 
-// import Signinbtn from './Components/Signinbtn';
-// // Importing the Sign-in button component
+// // // import { registerUser, loginUser, logoutUser, checkUser, auth, db } from './firebase/Auth';
 
-// function App() {
-//   const [cart, setCart] = useState(() => {
-//     const cartItems = JSON.parse(localStorage.getItem('cartItems'));
-//     return cartItems? cartItems : [];
-//   });
-
-//   useEffect(() => {
-//     localStorage.setItem('cartItems', JSON.stringify(cart));
-//   }, [cart]);
+// // // import { collection, addDoc, onSnapshot, query, where, setDoc, doc } from 'firebase/firestore';
 
 
-//   const [orders, setOrders] = useState(() => {
-//     const ordersData = JSON.parse(localStorage.getItem('orders'));
-//     return ordersData? ordersData : [];
-//   });
+// // // // Importing page components
 
-//   useEffect(() => {
-//     localStorage.setItem('orders', JSON.stringify(orders));
-//   }, [orders]);
+// // // import { useState, useEffect } from 'react';
+// // // // Importing React hooks for state management and side effects
+
+// // // import './App.css';
+// // // // Importing global styles
+
+// // // import Signinbtn from './Components/Signinbtn';
+// // // // Importing the Sign-in button component
+
+// // // function App() {
+// // //   const [cart, setCart] = useState(() => {
+// // //     const cartItems = JSON.parse(localStorage.getItem('cartItems'));
+// // //     return cartItems? cartItems : [];
+// // //   });
+
+// // //   useEffect(() => {
+// // //     localStorage.setItem('cartItems', JSON.stringify(cart));
+// // //   }, [cart]);
+
+
+// // //   const [orders, setOrders] = useState(() => {
+// // //     const ordersData = JSON.parse(localStorage.getItem('orders'));
+// // //     return ordersData? ordersData : [];
+// // //   });
+
+// // //   useEffect(() => {
+// // //     localStorage.setItem('orders', JSON.stringify(orders));
+// // //   }, [orders]);
   
-//   // State to manage the visibility of the authentication (sign-in) page
-//   const [showSignin, setShowSignin] = useState(false);
+// // //   // State to manage the visibility of the authentication (sign-in) page
+// // //   const [showSignin, setShowSignin] = useState(false);
   
-//   // State to manage the visibility of the sign-in button
-//   const [signin, setSignin] = useState(false);
+// // //   // State to manage the visibility of the sign-in button
+// // //   const [signin, setSignin] = useState(false);
   
-//   // Function to show the sign-in button
-//   const showSigninBtn = () => {
-//     setShowSignin(true);
-//   }
+// // //   // Function to show the sign-in button
+// // //   const showSigninBtn = () => {
+// // //     setShowSignin(true);
+// // //   }
   
-//   // Function to hide the sign-in button
-//   const hideSigninBtn = () => {
-//     setShowSignin(false);
-//   }
+// // //   // Function to hide the sign-in button
+// // //   const hideSigninBtn = () => {
+// // //     setShowSignin(false);
+// // //   }
   
-//   // Function to add a product to the cart
-//   const addToCart = (product) => {
-//     setCart((prevCart) => [...prevCart, product]);
-//   };
+// // //   // Function to add a product to the cart
+// // //   const addToCart = (product) => {
+// // //     setCart((prevCart) => [...prevCart, product]);
+// // //   };
 
 
-//   const addToOrders = (cart) => {
-//     setOrders((prevOrders) => [...prevOrders, cart]);
-//     setCart([]);
-//   }
+// // //   const addToOrders = (cart) => {
+// // //     setOrders((prevOrders) => [...prevOrders, cart]);
+// // //     setCart([]);
+// // //   }
 
-//   // Function to remove a product from the cart
-//   const removeFromCart = (product) => {
-//     setCart((prevCart) => prevCart.filter((item) => item.id !== product.id));
-//   };
+// // //   // Function to remove a product from the cart
+// // //   const removeFromCart = (product) => {
+// // //     setCart((prevCart) => prevCart.filter((item) => item.id !== product.id));
+// // //   };
 
 
 
-//   // Function to show the sign-in page
-//   const handleSignin = () => {
-//     setShowSignin(true);
-//   };
+// // //   // Function to show the sign-in page
+// // //   const handleSignin = () => {
+// // //     setShowSignin(true);
+// // //   };
 
-//   // Function to close the sign-in page
-//   const handleCloseSignin = () => {
-//     setShowSignin(false);
-//   };
+// // //   // Function to close the sign-in page
+// // //   const handleCloseSignin = () => {
+// // //     setShowSignin(false);
+// // //   };
 
-//   // Side effect: Disable scrolling when the authentication page is open
-//   useEffect(() => {
-//     if (showSignin) {
-//       document.body.classList.add('no-scroll');
-//     } else {
-//       document.body.classList.remove('no-scroll');
-//     }
-//   }, [showSignin]); // Re-run this effect whenever `showSignin` changes
+// // //   // Side effect: Disable scrolling when the authentication page is open
+// // //   useEffect(() => {
+// // //     if (showSignin) {
+// // //       document.body.classList.add('no-scroll');
+// // //     } else {
+// // //       document.body.classList.remove('no-scroll');
+// // //     }
+// // //   }, [showSignin]); // Re-run this effect whenever `showSignin` changes
   
-//   return (
-//     <Router>
-//       {/* Router provides navigation between different pages */}
-//       <div>
-//         <Routes>
-//           {/* Define application routes */}
+// // //   return (
+// // //     <Router>
+// // //       {/* Router provides navigation between different pages */}
+// // //       <div>
+// // //         <Routes>
+// // //           {/* Define application routes */}
 
-//           <Route path='/' element={<LandingPage cart={cart} handleSignin={handleSignin}/>} />
-//           {/* Landing page route */}
+// // //           <Route path='/' element={<LandingPage cart={cart} handleSignin={handleSignin}/>} />
+// // //           {/* Landing page route */}
 
-//           <Route path='/Product' element={<ProductPage cart={cart} handleSignin={handleSignin}/>} />
-//           {/* Product listing page route */}
+// // //           <Route path='/Product' element={<ProductPage cart={cart} handleSignin={handleSignin}/>} />
+// // //           {/* Product listing page route */}
 
-//           <Route path='/Product/:id' element={<ProductOverview addToCart={addToCart} cart={cart} handleSignin={handleSignin}/>} />
-//           {/* Product details page route with dynamic product ID */}
+// // //           <Route path='/Product/:id' element={<ProductOverview addToCart={addToCart} cart={cart} handleSignin={handleSignin}/>} />
+// // //           {/* Product details page route with dynamic product ID */}
 
-//           <Route path='/Cart' element={<Cart removeFromCart={removeFromCart} cart={cart} handleSignin={handleSignin} showSigninBtn={showSigninBtn} hideSigninBtn={hideSigninBtn}/>} />
-//           {/* Cart page route */}
+// // //           <Route path='/Cart' element={<Cart removeFromCart={removeFromCart} cart={cart} handleSignin={handleSignin} showSigninBtn={showSigninBtn} hideSigninBtn={hideSigninBtn}/>} />
+// // //           {/* Cart page route */}
 
-//           <Route path='/Contact' element={<ContactUs handleSignin={handleSignin} />}  />
-//           {/* Contact page route */}
+// // //           <Route path='/Contact' element={<ContactUs handleSignin={handleSignin} />}  />
+// // //           {/* Contact page route */}
 
-//           <Route path='/Shop' element={<Shop handleSignin={handleSignin} />}  />
-//           {/* Shop page route */}
+// // //           <Route path='/Shop' element={<Shop handleSignin={handleSignin} />}  />
+// // //           {/* Shop page route */}
 
-//           <Route path='/Checkout'  element={<Checkout cart={cart} addToOrders={addToOrders}/>}/>
+// // //           <Route path='/Checkout'  element={<Checkout cart={cart} addToOrders={addToOrders}/>}/>
 
-//           <Route path='/OrderAndReturn'  element={<OrderAndReturn handleSignin={handleSignin} orders={orders} addToOrders={addToOrders}/>}/>
-//         </Routes>
+// // //           <Route path='/OrderAndReturn'  element={<OrderAndReturn handleSignin={handleSignin} orders={orders} addToOrders={addToOrders}/>}/>
+// // //         </Routes>
 
-//         {/* Render the authentication page if `showSignin` is true */}
-//         {showSignin && <AuthPage showSignin={showSignin} onClose={handleCloseSignin} />}
+// // //         {/* Render the authentication page if `showSignin` is true */}
+// // //         {showSignin && <AuthPage showSignin={showSignin} onClose={handleCloseSignin} />}
 
         
-//       </div>
-//     </Router>
-//   );
-// }
+// // //       </div>
+// // //     </Router>
+// // //   );
+// // // }
 
-// export default App;
-// // Exporting the App component as the default export
-
-
+// // // export default App;
+// // // // Exporting the App component as the default export
 
 
 
 
-// App.js second code -- bug
 
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// import '@fortawesome/fontawesome-free/css/all.css';
-// import LandingPage from "./Components/LandingPage";
-// import ProductPage from './Components/ProductPage';
-// import ProductOverview from './Components/ProductOverview';
-// import Cart from './Components/Cart';
-// import AuthPage from './Components/AuthPage';
-// import Checkout from './Components/Checkout';
-// import ContactUs from './Components/ContactUs';
-// import Shop from './Components/Shop';
-// import OrderAndReturn from './Components/OrderAndReturn';
-// import { registerUser, loginUser, logoutUser, checkUser, auth } from './firebase/Auth';
-// import { db } from './firebase/firebase';
-// import { collection, addDoc, onSnapshot, query, where, setDoc, doc, arrayUnion } from 'firebase/firestore';
-// import { useState, useEffect } from 'react';
-// import './App.css';
-// import Signinbtn from './Components/Signinbtn';
-// import { onAuthStateChanged } from 'firebase/auth';
-// import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
-// function App() {
-//   const [cart, setCart] = useState([]);
-//   const [user, setUser] = useState(null);
-//   const [orders, setOrders] = useState(() => {
-//     const ordersData = JSON.parse(localStorage.getItem('orders'));
-//     return ordersData ? ordersData : [];
-//   });
-//   const [showSignin, setShowSignin] = useState(false);
-//   const [signin, setSignin] = useState(false);
+// // // App.js second code -- bug
 
-//   useEffect(() => {
-//     localStorage.setItem('cartItems', JSON.stringify(cart));
-//   }, [cart]);
+// // // import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// // // import '@fortawesome/fontawesome-free/css/all.css';
+// // // import LandingPage from "./Components/LandingPage";
+// // // import ProductPage from './Components/ProductPage';
+// // // import ProductOverview from './Components/ProductOverview';
+// // // import Cart from './Components/Cart';
+// // // import AuthPage from './Components/AuthPage';
+// // // import Checkout from './Components/Checkout';
+// // // import ContactUs from './Components/ContactUs';
+// // // import Shop from './Components/Shop';
+// // // import OrderAndReturn from './Components/OrderAndReturn';
+// // // import { registerUser, loginUser, logoutUser, checkUser, auth } from './firebase/Auth';
+// // // import { db } from './firebase/firebase';
+// // // import { collection, addDoc, onSnapshot, query, where, setDoc, doc, arrayUnion } from 'firebase/firestore';
+// // // import { useState, useEffect } from 'react';
+// // // import './App.css';
+// // // import Signinbtn from './Components/Signinbtn';
+// // // import { onAuthStateChanged } from 'firebase/auth';
+// // // import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
-//   useEffect(() => {
-//     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-//       setUser(currentUser);
-//     });
+// // // function App() {
+// // //   const [cart, setCart] = useState([]);
+// // //   const [user, setUser] = useState(null);
+// // //   const [orders, setOrders] = useState(() => {
+// // //     const ordersData = JSON.parse(localStorage.getItem('orders'));
+// // //     return ordersData ? ordersData : [];
+// // //   });
+// // //   const [showSignin, setShowSignin] = useState(false);
+// // //   const [signin, setSignin] = useState(false);
 
-//     return () => unsubscribe();
-//   }, []);
+// // //   useEffect(() => {
+// // //     localStorage.setItem('cartItems', JSON.stringify(cart));
+// // //   }, [cart]);
 
-//   useEffect(() => {
-//     if (user) {
-//       const cartQuery = query(
-//         collection(db, 'carts'),
-//         where('userId', '==', user.uid)
-//       );
+// // //   useEffect(() => {
+// // //     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+// // //       setUser(currentUser);
+// // //     });
 
-//       const unsubscribe = onSnapshot(cartQuery, (snapshot) => {
-//         const cartItems = snapshot.docs.map((doc) => ({
-//           id: doc.id,
-//           ...doc.data()
-//         }));
+// // //     return () => unsubscribe();
+// // //   }, []);
 
-//         setCart(cartItems);
-//       });
+// // //   useEffect(() => {
+// // //     if (user) {
+// // //       const cartQuery = query(
+// // //         collection(db, 'carts'),
+// // //         where('userId', '==', user.uid)
+// // //       );
 
-//       return () => unsubscribe();
-//     }
-//   }, [user]);
+// // //       const unsubscribe = onSnapshot(cartQuery, (snapshot) => {
+// // //         const cartItems = snapshot.docs.map((doc) => ({
+// // //           id: doc.id,
+// // //           ...doc.data()
+// // //         }));
 
-//   // Fetching data
-//   useEffect(() => {
-//     if (user) {
-//       const cartDocRef = doc(db, 'carts', user.uid);
+// // //         setCart(cartItems);
+// // //       });
 
-//       const unsubscribe = onSnapshot(cartDocRef, (doc) => {
-//         if (doc.exists()) {
-//           const cartData = doc.data();
-//           setCart(cartData?.products || []);
-//         } else {
-//           setCart([]);
-//         }
-//       });
+// // //       return () => unsubscribe();
+// // //     }
+// // //   }, [user]);
 
-//       return () => unsubscribe();
-//     }
-//   }, [user]);
+// // //   // Fetching data
+// // //   useEffect(() => {
+// // //     if (user) {
+// // //       const cartDocRef = doc(db, 'carts', user.uid);
 
-//   useEffect(() => {
-//     localStorage.setItem('orders', JSON.stringify(orders));
-//   }, [orders]);
+// // //       const unsubscribe = onSnapshot(cartDocRef, (doc) => {
+// // //         if (doc.exists()) {
+// // //           const cartData = doc.data();
+// // //           setCart(cartData?.products || []);
+// // //         } else {
+// // //           setCart([]);
+// // //         }
+// // //       });
 
-//   useEffect(() => {
-//     if (showSignin) {
-//       document.body.classList.add('no-scroll');
-//     } else {
-//       document.body.classList.remove('no-scroll');
-//     }
-//   }, [showSignin]);
+// // //       return () => unsubscribe();
+// // //     }
+// // //   }, [user]);
 
-//   const showSigninBtn = () => {
-//     setShowSignin(true);
-//   };
+// // //   useEffect(() => {
+// // //     localStorage.setItem('orders', JSON.stringify(orders));
+// // //   }, [orders]);
 
-//   const hideSigninBtn = () => {
-//     setShowSignin(false);
-//   };
+// // //   useEffect(() => {
+// // //     if (showSignin) {
+// // //       document.body.classList.add('no-scroll');
+// // //     } else {
+// // //       document.body.classList.remove('no-scroll');
+// // //     }
+// // //   }, [showSignin]);
 
-//   // const uploadImage = async (imageFile) => {
-//   //   const storage = getStorage();
-//   //   const storageRef = ref(storage, `cart-images/${imageFile.name}`)
+// // //   const showSigninBtn = () => {
+// // //     setShowSignin(true);
+// // //   };
 
-//   //   const snapshot = await uploadBytes(storageRef, imageFile)
+// // //   const hideSigninBtn = () => {
+// // //     setShowSignin(false);
+// // //   };
+
+// // //   // const uploadImage = async (imageFile) => {
+// // //   //   const storage = getStorage();
+// // //   //   const storageRef = ref(storage, `cart-images/${imageFile.name}`)
+
+// // //   //   const snapshot = await uploadBytes(storageRef, imageFile)
     
-//   //   const downloadURL = await getDownloadURL(snapshot.ref);
-//   //   return downloadURL;
-//   // }
+// // //   //   const downloadURL = await getDownloadURL(snapshot.ref);
+// // //   //   return downloadURL;
+// // //   // }
 
-//   const addToCart = async (product) => {
-//     console.log("Product Image: ", product.img, "Type: ", typeof product.img);
+// // //   const addToCart = async (product) => {
+// // //     console.log("Product Image: ", product.img, "Type: ", typeof product.img);
 
-//     if (!user) {
-//       alert('You need to log in to add items to your cart.');
-//       return;
-//     }
+// // //     if (!user) {
+// // //       alert('You need to log in to add items to your cart.');
+// // //       return;
+// // //     }
 
     
 
-//     const baseURL = window.location.origin; // Get the base URL of your app
-// const absoluteImgURL = `${baseURL}${product.img}`; // Convert to absolute URL
+// // //     const baseURL = window.location.origin; // Get the base URL of your app
+// // // const absoluteImgURL = `${baseURL}${product.img}`; // Convert to absolute URL
 
-// console.log("Absolute Image URL:", absoluteImgURL); // Debugging log
+// // // console.log("Absolute Image URL:", absoluteImgURL); // Debugging log
 
-// if (absoluteImgURL) {
-//   console.log("Error: Product image is missing!");
-//   return;
-// }
+// // // if (absoluteImgURL) {
+// // //   console.log("Error: Product image is missing!");
+// // //   return;
+// // // }
 
-// if (typeof absoluteImgURL == "string") {
-//   console.error("Invalid absolute image URL:", absoluteImgURL);
-//   return;
-// }
+// // // if (typeof absoluteImgURL == "string") {
+// // //   console.error("Invalid absolute image URL:", absoluteImgURL);
+// // //   return;
+// // // }
 
-// console.log(typeof absoluteImgURL)
+// // // console.log(typeof absoluteImgURL)
 
 
-//     try {
-//       const cartDocRef = doc(db, 'carts', user.uid);
+// // //     try {
+// // //       const cartDocRef = doc(db, 'carts', user.uid);
 
-//       await setDoc(
-//         cartDocRef,
-//         {
-//           userId: user.uid,
-//           products: arrayUnion({
-//             id: product.id,
-//             name: product.name,
-//             price: product.price,
-//             img: absoluteImgURL,
-//             code: product.code,
-//             description: product.description,
-//             addedAt: new Date()
-//           })
-//         },
-//         { merge: true }
-//       );
+// // //       await setDoc(
+// // //         cartDocRef,
+// // //         {
+// // //           userId: user.uid,
+// // //           products: arrayUnion({
+// // //             id: product.id,
+// // //             name: product.name,
+// // //             price: product.price,
+// // //             img: absoluteImgURL,
+// // //             code: product.code,
+// // //             description: product.description,
+// // //             addedAt: new Date()
+// // //           })
+// // //         },
+// // //         { merge: true }
+// // //       );
 
-//       setCart((prevCart) => [
-//         ...prevCart,
-//         {
-//           name: product.name,
-//           price: product.price,
-//           code: product.code,
-//           description: product.description,
-//           img: absoluteImgURL,
-//         }
-//       ]);
-//     } catch (error) {
-//       console.error('Error adding to cart:', error);
-//     }
-//   };
+// // //       setCart((prevCart) => [
+// // //         ...prevCart,
+// // //         {
+// // //           name: product.name,
+// // //           price: product.price,
+// // //           code: product.code,
+// // //           description: product.description,
+// // //           img: absoluteImgURL,
+// // //         }
+// // //       ]);
+// // //     } catch (error) {
+// // //       console.error('Error adding to cart:', error);
+// // //     }
+// // //   };
 
  
 
-//   const addToOrders = (cart) => {
-//     setOrders((prevOrders) => [...prevOrders, cart]);
-//     setCart([]);
-//   };
+// // //   const addToOrders = (cart) => {
+// // //     setOrders((prevOrders) => [...prevOrders, cart]);
+// // //     setCart([]);
+// // //   };
 
-//   const removeFromCart = (product) => {
-//     setCart((prevCart) => prevCart.filter((item) => item.id !== product.id));
-//   };
+// // //   const removeFromCart = (product) => {
+// // //     setCart((prevCart) => prevCart.filter((item) => item.id !== product.id));
+// // //   };
 
-//   const handleSignin = () => {
-//     setShowSignin(true);
-//   };
+// // //   const handleSignin = () => {
+// // //     setShowSignin(true);
+// // //   };
 
-//   const handleCloseSignin = () => {
-//     setShowSignin(false);
-//   };
+// // //   const handleCloseSignin = () => {
+// // //     setShowSignin(false);
+// // //   };
 
-//   return (
-//     <Router>
-//       <div>
-//         <Routes>
-//           <Route path='/' element={<LandingPage cart={cart} handleSignin={handleSignin} />} />
-//           <Route path='/Product' element={<ProductPage cart={cart} handleSignin={handleSignin} />} />
-//           <Route path='/Product/:id' element={<ProductOverview addToCart={addToCart} cart={cart} handleSignin={handleSignin} />} />
-//           <Route path='/Cart' element={<Cart removeFromCart={removeFromCart} cart={cart} handleSignin={handleSignin} showSigninBtn={showSigninBtn} hideSigninBtn={hideSigninBtn} />} />
-//           <Route path='/Contact' element={<ContactUs handleSignin={handleSignin} />} />
-//           <Route path='/Shop' element={<Shop handleSignin={handleSignin} />} />
-//           <Route path='/Checkout' element={<Checkout cart={cart} addToOrders={addToOrders} />} />
-//           <Route path='/OrderAndReturn' element={<OrderAndReturn handleSignin={handleSignin} orders={orders} addToOrders={addToOrders} />} />
-//         </Routes>
+// // //   return (
+// // //     <Router>
+// // //       <div>
+// // //         <Routes>
+// // //           <Route path='/' element={<LandingPage cart={cart} handleSignin={handleSignin} />} />
+// // //           <Route path='/Product' element={<ProductPage cart={cart} handleSignin={handleSignin} />} />
+// // //           <Route path='/Product/:id' element={<ProductOverview addToCart={addToCart} cart={cart} handleSignin={handleSignin} />} />
+// // //           <Route path='/Cart' element={<Cart removeFromCart={removeFromCart} cart={cart} handleSignin={handleSignin} showSigninBtn={showSigninBtn} hideSigninBtn={hideSigninBtn} />} />
+// // //           <Route path='/Contact' element={<ContactUs handleSignin={handleSignin} />} />
+// // //           <Route path='/Shop' element={<Shop handleSignin={handleSignin} />} />
+// // //           <Route path='/Checkout' element={<Checkout cart={cart} addToOrders={addToOrders} />} />
+// // //           <Route path='/OrderAndReturn' element={<OrderAndReturn handleSignin={handleSignin} orders={orders} addToOrders={addToOrders} />} />
+// // //         </Routes>
 
-//         {showSignin && <AuthPage showSignin={showSignin} onClose={handleCloseSignin} />}
-//       </div>
-//     </Router>
-//   );
+// // //         {showSignin && <AuthPage showSignin={showSignin} onClose={handleCloseSignin} />}
+// // //       </div>
+// // //     </Router>
+// // //   );
+// // // }
+
+// // // export default App;
+
+
+
+// // // <Router>
+// // //     <div>
+// // //         <Routes>
+// // //           <Route path='/' element={<LandingPage cart={cart} handleSignin={handleSignin} />} />
+// // //           <Route path='/Product' element={<ProductPage cart={cart} handleSignin={handleSignin} />} />
+// // //           <Route path='/Product/:id' element={<ProductOverview addToCart={addToCart} cart={cart} handleSignin={handleSignin} />} />
+// // //           <Route path='/Cart' element={<Cart removeFromCart={removeFromCart} cart={cart} handleSignin={handleSignin} showSigninBtn={showSigninBtn} hideSigninBtn={hideSigninBtn} />} />
+// // //           <Route path='/Contact' element={<ContactUs handleSignin={handleSignin} />} />
+// // //           <Route path='/Shop' element={<Shop handleSignin={handleSignin} />} />
+// // //           <Route path='/Checkout' element={<Checkout cart={cart} createOrder={createOrder} removeFromCart={removeFromCart} setCart={setCart} user={user}/>} />
+// // //           <Route path='/OrderAndReturn' element={<OrderAndReturn handleSignin={handleSignin} orders={orders} returns={returns} user={user} cart={cart} setOrders={setOrders} getOrders={getOrders}/>} />
+// // //         </Routes>
+// // //         {showSignin && <AuthPage showSignin={showSignin} onClose={handleCloseSignin} />}
+// // //     </div>
+// // // </Router>
+
+
+
+// // const addToAddress = async (addressInfo) => {
+// //   if(user){
+// //     try{
+// //       const addressRef = doc(db, 'addresses', user.uid);
+
+// //       await setDoc(
+// //         addressRef,
+// //         {
+// //           userId: user.uid,
+// //           address: arrayUnion({
+// //             Firstname: addressInfo.Firstname,
+// //             Lastname: addressInfo.Lastname,
+// //             Address: addressInfo.Address,
+// //             City: addressInfo.City,
+// //             State: addressInfo.State,
+// //             Zipcode: addressInfo.Zipcode,
+// //             Country: addressInfo.Country
+// //           })
+// //         },
+// //         { merge: true }
+// //       );
+
+// //       //Fetch the address from Firestore
+// //       const addressDocSnapshot = await getDoc(addressRef);
+// //       if(addressDocSnapshot.exists()){
+// //         const addressData = addressDocSnapshot.data();
+// //         setAddresses(addressData.address);
+// //       }
+// //     } catch (error){
+// //       console.error("Error adding address" + error);
+// //     }
+// //   }
+// // }
+
+// // const fetchAddress = async (userId) => {
+// //   if (user) {
+// //     try{
+// //       const addressRef = doc(db, 'addresses', userId);
+// //       const addressDoc = await getDoc(addressRef);
+
+// //       if(addressDoc.exists()){
+// //         const data = addressDoc.data();
+// //         return data.address || [];
+// //         setMainAddressSection(false)
+        
+// //       } else {
+// //         setMainAddressSection(true)
+// //       }
+// //     } catch(error){
+
+// //     }
+// //   } 
+// // }
+
+
+// import React, { useState, useEffect } from 'react';
+// import Header from './Header'; // Header component to display at the top of the page
+// import Signinbtn from './Signinbtn'; // Sign-in button component
+// import { Link, useNavigate } from 'react-router-dom'; // React Router's Link for navigation
+// import Footer from './Footer'; // Footer component to display at the bottom of the page
+// import AuthPage from './AuthPage'; // Authentication page (optional)
+// import Checkout from './Checkout';
+// import ConfirmOrderBtn from './ConfirmOrderBtn';
+// import ScrollToTop from './ScrollToTop';
+// import ContactUs from './ContactUs';
+// import {auth, checkUser} from '../firebase/Auth';
+
+
+// import './Cart.css'; // CSS file for styling the cart page
+
+// // Cart Component
+// function Cart({ cart, handleSignin, handleCloseSignin, signin, removeFromCart, addToCart}) {
+
+//     const [user, setUser] = useState(null);
+//     useEffect(() => {
+//         const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+//             setUser(currentUser);
+//         })
+//     }, []); 
+
+//     const [quantity, setQuantity] = useState("");
+
+//     const handleOnchange = (e) => {
+//         setQuantity(e.target.value);
+//     }
+//     const navigate = useNavigate();
+
+//     const checkout = (user) => {
+//         if (user) {
+//             navigate("/Checkout");
+//         } else {
+//             navigate("/AuthPage");
+//         }
+//     }
+
+//     return (
+//         <div>
+//             <ScrollToTop />
+//             {/* Header component receives the cart as a prop */}
+//             <Header cart={cart} handleSignin={handleSignin}/>
+
+//             {/* Main cart section */}
+//             <div className="cart">
+//                 <h1>Shopping Cart</h1>
+
+               
+//                 {cart.length === 0 ? (
+//                     <p style={{ paddingBottom: '2rem' }}>Your cart is empty. Add some items to continue shopping.</p>
+//                 ) : (
+//                     // Map through the cart items and display each one
+//                     cart.map((item) => (
+//                         <div className="cart-container" key={item.id}>
+                           
+//                             {/* Estimated delivery time */}
+//                             <p className="delivery-time">Estimated delivery between 10-15 business days</p>
+//                             <div className="line"></div> {/* Divider line */}
+
+//                             {/* Cart item details */}
+//                             <div className="cart-flex">
+//                                 {/* Remove item from cart button */}
+//                                 <div className='removeItem' onClick={() => removeFromCart(item)}>
+//                                     <i className='fa fa-times'></i>
+//                                 </div>
+
+//                                 {/* Left section: item image and details */}
+//                                 <div className="left">
+//                                     <div className="cart-item">
+//                                         <div className="cart-item-img">
+//                                             <img src={item.img} alt={item.name} />
+//                                         </div>
+
+//                                         <div className="cart-item-details">
+//                                             <h3>{item.name}</h3>
+//                                             <p>{item.description}</p>
+//                                             <p>{item.code}</p>
+//                                         </div>
+
+//                                         <div className="quantity">
+//                                             <h3>Quantity</h3>
+//                                             <input 
+//                                             type="number"
+//                                             value={quantity}
+//                                             onChange={handleOnchange}/>
+//                                         </div>
+
+//                                         <div className="price">
+//                                              <p>Price:</p>
+//                                              <p>${item.price}</p>
+//                                         </div>
+//                                     </div>
+//                                 </div>
+
+//                                 {/* Right section: order summary */}
+//                                 <div className="right">
+//                                     <div className="subtotal">
+//                                         <p>Subtotal:</p>
+//                                         <p>${item.price}</p>
+//                                     </div>
+
+//                                     <div className="shipping">
+//                                         <p>Shipping:</p>
+//                                         <p>$0</p>
+//                                     </div>
+                                    
+//                                 </div>
+//                             </div>
+                            
+//                         </div>
+//                     ))
+//                 )}
+//                 <div className="line"></div> {/* Divider line */}
+//                 {cart.length > 0 && <div className='totalAmount'>
+//                     <p>Total: $33</p>
+//                 </div>}
+
+//                 {/* Display sign-in button if the user is not signed in */}
+//                 {!user ? (
+//                     cart.length > 0 ? (
+//                         <ConfirmOrderBtn handleSignin={handleSignin}/>
+//                     ) : (
+//                         <Signinbtn handleSignin={handleSignin} />
+//                     )
+//                 ) : cart.length > 0 ? (
+//                     <Link to="/Checkout"><ConfirmOrderBtn /></Link>
+//                 ) : (
+//                     null
+//                 )
+//                 }
+
+//             </div>
+
+//             {/* Contact section for customer support */}
+//             <div className="contact">
+//                 <div className="need-help">
+//                     <h3>Need help?</h3>
+//                     <p>
+//                         Contact our global Customer Service team, you can reach us by phone or
+//                         email. Alternatively, you may find the answer in our Frequently Asked
+//                         Questions page.
+//                     </p>
+//                 </div>
+
+//                 {/* Call us section */}
+//                 <div className="call-us">
+//                     <div className="title-flex">
+//                         <i className="fa-solid fa-phone"></i>
+//                         <h3>Call us</h3>
+//                     </div>
+//                     <p>+1 (800) 123-4567</p>
+//                     <span>
+//                         Monday to Friday: 8:00am to 5:00pm <br /> GMT
+//                     </span>
+//                 </div>
+
+//                 {/* Email us section */}
+//                 <div className="email-us">
+//                     <div className="title-flex">
+//                         <i className="fa-solid fa-envelope"></i>
+//                         <h3>Click here to send us an email</h3>
+//                     </div>
+//                     <p>Customer Service</p>
+//                 </div>
+
+//                 {/* FAQs section */}
+//                 <div className="faqs">
+//                     <div className="title-flex">
+//                         <i className="fa-solid fa-question"></i>
+//                         <h3>FAQs</h3>
+//                     </div>
+//                     <p>
+//                         Find the answers you need in our <Link to="/faqs">FAQs</Link>
+//                     </p>
+//                 </div>
+//             </div>
+
+//             {/* Footer component */}
+//             <Footer />
+//             {/*   */}
+//         </div>
+//     );
 // }
 
-// export default App;
+// export default Cart;

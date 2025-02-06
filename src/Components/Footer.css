@@ -101,22 +101,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 
 }
 
 .subscribe_input input{
     width: 100%;
-    padding: 18px 20px;
+    padding: 28px 20px;
     border-radius: 30px;
     border: 1px solid #bfbfbf;
-    position: relative;
     font-size: 17px;
     
 }
 
 .subscribe_input button{
     position: absolute;
-    right: 70px;
+    right: 10px;
     padding: 10px 25px;
     border-radius: 30px;
     background-color: var(--secondary-color);
@@ -124,7 +124,8 @@
     font-weight: 600;
     transition: .5s ease-in-out;
     cursor: pointer;
-    width: 9%;
+    width: 30%;
+    top: 25px;
 }
 
 .subscribe_input button:hover{

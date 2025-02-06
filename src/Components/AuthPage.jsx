@@ -63,7 +63,6 @@ function AuthPage({ onClose, showSignin, setLoading }) {
     }
   };
 
-  // Handle login
   const handleLogin = async (e) => {
     e.preventDefault();
     setSignin(isSignin);
@@ -94,7 +93,6 @@ function AuthPage({ onClose, showSignin, setLoading }) {
     }
   };
 
-  // Toggle form animation
   const handleClick = () => {
     setSignin(!isSignin);
     if (isSignin) {

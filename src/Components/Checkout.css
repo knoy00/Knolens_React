@@ -1,7 +1,6 @@
 .checkout{
     width: 100%;
     position: relative;
-    background-color: black;
 }
 
 .load-animate{
@@ -196,7 +195,7 @@ label{
 .cancel{
     position: absolute;
     right: 0;
-    top: 0;
+    top: 65px;
     cursor: pointer;
 }
 
@@ -326,6 +325,7 @@ label{
     width: 50%;
     border-radius: 5px;
     padding: 1rem;
+    max-width: 500px;
 }
 
 .checkout-right-header-wrapper{
@@ -423,6 +423,7 @@ label{
     background-color: #f5f5f5;
     padding: 1rem;
     border-radius: 5px;
+    max-width: 200px;
 }
 
 .checkout-item-image img{
@@ -673,3 +674,150 @@ input[type="number"] {
     margin: 0; /* Removes any margin */
   }
   
+/* 
+  SAVED ADDRESS */
+
+  .saved-address-wrapper{
+    width: 100%;
+    padding-top: 20px;
+  }
+
+  .address_btn{
+    padding-bottom: 20px;
+  }
+
+  .address_btn button{
+    padding: 15px 40px;
+    border: 1px solid black;
+    background-color: #000000;
+    color: #acacac;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+    font-weight: 600;
+    font-size: 17px;
+    position: relative;
+}
+
+.loader_2{
+    position: absolute;
+    left: 225px;
+    top: 15px;
+    z-index: 1;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader_2 {
+    width: 20px;
+    aspect-ratio: 1;
+    display: grid;
+    border-radius: 50%;
+    background:
+      linear-gradient(0deg ,#fdfdfd 30%,#222222b4 0 70%,#ffffff 0) 50%/8% 100%,
+      linear-gradient(90deg,#ffffff 30%,#202020f3 0 70%,#0000005e 0) 50%/100% 8%;
+    background-repeat: no-repeat;
+    animation: l23 1s infinite steps(12);
+  }
+  .loader_2::before,
+  .loader_2::after {
+     content: "";   
+     grid-area: 1/1;
+     border-radius: 50%;
+     background: inherit;
+     opacity: 0.915;
+     transform: rotate(30deg);
+  }
+  .loader_2::after {
+     opacity: 0.83;
+     transform: rotate(60deg);
+  }
+  @keyframes l23 {
+    100% {transform: rotate(1turn)}
+  }
+
+
+
+/* SAVED ADDRESS */
+
+.saved-address-wrapper{
+    padding: 50px;
+}
+
+.saved-address{
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    gap: 20px;
+    max-width: calc(650px * 2 + 20px * 1); /* Adjusted for 2 columns */
+    margin: 0 auto;
+    width: 100%;
+    padding: 3rem 2rem;
+}
+
+.saved-address-header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 1rem;
+
+}
+
+.saved-address-header h1{
+   font-weight: 400;
+}
+
+.saved-address-item-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+
+.saved-address-item{
+    background-color: rgb(41, 41, 41);
+    padding: 2rem;
+    border: 1px solid #000;
+    border-radius: 10px;
+}
+
+.saved-address-item h2{
+    font-size: 20px;
+    letter-spacing: .03rem;
+    line-height: 1.4rem;
+    color: #fff;
+    padding-bottom: 1rem;
+}
+
+.saved-address-item p{
+    font-size: 16px;
+    letter-spacing: .03rem;
+    line-height: 1.4rem;
+    color: #fff;
+    padding-top: 5px;
+}
+
+.saved-address-item span{
+    font-weight: 600;
+    color: #fff;
+    font-size: 17px
+}
+
+.saved-address-item-header p{
+    color: #ff0000;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+    color: #ff0000;
+    
+    transition: text-shadow 0.3s ease, color 0.3s ease;
+}
+
+.saved-address-item-header p:hover{
+    color: #ff4800;
+    text-shadow: 0 0 20px rgba(255, 38, 0, 0.89), 
+                 0 0 40px rgba(224, 50, 20, 0.733), 
+                 0 0 80px rgb(255, 52, 1),
+                 0 10px 80px rgb(255, 52, 1);
+    
+    transition: text-shadow 0.3s ease, color 0.3s ease;
+}

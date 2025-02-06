@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {Link} from 'react-router-dom'
 import Footer from './Footer'
 import Paypal from '../assets/images/paypal.png'
@@ -8,34 +8,64 @@ import ScrollToTop from './ScrollToTop'
 import PaymentMethodBtn from './PaymentMethodBtn'
 import ConfirmBtn from './ConfirmBtn'
 
+import { db } from '../firebase/firebase';
+import {setDoc, doc,} from 'firebase/firestore';
+
 import { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import './Checkout.css'
 
-function Checkout({cart ,addToOrders}) {
+function Checkout({cart ,createOrder, addresses, removeFromCart, setCart, user, addToAddress, fetchAddress}) {
     
-
     const navigate = useNavigate();
     const loadRef = useRef(null);
 
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
-    const [address, setAddress] = useState('');
-    const [city, setCity] = useState('');
-    const [state, setState] = useState('');
-    const [zip, setZip] = useState('');
-    const [country, setCountry] = useState('');
-    const [name, setName] = useState('');
-    const [number, setNumber] = useState('');
-    const [code, setCode] = useState('');
+    const handleScrollToBottom = () => {
+        
+        window.scrollTo({
+          top: window.innerHeight * 1.2,
+          behavior: "smooth",
+        });
+    };
+    
+    const [savedAddress, setSavedAddress] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        address: '',
+        city: '',
+        state: '',
+        zip: '',
+        country: ''
+      });
+      
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setFormData({ ...formData, [name]: value });
+      validateForm();
+    };
+
+    const [cardData, setCardData] = useState({
+        name: '',
+        number: '',
+        cvc: '',
+        expiry: '',
+    });
+
+    const handleCardChange = (e) => {
+      const { name, value } = e.target;
+      setCardData({ ...cardData, [name]: value });      
+    };
+      
     const[allFields, setAllFields] = useState(false);
 
     const validateForm = () => {
-        if (firstName && lastName && phone && address && city && zip) {
+        if (formData.firstName && formData.lastName && formData.phone && formData.address && formData.city && formData.zip) {
             setAllFields(true);
         }
         else{
@@ -64,7 +94,6 @@ function Checkout({cart ,addToOrders}) {
         }
     }
 
-    // Switching between active and inactive tabs
     const [paypalTab, setPaypalTab] = useState(false);
     const [cardTab, setCardTab] = useState(false);
     const [bitcoinTab, setBitcoinTab] = useState(false);
@@ -91,36 +120,86 @@ function Checkout({cart ,addToOrders}) {
         }
     }
 
-    // Loader function and navigation
-    const handlePlaceOrder = () => {
-        if(addressTab && (paypalTab || bitcoinTab || cardTab) && total > 0){
+    const handleAddAddress = (e) => {
+        const { country, ...addressData } = formData;
+        addToAddress(addressData);
+    }
+
+    console.log(addresses)
+
+    const handlePlaceOrder = async () => {
+        if (!user) {
+            alert('You need to log in first to place an order');
+            return;
+        }
+        console.log("Cart data received:", cart);
+        console.log("Checkout.js2", Array.isArray(cart) ? "Array" : "Not Array");
+    
+        if (addressTab && (paypalTab || bitcoinTab || cardTab) && total > 0) {
             if (loadRef.current) {
                 loadRef.current.style.width = "40%";
-            
+    
                 setTimeout(() => {
-                  if (loadRef.current) {
-                    loadRef.current.style.width = "70%";
-                  }
+                    if (loadRef.current) {
+                        loadRef.current.style.width = "70%";
+                    }
                 }, 2000);
-            
-                setTimeout(() => {
-                  if (loadRef.current) {
+    
+                setTimeout(async () => {
+                    if (loadRef.current) {
                         loadRef.current.style.width = "100%";
-            
-                        setTimeout(() => {
+    
+                        setTimeout(async () => {
                             if (loadRef.current) {
-                              loadRef.current.style.display = "none";
-                              addToOrders(cart);
-                              navigate('/OrderAndReturn');
+                                loadRef.current.style.display = "none";
+
+                                try {
+                                    console.log("Checkout.js - Cart before order submission:", cart);
+                                
+                                    if (!Array.isArray(cart)) {
+                                      throw new Error("Cart is not an array.");
+                                    }
+                                    cart.forEach((item, index) => {
+                                      if (typeof item !== "object" || item === null) {
+                                        throw new Error(`Cart item at index ${index} is invalid: ${item}`);
+                                      }
+                                    });
+                                
+                            
+                                    const cartDocRef = doc(db, "carts", user.uid);
+                                    await setDoc(cartDocRef, { products: [] }, { merge: true });
+                                
+                                    createOrder(cart)
+
+                                    navigate("/OrderAndReturn");
+                                  } catch (error) {
+                                    console.error("Error handling order:", error);
+                                  }
+                                  
                             }
                         }, 500);
                     }
                 }, 2500);
             }
-        }  
+        }
     };
-      
-
+    
+    const handleFetchAddress = () => {
+        setIsLoading(true); 
+    
+        setTimeout(() => {
+            if (user) {
+                setSavedAddress(true);
+                fetchAddress().then(() => {
+                    setTimeout(() => {
+                        handleScrollToBottom();
+                        setIsLoading(false); 
+                    }, 500);
+                });
+            }
+        }, 2000); 
+    };
+    
   return (
     <div className='checkout'>
         <ScrollToTop />
@@ -150,8 +229,14 @@ function Checkout({cart ,addToOrders}) {
         </div>
 
         <div className="checkout-flex">
+            
             <div className="checkout-left">
                 {mainAddressSection && <div>
+                   { user && <div className='address_btn'>
+                        <button onClick={handleFetchAddress}>Check Saved Address</button>
+                       {isLoading &&  <div className="loader_2"></div>}
+                    </div>}
+                    
                     <h2>Delivery Address</h2>
 
                     <p>Add your delivery address</p>
@@ -161,31 +246,31 @@ function Checkout({cart ,addToOrders}) {
 
                     <div className="names">
                         <div className="first-name">
-                            <label htmlFor="first-name">First name<span>*</span></label>
+                            <label htmlFor="firstName">First name<span>*</span></label>
                             <input 
                             type="text" 
                             placeholder='' 
-                            name='first-name' 
+                            name='firstName' 
                             required 
-                            value={firstName} 
+                            value={formData.firstName} 
                             onChange={(e) => {
-                                validateForm();
-                                setFirstName(e.target.value)}} />
-                            {firstName.length > 0 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
+                                
+                                handleChange(e)}} />
+                            {formData.firstName.length > 0 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
                         </div>
 
                         <div className="last-name">
-                            <label htmlFor="first-name">Last name<span>*</span></label>
+                            <label htmlFor="lastName">Last name<span>*</span></label>
                             <input 
                             type="text" 
                             placeholder='' 
-                            name='last-name' 
+                            name='lastName' 
                             required 
-                            value={lastName} 
+                            value={formData.lastName} 
                             onChange={(e) => {
-                                setLastName(e.target.value)
+                                handleChange(e)
                                 validateForm()}}/> 
-                            {lastName.length > 0 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}              
+                            {formData.lastName.length > 0 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}              
                         </div>
                     </div>
 
@@ -200,16 +285,16 @@ function Checkout({cart ,addToOrders}) {
                     </div>
 
                     <div className="address">
-                        <label htmlFor="Address">Address<span>*</span></label>
+                        <label htmlFor="address">Address<span>*</span></label>
                         <input 
                         type="text" 
-                        name="Address" 
+                        name="address" 
                         required 
-                        value={address} 
+                        value={formData.address} 
                         onChange={(e) => {
-                            setAddress(e.target.value)
-                            validateForm()}}/>
-                        {address.length > 0 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
+                            handleChange(e)
+                        }}/>
+                        {formData.address.length > 0 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
                     </div>
 
                     <div className="city">
@@ -218,18 +303,18 @@ function Checkout({cart ,addToOrders}) {
                         type="text" 
                         name="city" 
                         required 
-                        value={city} 
+                        value={formData.city} 
                         onChange={(e) => {
-                            setCity(e.target.value)
-                            validateForm()}}/>
-                        {city.length > 1 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
+                            handleChange(e)
+                        }}/>
+                        {formData.city.length > 1 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
                     </div>
 
                     <div className='state-wrapper'>
                         <div className="state">
                             <label htmlFor="state">State/Province</label>
-                            <input type="text" name="state" value={state} onChange={(e) => setState(e.target.value)}/>
-                            {state.length > 0 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
+                            <input type="text" name="state" value={formData.state} onChange={(e) => handleChange(e)}/>
+                            {formData.state.length > 0 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
                         </div>
 
                         <div className="zip">
@@ -238,12 +323,11 @@ function Checkout({cart ,addToOrders}) {
                             type="text" 
                             required 
                             name="zip" 
-                            value={zip} 
+                            value={formData.zip} 
                             onChange={(e) => {
-                                setZip(e.target.value)
-                                validateForm();
-                                }}/>
-                            {zip.length >= 5 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
+                                handleChange(e)
+                            }}/>
+                            {formData.zip.length >= 5 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
                         </div>
                     </div>
 
@@ -253,12 +337,12 @@ function Checkout({cart ,addToOrders}) {
                         type="text" 
                         name="phone" 
                         required 
-                        value={phone} 
+                        value={formData.phone} 
                         onChange={(e) => {
-                            setPhone(e.target.value)
+                            handleChange(e)
                             validateForm();
                             }}/>
-                        {phone.length >= 10 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
+                        {formData.phone.length >= 10 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
                         <span style={{fontSize: "0.8rem"}}>We will not share your phone number</span>
                     </div>
 
@@ -267,7 +351,17 @@ function Checkout({cart ,addToOrders}) {
                         <label for="billing-address">Use as billing address</label>
                     </div>
 
-                    {allFields && <ConfirmBtn onClick={() => confirmAddress(allFields)}/>}
+                    {allFields && (
+                        <>
+                            <ConfirmBtn 
+                                onClick={() => {
+                                    confirmAddress(allFields);
+                                    handleAddAddress();
+                                }}
+                            />
+                            <p style={{fontSize: "0.8rem", marginTop: -10}}>By clicking on confirm, your address will be saved for future use.</p>
+                        </>
+                    )}
 
                 </div>}
 
@@ -282,9 +376,9 @@ function Checkout({cart ,addToOrders}) {
                     </div>
 
                     
-                    <p>{firstName} {lastName}</p>
-                    <p>{city}</p>
-                    <p>{zip}</p>
+                    <p>{formData.firstName} {formData.lastName}</p>
+                    <p>{formData.city}</p>
+                    <p>{formData.zip}</p>
                     <div className="edit">
                         <span>Edit</span>
                         <i className='fa-solid fa-pen-to-square'></i>
@@ -293,119 +387,120 @@ function Checkout({cart ,addToOrders}) {
 
                 <div className="payment">  
                     <div className="line"></div>
-                    {visibleTab && <div>
-                        <h2>Payment Method</h2>
-                        <p>Pay securely through your preferred payment method</p>
+                        {visibleTab && <div>
+                            <h2>Payment Method</h2>
+                            <p>Pay securely through your preferred payment method</p>
 
-                        <div className="payment-methods">
-                            <div className={`payment-option ${activeTab === 'paypal' ? 'active' : ''}`} onClick={() => handleActiveTab('paypal')}>
-                                <div className='pay-logo paypal'>
-                                    <img src={Paypal} alt="" />
+                            <div className="payment-methods">
+                                <div className={`payment-option ${activeTab === 'paypal' ? 'active' : ''}`} onClick={() => handleActiveTab('paypal')}>
+                                    <div className='pay-logo paypal'>
+                                        <img src={Paypal} alt="" />
+                                    </div>
+                                </div>
+
+                                <div className={`payment-option ${activeTab === 'card' ? 'active' : ''}`} onClick={() => handleActiveTab('card')}>
+                                    <div className='pay-logo card'>
+                                        <img src={Card} alt="" />
+                                    </div>
+                                </div>
+
+                                <div className={`payment-option ${activeTab === 'bitcoin' ? 'active' : ''}`} onClick={() => handleActiveTab('bitcoin')}>
+                                    <div className='pay-logo coin'>
+                                        <img src={Bitcoin} alt="" />
+                                    </div>
                                 </div>
                             </div>
 
-                            <div className={`payment-option ${activeTab === 'card' ? 'active' : ''}`} onClick={() => handleActiveTab('card')}>
-                                <div className='pay-logo card'>
-                                    <img src={Card} alt="" />
+                            <div className={`paypal-content ${activeTab === 'paypal' ? 'display-content' : ''}`} onClick={() => handleActiveTab('paypal')}>
+                                <div className="paypal-check">
+                                    <input type="checkbox" id="paypal" name="paypal" />
+                                    <label for="paypal">Activate one-click pay</label>
+                                </div>
+                                <p>Next time you can pay with PayPal without having to log in</p>
+                                <p className='confirm-method-txt'>Please confirm your payment method below</p>
+
+                                <PaymentMethodBtn onClick={() => handlePaymentTab('Paypal')}/>
+                                <div className="line"></div>
+
+                            </div>
+                        
+                        
+
+                            <div className={`card-content ${activeTab === 'card' ? 'display-content' : ''}`} onClick={() => handleActiveTab('card')}>
+                                <div>
+                                    <p>CARD DETAILS</p>
+                                    <span>*Required fields</span>
+
+                                    <div className="card-name">
+                                        <label htmlFor="card-name">Card Name<span>*</span></label>
+                                        <input type="text" name="card-name" required placeholder='John Doe' value={cardData.name} onChange={(e) => handleCardChange(e)}/>
+                                        {cardData.name.length > 2 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
+
+                                    </div>
+
+                                    <div className="card-number-wrapper">
+                                        <div className="card-number">
+                                            <label htmlFor="card-number">Card Number<span>*</span></label>
+                                            <input 
+                                            type="text" 
+                                            name="card-number"
+                                            maxLength="19"
+                                            required 
+                                            placeholder='0000 0000 0000 0000' 
+                                            value={cardData.number} 
+                                            onChange={(e) => {
+                                                const inputValue = e.target.value;
+                                                const formattedValue = inputValue
+                                                  .replace(/\D/g, "") 
+                                                  .match(/.{1,4}/g) 
+                                                  ?.join(" ") || "";
+                                                handleCardChange({ ...cardData, number: formattedValue })}}/>
+                                            {cardData.number.length >= 14 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
+                                        </div>
+
+                                        <div className="card-expiration">
+                                            <label htmlFor="card-expiration">Expiry Date<span>*</span></label>
+                                            <input type="text" name="card-expiration" placeholder='MM/YY' required />
+                                        </div>
+                                    </div>
+
+                                    <div className="card-cvv">
+                                        <label htmlFor="card-cvv">CVV<span>*</span></label>
+                                        <input 
+                                        type="text" 
+                                        name="card-cvv" 
+                                        required 
+                                        placeholder='000'
+                                        maxlength="3" 
+                                        min="100" 
+                                        max="999" 
+                                        value={cardData.code} 
+                                        onChange={(e) => handleCardChange({ ...cardData, cvc: e.target.value })}/>
+                                        {cardData.cvc.length === 3 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
+                                    </div>
+
+                                    <PaymentMethodBtn onClick={() => handlePaymentTab('Card')}/>
+                                    <div className="line"></div>
                                 </div>
                             </div>
 
-                            <div className={`payment-option ${activeTab === 'bitcoin' ? 'active' : ''}`} onClick={() => handleActiveTab('bitcoin')}>
-                                <div className='pay-logo coin'>
-                                    <img src={Bitcoin} alt="" />
+
+                            <div className={`crypto-content ${activeTab === 'bitcoin' ? 'display-content' : ''}`} onClick={() => handleActiveTab('bitcoin')}>
+                                <div>
+                                    <p>
+                                        You can pay with Bitcoin (BTC), Bitcoin Lightning (LN BTC), Ethereum (ETH), Tether (USDT), USD Coin (USDC) and other cryptocurrencies.
+                                    </p>
+
+                                    <p>When you place your order, you’ll be redirected to TripleA to complete your purchase. <br />Your payment to TripleA will pay for your FARFETCH purchase in full. <br />Keep the page open until your payment is successful.</p>
+
+                                    <PaymentMethodBtn onClick={() => handlePaymentTab('Bitcoin')}/>
+                                    <div className="line"></div>
+
                                 </div>
                             </div>
+
                         </div>
-
-                        <div className={`paypal-content ${activeTab === 'paypal' ? 'display-content' : ''}`} onClick={() => handleActiveTab('paypal')}>
-                            <div className="paypal-check">
-                                <input type="checkbox" id="paypal" name="paypal" />
-                                <label for="paypal">Activate one-click pay</label>
-                            </div>
-                            <p>Next time you can pay with PayPal without having to log in</p>
-                            <p className='confirm-method-txt'>Please confirm your payment method below</p>
-
-                            <PaymentMethodBtn onClick={() => handlePaymentTab('Paypal')}/>
-                            <div className="line"></div>
-
-                        </div>
-                    
-                    
-
-                    <div className={`card-content ${activeTab === 'card' ? 'display-content' : ''}`} onClick={() => handleActiveTab('card')}>
-                        <div>
-                            <p>CARD DETAILS</p>
-                            <span>*Required fields</span>
-
-                            <div className="card-name">
-                                <label htmlFor="card-name">Card Name<span>*</span></label>
-                                <input type="text" name="card-name" required placeholder='John Doe' value={name} onChange={(e) => setName(e.target.value)}/>
-                                {name.length > 2 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
-
-                            </div>
-
-                            <div className="card-number-wrapper">
-                                <div className="card-number">
-                                    <label htmlFor="card-number">Card Number<span>*</span></label>
-                                    <input 
-                                    type="text" 
-                                    name="card-number"
-                                    maxLength="19"
-                                    required 
-                                    placeholder='0000 0000 0000 0000' 
-                                    value={number} 
-                                    onChange={(e) => {
-                                        const inputValue = e.target.value;
-                                        // Remove non-digit characters and format with spaces
-                                        const formattedValue = inputValue
-                                          .replace(/\D/g, "") // Remove non-digit characters
-                                          .match(/.{1,4}/g) // Match groups of 1 to 4 digits
-                                          ?.join(" ") || ""; // Join groups with spaces
-                                        setNumber(formattedValue)}}/>
-                                    {number.length >= 14 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
-                                </div>
-
-                                <div className="card-expiration">
-                                    <label htmlFor="card-expiration">Expiry Date<span>*</span></label>
-                                    <input type="text" name="card-expiration" placeholder='MM/YY' required />
-                                </div>
-                            </div>
-
-                            <div className="card-cvv">
-                                <label htmlFor="card-cvv">CVV<span>*</span></label>
-                                <input 
-                                type="text" 
-                                name="card-cvv" 
-                                required 
-                                placeholder='000'
-                                maxlength="3" 
-                                min="100" 
-                                max="999" 
-                                value={code} 
-                                onChange={(e) => setCode(e.target.value)}/>
-                                {code.length === 3 && <i className='fa-regular fa-circle-check check' style={{color: 'green'}}></i>}
-                            </div>
-
-                            <PaymentMethodBtn onClick={() => handlePaymentTab('Card')}/>
-                            <div className="line"></div>
-                        </div>
-                    </div>
-
-
-                    <div className={`crypto-content ${activeTab === 'bitcoin' ? 'display-content' : ''}`} onClick={() => handleActiveTab('bitcoin')}>
-                        <div>
-                            <p>
-                                You can pay with Bitcoin (BTC), Bitcoin Lightning (LN BTC), Ethereum (ETH), Tether (USDT), USD Coin (USDC) and other cryptocurrencies.
-                            </p>
-
-                            <p>When you place your order, you’ll be redirected to TripleA to complete your purchase. <br />Your payment to TripleA will pay for your FARFETCH purchase in full. <br />Keep the page open until your payment is successful.</p>
-
-                            <PaymentMethodBtn onClick={() => handlePaymentTab('Bitcoin')}/>
-                            <div className="line"></div>
-
-                        </div>
-                    </div>
-                    </div>}
+                    }
 
                     <div className="payment-confirm">
                         {paypalTab &&
@@ -511,7 +606,7 @@ function Checkout({cart ,addToOrders}) {
 
                 <div className="delivery-fee">
                     <p>Delivery Fee</p>
-                    <p>FREE</p>
+                    {total < 1000 ? <p>FREE</p> : <p>USD $ {0.01 * total}</p>}
                 </div>
 
                 <div className="line"></div>
@@ -529,6 +624,42 @@ function Checkout({cart ,addToOrders}) {
 
             </div>
         </div>  
+
+        { savedAddress && <div className='saved-address-wrapper'>
+            <div className='saved-address-header'>
+                <h1>Saved Address</h1>
+                <p></p>
+            </div>
+            <div className='saved-address'>
+               { addresses.map((item, itemIndex) => {
+
+                    return (
+                        <div key={itemIndex} className='saved-address-item'>
+                            <div>
+                                <div className="saved-address-item-header">
+                                    <h2>Address. {itemIndex + 1}</h2>
+                                    <p>Delete Address</p>
+                                </div>
+                                
+                                <div className="line"></div>
+                                <p><span>Firstname: </span>{item.firstName}</p>
+                                <p><span>Lastname: </span>{item.lastName}</p>
+                                <p><span>Adddress: </span>{item.address}</p>
+                                <p><span>City: </span>{item.city}</p>
+                                <p><span>State: </span>{item.state}</p>
+                                <p><span>Phone: </span>{item.phone}</p>
+                                <p><span>Zip: </span>{item.zip}</p>
+
+                            </div>
+                        </div>
+                        
+                    )
+                    }
+                )}
+
+            </div>
+        </div>}
+
     </div>
   )
 }

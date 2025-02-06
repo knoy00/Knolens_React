@@ -1,9 +1,11 @@
 .confirm-order{
-    width: 100%;
-    padding-top: 2rem;
+    background-color: red;
+    margin-top: 0rem;
+    width: 240px;
 }
 
 .confirm-order button{
+    width: 100%;
     padding: .8rem 3rem;
     background-color: #000000;
     color: #ffffff;

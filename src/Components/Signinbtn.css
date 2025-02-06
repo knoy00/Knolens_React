@@ -1,6 +1,7 @@
 .sign-in{
-    width: 100%;
-    padding-top: 2rem;
+    width: 200px;
+    margin-top: 2rem;
+    background-color: red;
 }
 
 .sign-in button{
@@ -12,6 +13,7 @@
     cursor: pointer;
     font-weight: 600;
     transition: background-color.3s ease-in-out, color.3s ease-in-out;
+    width: 100%;
 }
 
 .sign-in button:hover{

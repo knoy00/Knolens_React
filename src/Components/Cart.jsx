@@ -1,69 +1,62 @@
 import React, { useState, useEffect } from 'react';
-import Header from './Header'; // Header component to display at the top of the page
-import Signinbtn from './Signinbtn'; // Sign-in button component
-import { Link, useNavigate } from 'react-router-dom'; // React Router's Link for navigation
-import Footer from './Footer'; // Footer component to display at the bottom of the page
-import AuthPage from './AuthPage'; // Authentication page (optional)
-import Checkout from './Checkout';
+import Header from './Header';
+import Signinbtn from './Signinbtn';
+import { Link, useNavigate } from 'react-router-dom';
+import Footer from './Footer';
 import ConfirmOrderBtn from './ConfirmOrderBtn';
 import ScrollToTop from './ScrollToTop';
-import ContactUs from './ContactUs';
-import {auth, checkUser} from '../firebase/Auth';
+import { auth } from '../firebase/Auth';
+import './Cart.css';
 
+function Cart({ cart, setCart, handleSignin, removeFromCart }) {
 
-import './Cart.css'; // CSS file for styling the cart page
-
-// Cart Component
-function Cart({ cart, handleSignin, handleCloseSignin, signin, removeFromCart}) {
-    console.log(cart); // Logs the cart content for debugging
-
+    const navigate = useNavigate();
+    
     const [user, setUser] = useState(null);
+    const [quantities, setQuantities] = useState( 1 ||
+        cart.reduce((acc, item) => ({ ...acc, [item.id]: 1 }), {})
+    );
+
+    const handleQuantityChange = (name, value) => {
+        if (value === "" || isNaN(value)) {
+            setQuantities(prev => ({ ...prev, [name]: "" })); 
+        } else {
+            const newQuantity = Math.max(1, Number(value)); 
+            setQuantities(prev => ({ ...prev, [name]: newQuantity }));
+        }
+    };
+
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((currentUser) => {
             setUser(currentUser);
-        })
-    }, []); 
+        });
+        return () => unsubscribe();
+    }, []);
 
-    const navigate = useNavigate();
+    const getSubtotal = (item) => (item.price * (quantities[item.name] || 1)).toFixed(2);
 
-    const checkout = (user) => {
-        if (user) {
-            navigate("/Checkout");
-        } else {
-            navigate("/AuthPage");
-        }
-    }
+    const totalAmount = cart.reduce(
+        (acc, item) => acc + item.price * (quantities[item.name] || 1),
+        0
+    ).toFixed(2);
 
     return (
         <div>
             <ScrollToTop />
-            {/* Header component receives the cart as a prop */}
-            <Header cart={cart} handleSignin={handleSignin}/>
+            <Header cart={cart} handleSignin={handleSignin} />
 
-            {/* Main cart section */}
             <div className="cart">
-                <h1>Shopping Cart</h1>
+                <h1 style={{ paddingTop: '2rem' }}>Shopping Cart</h1>
 
-               
                 {cart.length === 0 ? (
-                    <p style={{ paddingBottom: '2rem' }}>Your cart is empty. Add some items to continue shopping.</p>
+                    <p style={{ paddingBottom: '15rem' }}>Your cart is empty. Add some items to continue shopping.</p>
                 ) : (
-                    // Map through the cart items and display each one
                     cart.map((item) => (
                         <div className="cart-container" key={item.id}>
-                           
-                            {/* Estimated delivery time */}
                             <p className="delivery-time">Estimated delivery between 10-15 business days</p>
-                            <div className="line"></div> {/* Divider line */}
+                            <div className="line"></div>
 
-                            {/* Cart item details */}
                             <div className="cart-flex">
-                                {/* Remove item from cart button */}
-                                <div className='removeItem' onClick={() => removeFromCart(item)}>
-                                    <i className='fa fa-times'></i>
-                                </div>
-
-                                {/* Left section: item image and details */}
                                 <div className="left">
                                     <div className="cart-item">
                                         <div className="cart-item-img">
@@ -72,112 +65,77 @@ function Cart({ cart, handleSignin, handleCloseSignin, signin, removeFromCart}) 
 
                                         <div className="cart-item-details">
                                             <h3>{item.name}</h3>
-                                            <p>{item.description}</p>
-                                            <p>Price: ${item.price}</p>
+                                            <p>{item.code}</p>
+                                        </div>
+
+                                        <div className="quantity">
+                                            <h3>Quantity</h3>
+                                            <input
+                                                type="number"
+                                                value={quantities[item.name] === "" ? "" : quantities[item.name]} 
+                                                min="1"
+                                                onChange={(e) => handleQuantityChange(item.name, e.target.value)}
+                                                onBlur={() => {
+                                                    if (quantities[item.name] === "") {
+                                                        setQuantities(prev => ({ ...prev, [item.name]: 1 }));
+                                                       
+                                                    }
+                                                }} 
+                                            />
+                                        </div>
+
+                                        <div className="price">
+                                            <h3>Price</h3>
+                                            <p>${item.price.toFixed(2)}</p>
                                         </div>
                                     </div>
                                 </div>
 
-                                {/* Right section: order summary */}
                                 <div className="right">
                                     <div className="subtotal">
-                                        <p>Subtotal:</p>
-                                        <p>${item.price}</p>
+                                        <h3>Subtotal:</h3>
+                                        <p>${getSubtotal(item)}</p>
                                     </div>
 
                                     <div className="shipping">
-                                        <p>Shipping:</p>
+                                        <h3>Shipping:</h3>
                                         <p>$0</p>
                                     </div>
 
-                                    
-                                    
-                                    {/* Total amount */}
-                                    {/* <div className="total">
-                                        <p>Total:</p>
-                                        <p>${item.price}</p>
-                                    </div> */}
-
-                                    {/* Checkout button (currently commented out) */}
-                                    {/* <div className='checkout'>
-                                        <Link to="/checkout">
-                                            <button>Checkout</button>
-                                        </Link>
-                                    </div> */}
+                                    <div className='removeItem' onClick={() => removeFromCart(item)}>
+                                        <i className='fa fa-times'></i>
+                                    </div>
                                 </div>
                             </div>
-                            
                         </div>
                     ))
                 )}
-                <div className="line"></div> {/* Divider line */}
-                {cart.length > 0 && <div className='totalAmount'>
-                    <p>Total: $33</p>
-                </div>}
 
-                {/* Display sign-in button if the user is not signed in */}
+                {cart.length > 0 && (
+                    <div className="total-amount-container">
+                        <div className="line"></div>
+                        <div className='totalAmount'>
+                            <p>Total: ${totalAmount}</p>
+                        </div>
+                    </div>
+                )}
+
                 {!user ? (
                     cart.length > 0 ? (
-                        <ConfirmOrderBtn handleSignin={handleSignin}/>
+                        <div className='confirm-order-btn-1'>
+                            <ConfirmOrderBtn handleSignin={handleSignin} />
+                        </div>
                     ) : (
                         <Signinbtn handleSignin={handleSignin} />
                     )
                 ) : cart.length > 0 ? (
-                    <Link to="/Checkout"><ConfirmOrderBtn /></Link>
-                ) : (
-                    null
-                )
-                }
-
+                    <div className='confirm-order-btn-2'><Link to="/Checkout" className='link_1'><ConfirmOrderBtn /></Link></div>
+                ) : null}
             </div>
 
-            {/* Contact section for customer support */}
-            <div className="contact">
-                <div className="need-help">
-                    <h3>Need help?</h3>
-                    <p>
-                        Contact our global Customer Service team, you can reach us by phone or
-                        email. Alternatively, you may find the answer in our Frequently Asked
-                        Questions page.
-                    </p>
-                </div>
-
-                {/* Call us section */}
-                <div className="call-us">
-                    <div className="title-flex">
-                        <i className="fa-solid fa-phone"></i>
-                        <h3>Call us</h3>
-                    </div>
-                    <p>+1 (800) 123-4567</p>
-                    <span>
-                        Monday to Friday: 8:00am to 5:00pm <br /> GMT
-                    </span>
-                </div>
-
-                {/* Email us section */}
-                <div className="email-us">
-                    <div className="title-flex">
-                        <i className="fa-solid fa-envelope"></i>
-                        <h3>Click here to send us an email</h3>
-                    </div>
-                    <p>Customer Service</p>
-                </div>
-
-                {/* FAQs section */}
-                <div className="faqs">
-                    <div className="title-flex">
-                        <i className="fa-solid fa-question"></i>
-                        <h3>FAQs</h3>
-                    </div>
-                    <p>
-                        Find the answers you need in our <Link to="/faqs">FAQs</Link>
-                    </p>
-                </div>
+            <div className="footer-cart">
+                <Footer />
             </div>
-
-            {/* Footer component */}
-            <Footer />
-            {/*   */}
         </div>
     );
 }

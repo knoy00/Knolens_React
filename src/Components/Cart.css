@@ -58,13 +58,11 @@
 
 .cart-container{
     width: 100%;
-    position: relative;
+   margin-top: 3rem;
 }
 
 .cart-flex{
     display: flex;
-    align-items: center;
-    justify-content: space-between;
     position: relative;
 }
 
@@ -79,22 +77,29 @@
     width: 100%;
     padding: 1rem 2rem;
     display: flex;
-    align-items: center;
+    justify-content: space-between;
+
 }
 
 .cart-item-img{
-    width: 100%;
-    object-fit: cover;
+    width: 15%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width:300px;
 }
 
 .cart-item-img img{
-    width: 30%;
+    width: 60%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .cart-item-details{
-    width: 100%;
+    width: 350px;
+    text-align: center;
+    
 }
 
 .cart-item-details h3{
@@ -108,23 +113,65 @@
     padding-bottom: .5rem;
 }
 
+.quantity{
+    width: 107px;
+    text-align: center;
+    padding: 0 1rem;
+}
+
+.quantity input{
+    width: 50px;
+    padding: .5rem;
+    border-radius: 5px;
+    border: 1px solid #808080;
+    margin: 1rem 0;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.price{
+    width: 120px;
+    text-align: center;
+}
+
+.price h3{
+    font-weight: 600;
+    padding-bottom: .5rem;
+}
+
 .right{
-    width: 30%;
+    width: 40%;
+    display: flex;
+    gap: 150px;
+    padding: 1rem 4rem;
+    border-left: 1px solid #868686;
 }
 
 .subtotal, .shipping, .total{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 10px;
 }
 
+.subtotal h3, .shipping h3, .total h3{
+    font-size: 1rem;
+    color: #373737;
+}
 .subtotal p, .shipping p, .total p{
     font-size: 1rem;
     color: #373737;
 }
 
 .subtotal, .shipping{
-    padding-bottom: 1rem;
+    padding-bottom: 2.5rem;
+}
+
+.total-amount-container{
+    width: 100%;
+    padding-top: 8rem;
+    
 }
 
 .totalAmount{
@@ -139,16 +186,39 @@
 }
 
 .removeItem{
-    position: absolute;
     right: 0;
     top: 2px;
     padding: .5rem;
     cursor: pointer;
     transition: .3s ease-in-out;  
+    height: 35px;
+    width: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .removeItem:hover{
-    background-color: #e0e0e0;
-    background-color: #e0e0e092;
-    border-radius: 5px;
+    background-color: #ff797992;
+    border-radius: 10px;
+}
+
+.confirm-order-btn-2{
+    margin-top: 4rem;
+}
+
+
+.footer-cart{
+    margin-top: 40px;
+}
+
+.link_1 {
+    display: inline-block; /* Or block */
+    width: fit-content; /* Ensures it wraps around the button */
+    height: fit-content;
+  }
+  
+
+.link_1{
+    background-color: rgb(3, 235, 173);
 }

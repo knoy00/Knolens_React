@@ -6,8 +6,7 @@ import ProductCard from './ProductCard'
 import Advertisement from './Advertisement.jsx';
 import Footer from './Footer.jsx';
 import ScrollToTop from './ScrollToTop.jsx';
-import { cameras, lenses, drones, salesOff, AdOne } from "./Data/Data.js";
-import CanonRebel from '../assets/images/Canon_rebel.webp';
+import { cameras, lenses, drones, AdOne } from "./Data/Data.js";
 
 import './ProductPage.css'
 
@@ -21,6 +20,9 @@ function ProductPage({cart=[], handleSignin}) {
       <ScrollToTop />
       <Header cart={cart} handleSignin={handleSignin}/>
       <div className="product-page">
+        <div className="product-text">
+          <h1>Products</h1>
+        </div>
         <div className = 'row'>
           <h2>Cameras</h2>
           <div className='product-row'>

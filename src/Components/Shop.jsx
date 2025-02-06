@@ -12,7 +12,7 @@ import './Shop.css'
 function Shop({handleSignin, cart=[]}) {
     return(
         <div>
-            <Header handleSignin={handleSignin}/>
+            <Header handleSignin={handleSignin} cart={cart}/>
             <div className="shop-page">
                 <div className="arrow-top">
                     <i className="fa-solid fa-arrow-up"></i>
