@@ -1,8 +1,7 @@
 import React from 'react'
 import Header from './Header'
 import Footer from './Footer'
-import {Link} from 'react-router-dom'
-import { cameras, lenses, drones, salesOff, AdOne } from "./Data/Data.js";
+import { cameras, lenses, drones } from "./Data/Data.js";
 import ProductCard from './ProductCard.jsx';
 import ChatBot from './ChatBot.jsx';
 
@@ -84,6 +83,7 @@ function Shop({handleSignin, cart=[]}) {
                 </div>
             </div>
             <ChatBot />
+            <Footer />
         </div>
     )
 }

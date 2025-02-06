@@ -2,10 +2,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.css';
 import { useState, useEffect } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
-import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { db } from './firebase/firebase';
-import { collection, addDoc, onSnapshot, query, where, setDoc, doc, arrayUnion, updateDoc, arrayRemove, getDoc, getDocs } from 'firebase/firestore';
-import { registerUser, loginUser, logoutUser, checkUser, auth } from './firebase/Auth';
+import { onSnapshot, setDoc, doc, arrayUnion, updateDoc, arrayRemove, getDoc, getDocs } from 'firebase/firestore';
+import { auth } from './firebase/Auth';
 import './App.css';
 
 import LandingPage from './Components/LandingPage';
@@ -17,7 +16,6 @@ import Checkout from './Components/Checkout';
 import ContactUs from './Components/ContactUs';
 import Shop from './Components/Shop';
 import OrderAndReturn from './Components/OrderAndReturn';
-import Signinbtn from './Components/Signinbtn';
 
 function App() {
   const [cart, setCart] = useState([]);
