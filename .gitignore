@@ -23,7 +23,8 @@ yarn-debug.log*
 yarn-error.log*
 
 # Firebase configuration
-src/firebase/firebase.js
+.env
+.env.local
 
 notes
 
