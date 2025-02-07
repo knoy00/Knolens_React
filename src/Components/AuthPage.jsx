@@ -19,7 +19,10 @@ function AuthPage({ onClose, showSignin }) {
   // Display a message temporarily
   const showMessage = (msg) => {
     setMessage(msg);
-    setTimeout(() => setMessage(''), 3000);
+    setTimeout(() => {
+      setMessage('')
+      setIsVisible(false);
+    }, 3000);
   };
 
   // Observe authentication state
@@ -28,7 +31,7 @@ function AuthPage({ onClose, showSignin }) {
       setUser(currentUser);
     });
     return () => unsubscribe();
-  }, []);
+  }, [user]);
 
   // Handle registration
   const handleRegister = async (e) => {
@@ -68,7 +71,7 @@ function AuthPage({ onClose, showSignin }) {
     setSignin(isSignin);
     if (isSignin) {
       if (!email || !password) {
-        showMessage('Please enter credentials');
+        showMessage('Please enter credentials');  
         return;
       }
 

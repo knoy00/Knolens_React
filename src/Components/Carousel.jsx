@@ -16,20 +16,21 @@ function Carousel() {
       <div className="carousel_section">
                 <div className="slider_wrapper">
                     <div className="slider">
-                        <img src={streetPhoto} id="slide-1" alt='Street'/>
                         <img src={fullShot} alt="full shot woman posing chair" id="slide-2" />
+                        <img src={woodenDock} alt="Brown Wooden Dock" id="slide-6" />
+                        <img src={streetPhoto} id="slide-1" alt='Street'/>
                         <img src={portrait} alt="portrait smiling afro american guy leather jacket" id="slide-3" />
                         <img src={photographer} alt="Fascinating Young Female Photographer Having Fun After Photoshoot" id="slide-4" />
                         <img src={amazingForestSunset} alt="Amazing Forest Sunset" id="slide-5" />
-                        <img src={woodenDock} alt="Brown Wooden Dock" id="slide-6" />
+                        
                     </div>
                     <div className="slider_nav">
-                        <a href="#slide-1"></a>
+                        {/* <a href="#slide-1"></a>
                         <a href="#slide-2"></a>
                         <a href="#slide-3"></a>
                         <a href="#slide-4"></a>
                         <a href="#slide-5"></a>
-                        <a href="#slide-6"></a>
+                        <a href="#slide-6"></a> */}
                     </div>
                 </div>
                 
