@@ -20,10 +20,9 @@ function OrderAndReturn({ orders, user, handleSignin, cart, setOrders, getOrders
         setLoader(false);
       }, 2000);
   
-      // Cleanup function to avoid memory leaks
       return () => clearTimeout(timeout);
     }
-  }, [user]);
+  }, [user, getOrders]);
   
   const handleGetOrders = () => {
     if (user) {
@@ -35,8 +34,6 @@ function OrderAndReturn({ orders, user, handleSignin, cart, setOrders, getOrders
     }
   };
   
-  
- 
 
   console.log("orders:" + orders)
   console.log("returns: " + returns)
@@ -74,7 +71,7 @@ function OrderAndReturn({ orders, user, handleSignin, cart, setOrders, getOrders
             
           </div>
 
-          {!user || user && orders < 1 ? (
+          {!user || (user && orders) < 1 ? (
             <div>
               {tabActive === 'orders' && (
                 <div>

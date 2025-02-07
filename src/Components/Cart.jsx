@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import Signinbtn from './Signinbtn';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, } from 'react-router-dom';
 import Footer from './Footer';
 import ConfirmOrderBtn from './ConfirmOrderBtn';
 import ScrollToTop from './ScrollToTop';
 import { auth } from '../firebase/Auth';
 import './Cart.css';
 
-function Cart({ cart, setCart, handleSignin, removeFromCart }) {
+function Cart({ cart, handleSignin, removeFromCart }) {
 
-    const navigate = useNavigate();
     
     const [user, setUser] = useState(null);
     const [quantities, setQuantities] = useState( 1 ||

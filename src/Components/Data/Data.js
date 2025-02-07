@@ -5,9 +5,9 @@ import RF24 from '../../assets/images/RF24.webp'
 import R5Mark2 from '../../assets/images/R5_Mark_2.webp'
 import CompactCanon from '../../assets/images/compact_canon.webp'
 import MiniPro from '../../assets/images/5698cb42a9a1fdce69e22f30550d9767.png'
-import Air3s from '../../assets/images/77738ff32f7a228fc58b4f401261e481.png'
-import Avata from '../../assets/images/97e1b5ab20211e739898969647666de1.png'
-import Neo from '../../assets/images/a2d5733d4fe4b62050a3a1ea1109612d.png'
+// import Air3s from '../../assets/images/77738ff32f7a228fc58b4f401261e481.png'
+// import Avata from '../../assets/images/97e1b5ab20211e739898969647666de1.png'
+// import Neo from '../../assets/images/a2d5733d4fe4b62050a3a1ea1109612d.png'
 
 // RF200 LENSES IMG
 import RF200_1 from '../../assets/images/RF-200/imageOne.webp'
@@ -46,7 +46,7 @@ import RF1200_5 from '../../assets/images/RF-1200/RF-1200_5.webp'
 import Drone1 from '../../assets/images/97e1b5ab20211e739898969647666de1.png'
 import Drone2 from '../../assets/images/a2d5733d4fe4b62050a3a1ea1109612d.png'
 import Drone3 from '../../assets/images/77738ff32f7a228fc58b4f401261e481.png'
-import Drone4 from '../../assets/images/5698cb42a9a1fdce69e22f30550d9767.png'
+// import Drone4 from '../../assets/images/5698cb42a9a1fdce69e22f30550d9767.png'
 
 export const accessories = [
     {

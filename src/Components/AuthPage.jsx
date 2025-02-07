@@ -6,7 +6,7 @@ import './Authtest.css';
 import google from '../assets/images/google-small.png';
 import apple from '../assets/images/apple-logo.png';
 
-function AuthPage({ onClose, showSignin, setLoading }) {
+function AuthPage({ onClose, showSignin }) {
   const [isSignin, setSignin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

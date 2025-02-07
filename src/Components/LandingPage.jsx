@@ -9,7 +9,6 @@ import ShopWithUS from './ShopWithUS'
 import Carousel from './Carousel'
 import Footer from './Footer'
 import ScrollToTop from './ScrollToTop'
-import { Routes, Route } from 'react-router-dom';
 
 import './LandingPageMediaQuery.css'
 

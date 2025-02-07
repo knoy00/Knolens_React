@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {Link} from 'react-router-dom'
-import Footer from './Footer'
 import Paypal from '../assets/images/paypal.png'
 import Card from '../assets/images/card.png'
 import Bitcoin from '../assets/images/bitcoin.png'
@@ -71,10 +70,6 @@ function Checkout({cart ,createOrder, addresses, removeFromCart, setCart, user, 
         else{
             setAllFields(false);
         }
-    }
-
-    function handleBlur(event) {
-        validateForm();
     }
 
     const total = (cart.reduce((total, item) => total + item.price, 0)).toFixed(2);

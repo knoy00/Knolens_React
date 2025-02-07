@@ -3,7 +3,7 @@ import '@fortawesome/fontawesome-free/css/all.css';
 import { useState, useEffect } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { db } from './firebase/firebase';
-import { onSnapshot, setDoc, doc, arrayUnion, updateDoc, arrayRemove, getDoc, getDocs } from 'firebase/firestore';
+import { onSnapshot, setDoc, doc, arrayUnion, updateDoc, arrayRemove, getDoc } from 'firebase/firestore';
 import { auth } from './firebase/Auth';
 import './App.css';
 
@@ -21,10 +21,12 @@ function App() {
   const [cart, setCart] = useState([]);
   const [user, setUser] = useState(null);
   const [orders, setOrders] = useState([]);
-  const [returns, setReturns] = useState([]);
   const [showSignin, setShowSignin] = useState(false);
-  const [signin, setSignin] = useState(false);
   const [addresses, setAddresses] = useState([]);
+
+  // const [signin, setSignin] = useState(false);
+  // const [returns, setReturns] = useState([]);
+
 
   const handleSignin = () => setShowSignin(true);
   const handleCloseSignin = () => setShowSignin(false);
@@ -397,6 +399,9 @@ function App() {
   }
 
   useEffect(() => {
+    const fetchAddress = async () => {
+      // ...
+    }
     fetchAddress()
   }, [])
 
@@ -411,7 +416,7 @@ function App() {
           <Route path="/Contact" element={<ContactUs handleSignin={handleSignin} cart={cart}/>} />
           <Route path="/Shop" element={<Shop handleSignin={handleSignin} cart={cart}/>} />
           <Route path="/Checkout" element={<Checkout cart={cart} createOrder={createOrder} removeFromCart={removeFromCart} setCart={setCart} user={user} getOrders={getOrders} fetchAddress={fetchAddress} addToAddress={addToAddress} addresses={addresses}/>} />
-          <Route path="/OrderAndReturn" element={<OrderAndReturn handleSignin={handleSignin} orders={orders} returns={returns} user={user} cart={cart} setOrders={setOrders} getOrders={getOrders}fetchOrders={fetchOrders} />} />
+          <Route path="/OrderAndReturn" element={<OrderAndReturn handleSignin={handleSignin} orders={orders} user={user} cart={cart} setOrders={setOrders} getOrders={getOrders}fetchOrders={fetchOrders} />} />
         </Routes>
         {showSignin && <AuthPage showSignin={showSignin} onClose={handleCloseSignin} />}
       </div>

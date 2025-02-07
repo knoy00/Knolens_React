@@ -16,9 +16,9 @@ function Carousel() {
       <div className="carousel_section">
                 <div className="slider_wrapper">
                     <div className="slider">
-                        <img src={streetPhoto} id="slide-1" />
+                        <img src={streetPhoto} id="slide-1" alt='Street'/>
                         <img src={fullShot} alt="full shot woman posing chair" id="slide-2" />
-                        <img src="Images/portrait-smiling-afro-american-guy-leather-jacket-resize.jpg" alt="portrait smiling afro american guy leather jacket" id="slide-3" />
+                        <img src={portrait} alt="portrait smiling afro american guy leather jacket" id="slide-3" />
                         <img src={photographer} alt="Fascinating Young Female Photographer Having Fun After Photoshoot" id="slide-4" />
                         <img src={amazingForestSunset} alt="Amazing Forest Sunset" id="slide-5" />
                         <img src={woodenDock} alt="Brown Wooden Dock" id="slide-6" />
