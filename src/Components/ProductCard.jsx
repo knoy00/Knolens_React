@@ -31,7 +31,7 @@ function ProductCard({
 
         <h3 id="productName">{name}</h3>
 
-        <p id="productDescription">{description}</p>
+        <p id="productDescription">{code}</p>
 
         <div className="Price-wrapper">
           <p id="productPrice">${price}</p> 

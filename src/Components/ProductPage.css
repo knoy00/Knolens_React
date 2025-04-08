@@ -120,3 +120,14 @@
      font-size: 1.2rem;
  }
  
+
+ /* MEDIA QUERY */
+ @media screen and (max-width: 768px) {
+    .row{
+        padding: 0 2vh 0 2vh ;
+    }
+
+    .newEntry_image_container{
+        background-position: center;
+    }
+ }

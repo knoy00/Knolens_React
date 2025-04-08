@@ -222,3 +222,7 @@
 .link_1{
     background-color: rgb(3, 235, 173);
 }
+
+@media screen and (max-width: 768px) {
+    
+}
